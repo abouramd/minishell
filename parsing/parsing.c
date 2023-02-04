@@ -12,27 +12,35 @@
 
 #include "../include/include.h"
 
-void	check_good(char **av, t_vals *seter)
+void signal_handler(int signal)
 {
-	int	i;
+    if (signal == SIGINT)
+        exit(0);
+}
 
-	i = 0;
-	while (av[i])
-	{
-		
-	}
+t_list	*ft_lexer(char *rl)
+{
+	t_list	*lex;
+	t_lex	analyze;
+	t_vals	*token;
+
+	analyze.fill = rl;
+	analyze.nxt = 0;
+	analyze.l = analyze.fill[analyze.nxt];
 }
 
 int	main(int ac, char **av, char **env)
 {
 	char	*rl;
-	t_vals	seter;
+	t_list	*lx;
 
+	signal(SIGINT, signal_handler);
+    signal(SIGQUIT, signal_handler);
 	while (1)
 	{
 		rl = readline(" minishell-1.0$ ");
 		add_history(rl);
-		check_good(av, &seter);
+		lx = ft_lexer(rl);
 		if (!rl)
 		{
 			write(1, "exit\n", 5);
