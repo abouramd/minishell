@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   include.h                                          :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zasabri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 18:34:05 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/04 19:10:46 by zasabri          ###   ########.fr       */
+/*   Created: 2022/10/05 09:09:38 by zasabri           #+#    #+#             */
+/*   Updated: 2022/10/05 09:26:11 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDE_H
-# define INCLUDE_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <fcntl.h>
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libft/libft.h"
-# include "set_val.h"
-
-#endif
+int	ft_isalpha(int c)
+{
+	if (c >= 65 && c <= 90)
+		return (1);
+	else if (c >= 97 && c <= 122)
+		return (1);
+	else
+		return (0);
+}

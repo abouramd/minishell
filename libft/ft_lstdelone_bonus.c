@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   include.h                                          :+:      :+:    :+:   */
+/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zasabri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 18:34:05 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/04 19:10:46 by zasabri          ###   ########.fr       */
+/*   Created: 2022/10/27 14:39:30 by zasabri           #+#    #+#             */
+/*   Updated: 2022/10/27 14:39:35 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDE_H
-# define INCLUDE_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <fcntl.h>
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libft/libft.h"
-# include "set_val.h"
-
-#endif
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
+{
+	if (!lst || !del)
+		return ;
+	del(lst -> content);
+	free(lst);
+}

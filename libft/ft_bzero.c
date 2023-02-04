@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   include.h                                          :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zasabri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 18:34:05 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/04 19:10:46 by zasabri          ###   ########.fr       */
+/*   Created: 2022/10/05 11:28:46 by zasabri           #+#    #+#             */
+/*   Updated: 2022/10/11 11:04:49 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDE_H
-# define INCLUDE_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <fcntl.h>
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libft/libft.h"
-# include "set_val.h"
+void	ft_bzero(void *s, size_t n)
+{
+	char			*str;
+	unsigned int	i;
 
-#endif
+	str = (char *)s;
+	i = 0;
+	while (i < n)
+	{
+		str[i] = 0;
+		i++;
+	}
+}
