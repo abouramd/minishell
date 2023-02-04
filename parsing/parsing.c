@@ -10,4 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../include/include.h"
 
+void	check_good(char **av, t_vals *seter)
+{
+	int	i;
+
+	i = 0;
+	while (av[i])
+	{
+		
+	}
+}
+
+int	main(int ac, char **av, char **env)
+{
+	char	*rl;
+	t_vals	seter;
+
+	while (1)
+	{
+		rl = readline(" minishell-1.0$ ");
+		add_history(rl);
+		check_good(av, &seter);
+		if (!rl)
+		{
+			write(1, "exit\n", 5);
+			exit(0);
+		}
+	}
+}
