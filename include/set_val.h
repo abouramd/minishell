@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 19:03:01 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/06 19:09:41 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/06 20:12:37 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ typedef	struct s_vals
 		V_STR,
 		V_PIPE,
 		V_APP,
-		V_DIR,
 		V_RDIR,
+		V_LDIR,
 		V_HDK,
 		V_EOF,
 	}	token;
