@@ -20,7 +20,6 @@ void	signal_handler(int signal)
 
 char	*add_str(char *str , char c)
 {
-	char *tmp = str;
 	char *charachter;
 
 	charachter = malloc(2);
@@ -35,7 +34,6 @@ char	*add_str(char *str , char c)
 	else
 	{  
 		str = ft_strjoin(str, charachter);
-		free(tmp);
 		free(charachter);
 	}
 	return(str);
@@ -142,7 +140,7 @@ int	main(int ac, char **av, char **env)
 	signal(SIGQUIT, signal_handler);
 	while (1)
 	{
-		rl = readline(" minishell-1.0$ ");
+		rl = readline("minishell-1.0$ ");
 		printf("%s\n", rl);
 		add_history(rl);
 		lx = ft_lexer(rl);
