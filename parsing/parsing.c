@@ -43,19 +43,23 @@ t_vals	*fill_token(char *str, int v)
 {
 	t_vals	*token;
 
+	if (!str)
+		return 0;
 	token = malloc(sizeof(t_vals));
 	token->val = str;
 	token->token = v;
 	return (token);
 }
 
-t_vals *set_tokens(t_lex *lexer)
+t_vals	*set_tokens(t_lex *lexer)
 {
 	t_vals *token; 
 	char *str;
 	int flag = 1; 
 	
 	str = NULL;
+	if (!lexer)
+		return (0);
 	while (lexer->l && lexer->l == ' ')
 	{
 		lexer->nxt++;
@@ -117,33 +121,41 @@ t_vals *set_tokens(t_lex *lexer)
 
 t_list	*ft_lexer(char *rl)
 {
-	t_list	*lex;
+	t_list	*lexer;
 	t_lex	analyze;
 	t_vals	*token;
 
+	if (!rl)
+		return (0);
 	analyze.fill = rl;
 	analyze.nxt = 0;
 	analyze.l = analyze.fill[analyze.nxt];
-	lex = NULL;
+	lexer = NULL;
 	while (analyze.l != '\0')
 	{
 		token = set_tokens(&analyze);
+		ft_lstadd_back(&lexer, ft_lstnew(token));
 	}
+	return (lexer);
 }
 
 int	main(int ac, char **av, char **env)
 {
 	char	*rl;
-	t_list	*lx;
+	t_list	*lexer;
 
+	(void)av;
+	(void)ac;
+	(void)env;
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, signal_handler);
 	while (1)
 	{
-		rl = readline("minishell-1.0$ ");
+		rl = readline("\033[1;32mminishell-1.0$ \033[0m");
 		printf("%s\n", rl);
 		add_history(rl);
-		lx = ft_lexer(rl);
+		lexer = ft_lexer(rl);
+		printf("%p\n", ft_lexer(rl));
 		if (!rl)
 		{
 			write(1, "exit\n", 5);
