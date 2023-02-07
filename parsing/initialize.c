@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_val.h                                          :+:      :+:    :+:   */
+/*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 19:03:01 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/07 01:40:23 by zasabri          ###   ########.fr       */
+/*   Created: 2023/02/07 01:20:12 by zasabri           #+#    #+#             */
+/*   Updated: 2023/02/07 02:06:17 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SET_VAL_H
-# define SET_VAL_H
+#include "../include/include.h"
 
-typedef	struct s_vals
+void	initialize_lexer(t_lex *lexer, char *str)
 {
-	char	*val;
-	enum
-	{
-		V_STR,
-		V_PIPE,
-		V_APP,
-		V_RDIR,
-		V_LDIR,
-		V_HDK,
-		V_EOF,
-	}	token;
-}	t_vals;
+	lexer->fill = str;
+	lexer->nxt = 0;
+	lexer->l = lexer->fill[lexer->nxt];
+}
 
-#endif
+void	go_next(t_lex *lexer)
+{
+	lexer->nxt++;
+	lexer->l = lexer->fill[lexer->nxt];
+}
+
+t_vals	*initialize_token(char *str, int v)
+{
+	t_vals	*token;
+
+	token = malloc(sizeof(t_vals));
+	token->token = v;
+	token->val = str;
+	return (token);
+}

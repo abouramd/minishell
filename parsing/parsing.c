@@ -2,9 +2,12 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
 /*   Created: 2023/02/04 18:32:13 by zasabri           #+#    #+#             */
 /*   Updated: 2023/02/04 18:32:13 by zasabri          ###   ########.fr       */
 /*                                                                            */
@@ -18,131 +21,113 @@ void	signal_handler(int signal)
 		exit(0);
 }
 
-char	*add_str(char *str , char c)
+t_vals	*others(t_lex *lexer)
+{
+	if (lexer->l == '>')
+	{
+		go_next(lexer);
+		if (lexer->l == '>')
+		{
+			go_next(lexer);
+			return (initialize_token(">>", V_APP));
+		}
+		return (initialize_token(">", V_RDIR));
+	}
+	if (lexer->l == '<')
+	{
+		go_next(lexer);
+		if (lexer->l == '<')
+		{
+			go_next(lexer);
+			return (initialize_token("<<", V_HDK));
+		}
+		return (initialize_token("<", V_LDIR));
+	}
+	if (lexer->l == '|')
+	{
+		go_next(lexer);
+		return (initialize_token("|", V_PIPE));
+	}
+	else
+		return (initialize_token("EOF", V_EOF));
+}
+
+char	*add_str(char *str, char c)
 {
 	char *charachter;
 
-	charachter = malloc(2);
+	charachter = malloc(sizeof(char) * 2);
 	charachter[0] = c;
 	charachter[1] = '\0';
-	if(!str)
-	{  
+	if (!str)
+	{
 		str = charachter;
-		free(charachter);
+		//printf("%s", str);
 		return (str);
 	}
 	else
-	{  
+	{
 		str = ft_strjoin(str, charachter);
 		free(charachter);
 	}
-	return(str);
+	//printf("%s", str);
+	return (str);
 }
 
-t_vals	*fill_token(char *str, int v)
+t_vals	*select_token(t_lex *lexer)
 {
-	t_vals	*token;
-
-	if (!str)
-		return 0;
-	token = malloc(sizeof(t_vals));
-	token->val = str;
-	token->token = v;
-	return (token);
-}
-
-t_vals	*set_tokens(t_lex *lexer)
-{
-	t_vals *token; 
+	t_vals *token;
 	char *str;
-	int flag = 1; 
-	
+	int double_quote;
+
+	double_quote = 0;
 	str = NULL;
-	if (!lexer)
-		return (0);
 	while (lexer->l && lexer->l == ' ')
 	{
 		lexer->nxt++;
 		lexer->l = lexer->fill[lexer->nxt];
 	}
-	while((lexer->l != '\0')
-		&& ((lexer->l != '|' && lexer->l != '>' && lexer->l != '<')
-		|| flag != 0))
+	while ((lexer->l != '\0')
+        && ((lexer->l != '|' && lexer->l != '>' && lexer->l != '<')
+        || double_quote == 0))
 	{
 		if (lexer->l == '\"')
-			flag = 0;
+			double_quote = 1;
 		str = add_str(str, lexer->l);
-		lexer->nxt++;
-		lexer->l = lexer->fill[lexer->nxt];
+		go_next(lexer);
 	}
-	token = malloc(sizeof(t_vals));
 	if (str)
-	{
-		token->val = str;
-		token->token = V_STR;
-	}
+		token = initialize_token(str, V_STR);
 	else
-	{
-		if(lexer->l == '>')
-		{
-			lexer->nxt++;
-			lexer->l = lexer->fill[lexer->nxt];
-			if (lexer->l == '>')
-			{
-				lexer->nxt++;
-				lexer->l = lexer->fill[lexer->nxt];
-				return fill_token(">>", V_APP);
-			}
-			return fill_token(">", V_RDIR);
-		}   
-		if (lexer->l == '<')
-		{
-			lexer->nxt++;
-			lexer->l = lexer->fill[lexer->nxt];
-			if(lexer->l == '<')
-			{
-				lexer->nxt++;
-				lexer->l = lexer->fill[lexer->nxt];
-				return fill_token("<<", V_HDK);
-			}
-			return fill_token("<", V_LDIR);
-		}
-		if(lexer->l == '|')
-		{   
-			lexer->nxt++;
-			lexer->l = lexer->fill[lexer->nxt];
-			return fill_token("|", V_PIPE);
-		}
-		else
-			return fill_token("EOF", V_EOF);
-	}
-	return token;
+		token = others(lexer);
+	//printf("%s\n", token->val);
+	return (token);
 }
 
-t_list	*ft_lexer(char *rl)
+t_list	*lexecal_analyzer(char *str)
 {
-	t_list	*lexer;
-	t_lex	analyze;
+	t_lex	lexer;
 	t_vals	*token;
-
-	if (!rl)
-		return (0);
-	analyze.fill = rl;
-	analyze.nxt = 0;
-	analyze.l = analyze.fill[analyze.nxt];
-	lexer = NULL;
-	while (analyze.l != '\0')
+	t_list	*list;
+	initialize_lexer(&lexer, str);
+	printf("lex: %s\n", lexer.fill);
+	list = NULL;
+	while (lexer.l != '\0')
 	{
-		token = set_tokens(&analyze);
-		ft_lstadd_back(&lexer, ft_lstnew(token));
+		printf("l: %c\n", lexer.l);
+		token = select_token(&lexer);
+		printf("token: %s\n", token->val);
+		ft_lstadd_back(&list, ft_lstnew(token));
 	}
-	return (lexer);
+	token = initialize_token(NULL, V_EOF);
+	ft_lstadd_back(&list, ft_lstnew(token));
+	return (list);
 }
 
 int	main(int ac, char **av, char **env)
 {
-	char	*rl;
-	t_list	*lexer;
+	char *rl;
+	t_list *lexer;
 
 	(void)av;
 	(void)ac;
@@ -152,10 +137,8 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		rl = readline("\033[1;32mminishell-1.0$ \033[0m");
-		printf("%s\n", rl);
 		add_history(rl);
-		lexer = ft_lexer(rl);
-		printf("%p\n", ft_lexer(rl));
+		lexer = lexecal_analyzer(rl);
 		if (!rl)
 		{
 			write(1, "exit\n", 5);

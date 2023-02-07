@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+         #
+#    By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/04 19:29:40 by abouramd          #+#    #+#              #
-#    Updated: 2023/02/06 20:32:36 by abouramd         ###   ########.fr        #
+#    Updated: 2023/02/07 01:21:43 by zasabri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,16 @@ LIB := -lreadline
 
 SRC_EXEC :=
 
-SRC_PARS :=
+SRC_PARS := ./parsing/parsing.c\
+			./include/libft/ft_strlen.c\
+			./include/libft/ft_strjoin.c\
+			./include/libft/ft_lstadd_back_bonus.c\
+			./include/libft/ft_lstlast_bonus.c\
+			./include/libft/ft_lstnew_bonus.c\
+			./parsing/initialize.c\
+			
+
+PROG	= minishell
 
 OBJ := $(SRC_EXEC:.c=.o) $(SRC_PARS:.c=.o)
 
@@ -31,8 +40,8 @@ all:$(NAME)
 $(NAME):$(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)  $(INC) $(LIB)
 
-$(OBJ): $(SRC_EXEC) $(SRC_PARS)
-	$(CC) $(CFLAGS) -c $(SRC_EXEC) $(SRC_PARS) $(INC) $(LIB)
+# $(OBJ): $(SRC_EXEC) $(SRC_PARS)
+# 	$(CC) $(CFLAGS) $(SRC_EXEC) $(SRC_PARS) $(LIB) -o $(PROG)
 	
 
 clean:

@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:34:05 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/04 22:34:00 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/07 02:05:46 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,7 @@
 # include "set_val.h"
 # include "lexer.h"
 
+void	initialize_lexer(t_lex *lexer, char *str);
+void	go_next(t_lex *lexer);
+t_vals	*initialize_token(char *str, int v);
 #endif
