@@ -82,7 +82,7 @@ t_vals	*select_token(t_lex *lexer)
 	}
 	while (lexer->l)
 	{
-		if (lexer->l == '|' || lexer->l == '<' || lexer->l == '>' || lexer->l == '\"')
+		if (lexer->l == '|' || lexer->l == '<' || lexer->l == '>')
 			break;
 		printf("lexer_l: %c\n", lexer->l);
 		str = add_str(str, lexer->l);
@@ -115,8 +115,14 @@ t_list	*lexecal_analyzer(char *str)
 		token = select_token(&lexer);
 		ft_lstadd_back(&list, ft_lstnew(token));
 	}
-	token = initialize_token(NULL, V_EOF);
-	ft_lstadd_back(&list, ft_lstnew(token));
+	//token = initialize_token(NULL, V_EOF);
+	// ft_lstadd_back(&list, ft_lstnew(token));
+	while (list)
+	{
+		t_vals *t = list->content; 
+		printf("%s\n", t->val);
+		list = list->next;
+	}
 	return (list);
 }
 
