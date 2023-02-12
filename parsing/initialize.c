@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 01:20:12 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/07 02:06:17 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/12 04:30:49 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@ void	go_next(t_lex *lexer)
 	lexer->l = lexer->fill[lexer->nxt];
 }
 
-t_vals	*initialize_token(char *str, int v)
+t_vals	*initialize_token(char *str, int type)
 {
 	t_vals	*token;
 
 	token = malloc(sizeof(t_vals));
-	token->token = v;
+	if (!token)
+		return (NULL);
+	token->token = type;
 	token->val = str;
 	return (token);
 }

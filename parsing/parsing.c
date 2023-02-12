@@ -59,7 +59,6 @@ char	*add_str(char *str, char c)
 	if (!str)
 	{
 		str = charachter;
-		//printf("%s", str);
 		return (str);
 	}
 	else
@@ -67,7 +66,6 @@ char	*add_str(char *str, char c)
 		str = ft_strjoin(str, charachter);
 		free(charachter);
 	}
-	//printf("%s", str);
 	return (str);
 }
 
@@ -75,29 +73,30 @@ t_vals	*select_token(t_lex *lexer)
 {
 	t_vals *token;
 	char *str;
-	int double_quote;
 
-	double_quote = 0;
 	str = NULL;
 	while (lexer->l && lexer->l == ' ')
 	{
 		lexer->nxt++;
 		lexer->l = lexer->fill[lexer->nxt];
 	}
-	while ((lexer->l != '\0')
-        && ((lexer->l != '|' && lexer->l != '>' && lexer->l != '<')
-        || double_quote == 0))
+	while (lexer->l)
 	{
-		if (lexer->l == '\"')
-			double_quote = 1;
+		if (lexer->l == '|' || lexer->l == '<' || lexer->l == '>' || lexer->l == '\"')
+			break;
+		printf("lexer_l: %c\n", lexer->l);
 		str = add_str(str, lexer->l);
+		printf("STR: %s\n", str);
 		go_next(lexer);
+		printf("lexer_l_next: %c\n", lexer->l);
 	}
 	if (str)
+	{
 		token = initialize_token(str, V_STR);
+	}
 	else
 		token = others(lexer);
-	//printf("%s\n", token->val);
+	printf("Token: %d\nValues: %s\n", token->token, token->val);
 	return (token);
 }
 
@@ -106,14 +105,14 @@ t_list	*lexecal_analyzer(char *str)
 	t_lex	lexer;
 	t_vals	*token;
 	t_list	*list;
+
+	if (!str)
+		return (NULL);
 	initialize_lexer(&lexer, str);
-	printf("lex: %s\n", lexer.fill);
 	list = NULL;
 	while (lexer.l != '\0')
 	{
-		printf("l: %c\n", lexer.l);
 		token = select_token(&lexer);
-		printf("token: %s\n", token->val);
 		ft_lstadd_back(&list, ft_lstnew(token));
 	}
 	token = initialize_token(NULL, V_EOF);
@@ -123,8 +122,8 @@ t_list	*lexecal_analyzer(char *str)
 
 int	main(int ac, char **av, char **env)
 {
-	char *rl;
-	t_list *lexer;
+	char	*rl;
+	t_list	*lexer;
 
 	(void)av;
 	(void)ac;
