@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_val.h                                          :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 19:03:01 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/14 06:33:12 by abouramd         ###   ########.fr       */
+/*   Created: 2022/10/07 17:02:33 by abouramd          #+#    #+#             */
+/*   Updated: 2022/11/19 00:19:19 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SET_VAL_H
-# define SET_VAL_H
+#include "libft.h"
 
-typedef	struct s_vals
+int	ft_atoi(const char *str)
 {
-	char	*val;
-	enum
-	{
-		V_STR,
-		V_PIPE,
-		V_APP,
-		V_RDIR,
-		V_LDIR,
-		V_HDK,
-		V_EOF,
-	}	token;
-}	t_vals;
+	int				sign;
+	long			res;
+	long			t;
 
-#endif
+	sign = 1;
+	res = 0;
+	while (*str == ' ' || (*str <= 13 && *str >= 9))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	while (*str <= '9' && *str >= '0')
+	{
+		t = (res * 10) + (*str - '0');
+		if (res > t)
+			return (0 - (sign > 0));
+		res = t;
+		str++;
+	}
+	return (sign * res);
+}

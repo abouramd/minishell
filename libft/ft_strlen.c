@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_val.h                                          :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abouramd <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 19:03:01 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/14 06:33:12 by abouramd         ###   ########.fr       */
+/*   Created: 2022/10/05 15:39:01 by abouramd          #+#    #+#             */
+/*   Updated: 2022/10/18 15:48:09 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SET_VAL_H
-# define SET_VAL_H
+#include "libft.h"
 
-typedef	struct s_vals
+size_t	ft_strlen(const char *s)
 {
-	char	*val;
-	enum
-	{
-		V_STR,
-		V_PIPE,
-		V_APP,
-		V_RDIR,
-		V_LDIR,
-		V_HDK,
-		V_EOF,
-	}	token;
-}	t_vals;
+	size_t	i;
 
-#endif
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}

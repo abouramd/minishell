@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/include.h"
+#include "include.h"
 
 void	signal_handler(int signal)
 {
@@ -113,8 +113,8 @@ t_list	*lexecal_analyzer(char *str)
 		token = select_token(&lexer);
 		ft_lstadd_back(&list, ft_lstnew(token));
 	}
-	// token = initialize_token(NULL, V_EOF);
-	// ft_lstadd_back(&list, ft_lstnew(token));
+	token = initialize_token(NULL, V_EOF);
+	ft_lstadd_back(&list, ft_lstnew(token));
 	// while (list)
 	// {
 	// 	t_vals *t = list->content; 
@@ -132,19 +132,20 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	(void)ac;
 	(void)env;
+	print_start();
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, signal_handler);
 	while (1)
 	{
 		rl = readline("\033[1;32mminishell-1.0$ \033[0m");
-		add_history(rl);
-		lexer = lexecal_analyzer(rl);
-		// if (all_is_good(lexer))
-		// 	free(lexer);
 		if (!rl)
 		{
 			write(1, "exit\n", 5);
 			exit(0);
 		}
+		add_history(rl);
+		lexer = lexecal_analyzer(rl);
+		if (all_is_good(lexer))
+		 	free(lexer);
 	}
 }

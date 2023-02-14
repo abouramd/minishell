@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_val.h                                          :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 19:03:01 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/14 06:33:12 by abouramd         ###   ########.fr       */
+/*   Created: 2022/10/08 16:31:16 by abouramd          #+#    #+#             */
+/*   Updated: 2022/11/19 00:08:56 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SET_VAL_H
-# define SET_VAL_H
+#include "libft.h"
 
-typedef	struct s_vals
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char	*val;
-	enum
-	{
-		V_STR,
-		V_PIPE,
-		V_APP,
-		V_RDIR,
-		V_LDIR,
-		V_HDK,
-		V_EOF,
-	}	token;
-}	t_vals;
+	unsigned char	*d;
+	unsigned char	*s;
 
-#endif
+	d = (unsigned char *) dst;
+	s = (unsigned char *) src;
+	if (dst == src)
+		return (dst);
+	if (d > s)
+		while (len-- > 0)
+			d[len] = s[len];
+	if (d < s)
+		ft_memcpy(dst, src, len);
+	return (dst);
+}

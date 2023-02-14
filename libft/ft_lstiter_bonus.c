@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_val.h                                          :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abouramd <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 19:03:01 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/14 06:33:12 by abouramd         ###   ########.fr       */
+/*   Created: 2022/10/16 11:25:20 by abouramd          #+#    #+#             */
+/*   Updated: 2022/10/17 18:57:48 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SET_VAL_H
-# define SET_VAL_H
+#include "libft.h"
 
-typedef	struct s_vals
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	char	*val;
-	enum
-	{
-		V_STR,
-		V_PIPE,
-		V_APP,
-		V_RDIR,
-		V_LDIR,
-		V_HDK,
-		V_EOF,
-	}	token;
-}	t_vals;
+	t_list	*p;
 
-#endif
+	if (!lst || !f)
+		return ;
+	p = lst;
+	while (p)
+	{
+		(*f)((*p).content);
+		p = (*p).next;
+	}
+}

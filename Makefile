@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+         #
+#    By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/04 19:29:40 by abouramd          #+#    #+#              #
-#    Updated: 2023/02/14 02:30:00 by zasabri          ###   ########.fr        #
+#    Updated: 2023/02/14 07:23:41 by abouramd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,18 +16,13 @@ CC := cc
 
 CFLAGS := -Wall -Wextra -Werror
 
-INC := -I ./include
+INC := -I ./include  -I ./libft
 
-LIB := -lreadline
+LIB := -lreadline -L ./libft/ -lft
 
-SRC_EXEC :=
+SRC_EXEC := ./executing/executing.c
 
 SRC_PARS := ./parsing/parsing.c\
-			./include/libft/ft_strlen.c\
-			./include/libft/ft_strjoin.c\
-			./include/libft/ft_lstadd_back_bonus.c\
-			./include/libft/ft_lstlast_bonus.c\
-			./include/libft/ft_lstnew_bonus.c\
 			./parsing/initialize.c\
 			./parsing/all_is_good.c\
 			
@@ -38,17 +33,20 @@ OBJ := $(SRC_EXEC:.c=.o) $(SRC_PARS:.c=.o)
 
 all:$(NAME)
 
-$(NAME):$(OBJ)
+$(NAME): $(OBJ)
+	make bonus -C ./libft/
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)  $(INC) $(LIB)
 
-# $(OBJ): $(SRC_EXEC) $(SRC_PARS)
-# 	$(CC) $(CFLAGS) $(SRC_EXEC) $(SRC_PARS) $(LIB) -o $(PROG)
-	
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
+
 
 clean:
+	make clean -C ./libft/
 	rm -rf $(OBJ)
 	
 fclean: clean
+	make fclean -C ./libft/
 	rm -rf $(NAME)
 
 re: fclean all
