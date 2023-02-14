@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+         #
+#    By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/04 19:29:40 by abouramd          #+#    #+#              #
-#    Updated: 2023/02/14 07:23:41 by abouramd         ###   ########.fr        #
+#    Updated: 2023/02/14 08:15:15 by zasabri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC_EXEC := ./executing/executing.c
 SRC_PARS := ./parsing/parsing.c\
 			./parsing/initialize.c\
 			./parsing/all_is_good.c\
+			./parsing/parse_str.c\
 			
 
 PROG	= minishell

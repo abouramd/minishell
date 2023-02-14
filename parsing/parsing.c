@@ -51,7 +51,8 @@ t_vals	*others(t_lex *lexer)
 
 char	*add_str(char *str, char c)
 {
-	char *charachter;
+	char	*charachter;
+	char	*tmp;
 
 	charachter = malloc(sizeof(char) * 2);
 	charachter[0] = c;
@@ -63,7 +64,9 @@ char	*add_str(char *str, char c)
 	}
 	else
 	{
+		tmp = str;
 		str = ft_strjoin(str, charachter);
+		free(tmp);
 		free(charachter);
 	}
 	return (str);
@@ -84,14 +87,11 @@ t_vals	*select_token(t_lex *lexer)
 	{
 		if (lexer->l == '|' || lexer->l == '<' || lexer->l == '>')
 			break;
-
 		str = add_str(str, lexer->l);
 		go_next(lexer);
 	}
 	if (str)
-	{
 		token = initialize_token(str, V_STR);
-	}
 	else
 		token = others(lexer);
 	//printf("Token: %d\nValues: %s\n", token->token, token->val);
@@ -146,6 +146,15 @@ int	main(int ac, char **av, char **env)
 		add_history(rl);
 		lexer = lexecal_analyzer(rl);
 		if (all_is_good(lexer))
-		 	free(lexer);
+		{
+			free(lexer);
+			continue;
+		}
+		if (!isValid(rl))
+		{
+			printf(" qout \" \' ");
+			continue;
+		}
+		printf("all is okay :)\n line => %s\n", rl);
 	}
 }
