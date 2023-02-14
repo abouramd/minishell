@@ -150,11 +150,11 @@ int	main(int ac, char **av, char **env)
 			free(lexer);
 			continue;
 		}
-		if (!isValid(rl))
-		{
-			printf(" qout \" \' ");
-			continue;
-		}
-		printf("all is okay :)\n line => %s\n", rl);
+		// if (!isValid(rl))
+		// {
+		// 	printf(" qout \" \' ");
+		// 	continue;
+		// }
+		// printf("all is okay :)\n line => %s\n", rl);
 	}
 }
