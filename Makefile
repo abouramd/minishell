@@ -6,7 +6,7 @@
 #    By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/04 19:29:40 by abouramd          #+#    #+#              #
-#    Updated: 2023/02/07 01:21:43 by zasabri          ###   ########.fr        #
+#    Updated: 2023/02/14 02:30:00 by zasabri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC_PARS := ./parsing/parsing.c\
 			./include/libft/ft_lstlast_bonus.c\
 			./include/libft/ft_lstnew_bonus.c\
 			./parsing/initialize.c\
+			./parsing/all_is_good.c\
 			
 
 PROG	= minishell

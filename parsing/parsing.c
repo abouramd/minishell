@@ -84,11 +84,9 @@ t_vals	*select_token(t_lex *lexer)
 	{
 		if (lexer->l == '|' || lexer->l == '<' || lexer->l == '>')
 			break;
-		printf("lexer_l: %c\n", lexer->l);
+
 		str = add_str(str, lexer->l);
-		printf("STR: %s\n", str);
 		go_next(lexer);
-		printf("lexer_l_next: %c\n", lexer->l);
 	}
 	if (str)
 	{
@@ -96,7 +94,7 @@ t_vals	*select_token(t_lex *lexer)
 	}
 	else
 		token = others(lexer);
-	printf("Token: %d\nValues: %s\n", token->token, token->val);
+	//printf("Token: %d\nValues: %s\n", token->token, token->val);
 	return (token);
 }
 
@@ -115,14 +113,14 @@ t_list	*lexecal_analyzer(char *str)
 		token = select_token(&lexer);
 		ft_lstadd_back(&list, ft_lstnew(token));
 	}
-	//token = initialize_token(NULL, V_EOF);
+	// token = initialize_token(NULL, V_EOF);
 	// ft_lstadd_back(&list, ft_lstnew(token));
-	while (list)
-	{
-		t_vals *t = list->content; 
-		printf("%s\n", t->val);
-		list = list->next;
-	}
+	// while (list)
+	// {
+	// 	t_vals *t = list->content; 
+	// 	//printf("%s\n", t->val);
+	// 	list = list->next;
+	// }
 	return (list);
 }
 
@@ -141,6 +139,8 @@ int	main(int ac, char **av, char **env)
 		rl = readline("\033[1;32mminishell-1.0$ \033[0m");
 		add_history(rl);
 		lexer = lexecal_analyzer(rl);
+		// if (all_is_good(lexer))
+		// 	free(lexer);
 		if (!rl)
 		{
 			write(1, "exit\n", 5);
