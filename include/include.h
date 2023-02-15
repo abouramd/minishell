@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:34:05 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/14 09:28:53 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/15 13:56:44 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ char	*check_str(char *str);
 char	*add_str(char *str, char c);
 int		isValid(char * s);
 // exec function
-void print_start(void);
+void	print_start(void);
 
 #endif

@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_val.h                                          :+:      :+:    :+:   */
+/*   join_characters.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 19:03:01 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/15 13:19:07 by zasabri          ###   ########.fr       */
+/*   Created: 2023/02/15 13:58:06 by zasabri           #+#    #+#             */
+/*   Updated: 2023/02/15 13:58:10 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SET_VAL_H
-# define SET_VAL_H
+#include "include.h"
 
-typedef	struct s_vals
+char	*add_str(char *str, char c)
 {
-	char	*val;
-	enum
-	{
-		V_STR,
-		V_PIPE,
-		V_APP,
-		V_RDIR,
-		V_LDIR,
-		V_HDK,
-		V_EOF,
-	}	token;
-}	t_vals;
+	char	*charachter;
+	char	*tmp;
 
-#endif
- 
+	charachter = malloc(sizeof(char) * 2);
+	charachter[0] = c;
+	charachter[1] = '\0';
+	if (!str)
+	{
+		str = charachter;
+		return (str);
+	}
+	else
+	{
+		tmp = str;
+		str = ft_strjoin(str, charachter);
+		free(tmp);
+		free(charachter);
+	}
+	return (str);
+}

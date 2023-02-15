@@ -49,29 +49,6 @@ t_vals	*others(t_lex *lexer)
 		return (initialize_token("EOF", V_EOF));
 }
 
-char	*add_str(char *str, char c)
-{
-	char	*charachter;
-	char	*tmp;
-
-	charachter = malloc(sizeof(char) * 2);
-	charachter[0] = c;
-	charachter[1] = '\0';
-	if (!str)
-	{
-		str = charachter;
-		return (str);
-	}
-	else
-	{
-		tmp = str;
-		str = ft_strjoin(str, charachter);
-		free(tmp);
-		free(charachter);
-	}
-	return (str);
-}
-
 t_vals	*select_token(t_lex *lexer)
 {
 	t_vals *token;

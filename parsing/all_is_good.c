@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 09:19:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/14 09:41:49 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/15 14:04:23 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ int	all_is_good(t_list *lexer)
 		if (first->token == V_STR)
 		{
 			save = first->val;
-			if (str == NULL)
+			str = check_str(first->val);
+			if (!str)
 				return (printf("syntax error unexpected token `(null)'\n"));
-			if (str != save)//drt hadi 7itach ila makanoch l qoutes rah ghaykon kaysawih but ila kano rah save ghaykono fih lqoutes so khass ytfreeya dak lfirst->val, you got me?
+			if (str != save)
 				free(save);
-			first->val = str;//example for this : ila 3ndi $ls fa rah makayn mochkil but ila 3ndi $"ls" farah aykhssni gha $ls dakchi bach kan7at return d check str wa raha kathandli lblan d lquotes 7it ila str[strlen] == '\0' ayruterni null and ila returna null
-			// fa ra ghayktb dak l message d syntax error + ktjoini liya gha string without qoutes. 
+			first->val = str; 
 		}
 		if (first->token != V_STR && second->token == V_PIPE)
 			return (printf("syntax error near unexpected token `%s'\n", second->val));
