@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:34:05 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/15 13:56:44 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/16 14:10:25 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@
 # include "libft.h"
 # include "set_val.h"
 # include "lexer.h"
+# include "command_list.h"
 
-void	initialize_lexer(t_lex *lexer, char *str);
-void	go_next(t_lex *lexer);
-t_vals	*initialize_token(char *str, int v);
-int		all_is_good(t_list *lexer);
-char	*check_str(char *str);
-char	*add_str(char *str, char c);
+void		initialize_lexer(t_lex *lexer, char *str);
+void		go_next(t_lex *lexer);
+t_vals		*initialize_token(char *str, int v);
+int			all_is_good(t_list *lexer);
+char		*check_str(char *str);
+char		*add_str(char *str, char c);
+t_cmd_list	*initilize_save(t_cmd_list *save);
 int		isValid(char * s);
 // exec function
 void	print_start(void);
