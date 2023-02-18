@@ -127,6 +127,7 @@ int	main(int ac, char **av, char **env)
 			free(lexer);
 			continue;
 		}
+		command_table(lexer);
 		// if (!isValid(rl))
 		// {
 		// 	printf(" qout \" \' ");

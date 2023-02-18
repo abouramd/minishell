@@ -6,12 +6,52 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:05:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/16 20:01:09 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/18 02:09:16 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
+char	**fill_save(char **cmd, char **save)
+{
+	int		i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		save[i] = ft_strdup(cmd[i]);
+		i++;
+	}
+	save[i] = NULL;
+	return (save);
+}
+
+char	**set_cmd(char **cmd, char *str)
+{
+	char	**save;
+	int		i;
+
+	i = 0;
+	if (!cmd[0])
+		cmd[0] = ft_strdup(str);
+	if (cmd[i])
+	{
+		while (cmd[i])
+			i++;
+		save = (char **)malloc(sizeof(char *) * (i + 1));
+		save = fill_save(cmd, save);
+		cmd = (char **) malloc(sizeof(char *) * (i + 2));
+		i = 0;
+		while (save[i])
+		{	
+			cmd[i] = save[i];
+			i++;
+		}
+		cmd[i] = ft_strdup(str);
+		cmd [i + 1] = NULL;
+	}
+	return (cmd);
+}
 t_list	*command_table(t_list *lexer)
 {
 	t_list		*cmd_table;
@@ -24,32 +64,18 @@ t_list	*command_table(t_list *lexer)
 	first = (t_vals *) lexer->content;
 	while (first->token != V_EOF)
 	{
-
-		if (first->token = V_APP)
-		{
-			lexer = lexer->next;
-			first = (t_vals *) lexer->content;
-			if (first->token == V_STR)
-				save->outfile = open(first->val, O_CREAT | O_RDWR | O_APPEND, 0777);
-		}
-		else if (first->token == V_RDIR)
-		{
-			lexer = lexer->next;
-			first = (t_vals *) lexer->content;
-			if (first->token == V_STR)
-				save->outfile = open(first->val, O_TRUNC | O_CREAT | O_RDWR, 0777);
-		}
+		if (first->token == V_STR)
+			save->cmd = set_cmd(save->cmd, first->val);
 		else if (first->token == V_LDIR)
-		{
-			lexer = lexer->next;
-			first = (t_vals *) lexer->content;
-			if (first->token == V_STR)
-				save->infile = open(first->val, O_CREAT | O_RDWR, 0777);
-		}
+			for_lderiction(first, save, &lexer);
+		else if (first->token == V_RDIR)
+			for_rderiction(first, save, &lexer);
+		else if (first->token == V_APP)
+			for_append(first, save, &lexer);
 		else if (first->token == V_PIPE)
 		{
 			ft_lstadd_back(&cmd_table, ft_lstnew(save));
-			save = init_content(save);
+			save = initilize_save(save);
 		}
 		lexer = lexer->next;
 		first = (t_vals *) lexer->content;

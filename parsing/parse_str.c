@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 07:59:21 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/16 14:17:19 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/18 01:49:43 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char	*check_str(char *str)
 				return (NULL);
 			i++;
 		}
-		else if (str[i] == '\'')
+		else if (str[i] == '\"')
 		{	
 			i++;
 			while (str[i] && str[i] != '\'')
