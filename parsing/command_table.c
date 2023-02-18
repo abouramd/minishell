@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:05:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/18 02:29:40 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/18 09:06:27 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	**set_cmd(char **cmd, char *str)
 		cmd[i] = ft_strdup(str);
 		cmd [i + 1] = NULL;
 	}
-	printf("%s\n", cmd[0]);
+	//printf("%s\n", cmd[0]);
 	return (cmd);
 }
 t_list	*command_table(t_list *lexer)

@@ -71,7 +71,6 @@ t_vals	*select_token(t_lex *lexer)
 		token = initialize_token(str, V_STR);
 	else
 		token = others(lexer);
-	//printf("Token: %d\nValues: %s\n", token->token, token->val);
 	return (token);
 }
 
@@ -92,19 +91,44 @@ t_list	*lexecal_analyzer(char *str)
 	}
 	token = initialize_token(NULL, V_EOF);
 	ft_lstadd_back(&list, ft_lstnew(token));
-	// while (list)
-	// {
-	// 	t_vals *t = list->content; 
-	// 	//printf("%s\n", t->val);
-	// 	list = list->next;
-	// }
 	return (list);
+}
+
+void print_tokens(t_vals *lexer)
+{
+        printf("value_of_token: %s (",lexer->val);
+		if (lexer->token == 0)
+			printf("str_token");
+		else if (lexer->token == 1)
+			printf("pipe_token");
+		else if (lexer->token == 2)
+			printf("append_token");
+		else if (lexer->token == 3)
+			printf("rderiction_token");
+		else if (lexer->token == 4)
+			printf("lderiction_token");
+		else if (lexer->token == 5)
+			printf("heredoce_token");
+		else
+			printf("end_of_file");
+		printf(")\n");
+}
+
+void test(t_list *lexer)
+{
+    t_list *first = lexer;
+    while(first)
+    {
+        print_tokens((t_vals *) first->content);
+        first = first->next;
+    }
 }
 
 int	main(int ac, char **av, char **env)
 {
 	char	*rl;
 	t_list	*lexer;
+	t_list	*cmd_table;
 
 	(void)av;
 	(void)ac;
@@ -122,17 +146,12 @@ int	main(int ac, char **av, char **env)
 		}
 		add_history(rl);
 		lexer = lexecal_analyzer(rl);
+		test(lexer);
 		if (all_is_good(lexer))
 		{
 			free(lexer);
 			continue;
 		}
-		command_table(lexer);
-		// if (!isValid(rl))
-		// {
-		// 	printf(" qout \" \' ");
-		// 	continue;
-		// }
-		// printf("all is okay :)\n line => %s\n", rl);
+		cmd_table = command_table(lexer);
 	}
 }
