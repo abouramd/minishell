@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 13:58:06 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/15 13:58:10 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/18 09:20:04 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*add_str(char *str, char c)
 {
 	char	*charachter;
-	char	*tmp;
+	char	*save;
 
 	charachter = malloc(sizeof(char) * 2);
 	charachter[0] = c;
@@ -27,9 +27,9 @@ char	*add_str(char *str, char c)
 	}
 	else
 	{
-		tmp = str;
+		save = str;
 		str = ft_strjoin(str, charachter);
-		free(tmp);
+		free(save);
 		free(charachter);
 	}
 	return (str);
