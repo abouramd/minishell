@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 07:59:21 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/18 01:49:43 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/18 02:12:01 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ char	*check_str(char *str)
 	while (str[i])
 	{
 		if (str[i] == '\"')
-		{
-			i += 1;
-			while (str[i] && str[i] != '\"')
+		{	
+			i++;
+			while (str[i] && str[i] != '\'')
 			{
 				new_str = add_str(new_str, str[i]);
 				i++;
@@ -101,9 +101,9 @@ char	*check_str(char *str)
 			i++;
 		}
 		else if (str[i] == '\"')
-		{	
-			i++;
-			while (str[i] && str[i] != '\'')
+		{
+			i += 1;
+			while (str[i] && str[i] != '\"')
 			{
 				new_str = add_str(new_str, str[i]);
 				i++;
