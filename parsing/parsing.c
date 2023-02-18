@@ -20,15 +20,10 @@ void	signal_handler(int signal)
 
 t_vals	*others(t_lex *lexer)
 {
-	if (lexer->l == '>')
+	if (lexer->l == '|')
 	{
 		go_next(lexer);
-		if (lexer->l == '>')
-		{
-			go_next(lexer);
-			return (initialize_token(">>", V_APP));
-		}
-		return (initialize_token(">", V_RDIR));
+		return (initialize_token("|", V_PIPE));
 	}
 	if (lexer->l == '<')
 	{
@@ -40,10 +35,15 @@ t_vals	*others(t_lex *lexer)
 		}
 		return (initialize_token("<", V_LDIR));
 	}
-	if (lexer->l == '|')
+	if (lexer->l == '>')
 	{
 		go_next(lexer);
-		return (initialize_token("|", V_PIPE));
+		if (lexer->l == '>')
+		{
+			go_next(lexer);
+			return (initialize_token(">>", V_APP));
+		}
+		return (initialize_token(">", V_RDIR));
 	}
 	else
 		return (initialize_token("EOF", V_EOF));

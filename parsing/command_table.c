@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:05:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/18 02:09:16 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/18 02:29:40 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char	**set_cmd(char **cmd, char *str)
 		cmd[i] = ft_strdup(str);
 		cmd [i + 1] = NULL;
 	}
+	printf("%s\n", cmd[0]);
 	return (cmd);
 }
 t_list	*command_table(t_list *lexer)
@@ -67,11 +68,20 @@ t_list	*command_table(t_list *lexer)
 		if (first->token == V_STR)
 			save->cmd = set_cmd(save->cmd, first->val);
 		else if (first->token == V_LDIR)
+		{
 			for_lderiction(first, save, &lexer);
+			printf("%d\n", save->infile);
+		}
 		else if (first->token == V_RDIR)
+		{
 			for_rderiction(first, save, &lexer);
+			printf("%d\n", save->outfile);
+		}
 		else if (first->token == V_APP)
+		{
 			for_append(first, save, &lexer);
+			printf("%d\n", save->outfile);
+		}
 		else if (first->token == V_PIPE)
 		{
 			ft_lstadd_back(&cmd_table, ft_lstnew(save));
