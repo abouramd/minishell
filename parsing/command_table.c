@@ -6,53 +6,11 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:05:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/19 02:09:51 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/19 09:19:26 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
-
-char	**fill_save(char **cmd, char **save)
-{
-	int		i;
-
-	i = 0;
-	while (cmd[i])
-	{
-		save[i] = ft_strdup(cmd[i]);
-		i++;
-	}
-	save[i] = NULL;
-	return (save);
-}
-
-char	**set_cmd(char **cmd, char *str)
-{
-	char	**save;
-	int		i;
-
-	i = 0;
-	if (!cmd[0])
-		cmd[0] = ft_strdup(str);
-	if (cmd[i])
-	{
-		while (cmd[i])
-			i++;
-		save = (char **)malloc(sizeof(char *) * (i + 1));
-		save = fill_save(cmd, save);
-		cmd = (char **) malloc(sizeof(char *) * (i + 2));
-		i = 0;
-		while (save[i])
-		{	
-			cmd[i] = save[i];
-			i++;
-		}
-		cmd[i] = ft_strdup(str);
-		cmd [i + 1] = NULL;
-	}
-	//printf("%s\n", cmd[0]);
-	return (cmd);
-}
 
 t_list	*command_table(t_list *lexer)
 {
@@ -60,6 +18,7 @@ t_list	*command_table(t_list *lexer)
 	t_vals		*first;
 	t_cmd_list	*save;
 
+	here_documents(lexer);
 	save = NULL;
 	cmd_table = NULL;
 	save = initilize_save(save);
@@ -67,7 +26,7 @@ t_list	*command_table(t_list *lexer)
 	while (first->token != V_EOF)
 	{
 		if (first->token == V_STR)
-			save->cmd = set_cmd(save->cmd, first->val);
+			save->cmd = ft_split(first->val, ' ');
 		else if (first->token == V_IN_RDIR)
 		{
 			for_input_redirection(first, save, &lexer);
@@ -92,5 +51,13 @@ t_list	*command_table(t_list *lexer)
 		first = (t_vals *) lexer->content;
 	}
 	ft_lstadd_back(&cmd_table, ft_lstnew(save));
+	// t_list *tmp = cmd_table;
+	// while (tmp != NULL)
+	// {
+	// 	t_cmd_list *y = tmp->content;
+	// 	for (int j = 0;y->cmd[j];j++)
+	// 		printf("cmd[%d] = %s\n", j,y->cmd[j]);
+	// 	tmp = tmp->next;
+	// }
 	return (cmd_table);
 }

@@ -6,7 +6,7 @@
 #    By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/04 19:29:40 by abouramd          #+#    #+#              #
-#    Updated: 2023/02/18 00:41:12 by zasabri          ###   ########.fr        #
+#    Updated: 2023/02/19 02:33:31 by zasabri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC_PARS := ./parsing/parsing.c\
 			./parsing/join_characters.c\
 			./parsing/command_table.c\
 			./parsing/open_files.c\
+			./parsing/here_documents.c\
 			
 
 PROG	= minishell

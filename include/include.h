@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:34:05 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/19 02:07:06 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/19 02:33:59 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int			isValid(char * s);
 void		for_out_redirection(t_vals *first, t_cmd_list *save, t_list **lexer);
 void		for_input_redirection(t_vals *first, t_cmd_list *save, t_list **lexer);
 void		for_append(t_vals *first, t_cmd_list *save, t_list **lexer);
+void		here_documents(t_list *tokens);
 // exec function
 void	print_start(void);
 
