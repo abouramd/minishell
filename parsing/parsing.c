@@ -33,7 +33,7 @@ t_vals	*others(t_lex *lexer)
 			go_next(lexer);
 			return (initialize_token("<<", V_HDK));
 		}
-		return (initialize_token("<", V_LDIR));
+		return (initialize_token("<", V_OUT_RDIR));
 	}
 	if (lexer->l == '>')
 	{
@@ -43,7 +43,7 @@ t_vals	*others(t_lex *lexer)
 			go_next(lexer);
 			return (initialize_token(">>", V_APP));
 		}
-		return (initialize_token(">", V_RDIR));
+		return (initialize_token(">", V_IN_RDIR));
 	}
 	else
 		return (initialize_token("EOF", V_EOF));
@@ -104,9 +104,9 @@ void print_tokens(t_vals *lexer)
 		else if (lexer->token == 2)
 			printf("append_token");
 		else if (lexer->token == 3)
-			printf("rderiction_token");
+			printf("out_rederiction_token");
 		else if (lexer->token == 4)
-			printf("lderiction_token");
+			printf("in_rederiction_token");
 		else if (lexer->token == 5)
 			printf("heredoce_token");
 		else

@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:05:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/18 09:06:27 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/19 02:09:51 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ char	**set_cmd(char **cmd, char *str)
 	//printf("%s\n", cmd[0]);
 	return (cmd);
 }
+
 t_list	*command_table(t_list *lexer)
 {
 	t_list		*cmd_table;
@@ -67,14 +68,14 @@ t_list	*command_table(t_list *lexer)
 	{
 		if (first->token == V_STR)
 			save->cmd = set_cmd(save->cmd, first->val);
-		else if (first->token == V_LDIR)
+		else if (first->token == V_IN_RDIR)
 		{
-			for_lderiction(first, save, &lexer);
+			for_input_redirection(first, save, &lexer);
 			printf("%d\n", save->infile);
 		}
-		else if (first->token == V_RDIR)
+		else if (first->token == V_OUT_RDIR)
 		{
-			for_rderiction(first, save, &lexer);
+			for_out_redirection(first, save, &lexer);
 			printf("%d\n", save->outfile);
 		}
 		else if (first->token == V_APP)

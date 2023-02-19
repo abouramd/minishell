@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 09:19:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/15 14:04:23 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/19 02:08:56 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	all_is_good(t_list *lexer)
 	second = (t_vals *) lexer->next->content;
 	while (first->token != V_EOF)
 	{
-		if ((first->token == V_APP || first->token == V_RDIR
-			|| first->token == V_LDIR || first->token == V_HDK) && second->token != V_STR)
+		if ((first->token == V_APP || first->token == V_OUT_RDIR
+			|| first->token == V_IN_RDIR || first->token == V_HDK) && second->token != V_STR)
 			return (printf("syntax error near unexpected token `%s'\n", second->val));
 		if (first->token == V_STR)
 		{
