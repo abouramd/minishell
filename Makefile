@@ -6,7 +6,7 @@
 #    By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 05:30:41 by abouramd          #+#    #+#              #
-#    Updated: 2023/02/20 03:48:09 by zasabri          ###   ########.fr        #
+#    Updated: 2023/02/20 03:58:26 by zasabri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,8 @@ readline_lib:
 
 
 clean:
+	make fclean -C ./library/libft/	
 	rm -rf $(OBJ)
-#	make fclean -C ./library/libft/	
 #	make clean -C ./library/readline/
 	
 fclean: clean
