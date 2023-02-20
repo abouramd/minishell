@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+         #
+#    By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 05:30:41 by abouramd          #+#    #+#              #
-#    Updated: 2023/02/20 02:31:59 by abouramd         ###   ########.fr        #
+#    Updated: 2023/02/20 03:48:09 by zasabri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := minishell
 
-CFLAGS := #-Wall -Wextra -Werror
+CFLAGS := -fsanitize=address -Wall -Wextra -Werror
 
 INC := -I ./include  -I ./library/libft -I ./library/readline/
 
@@ -39,12 +39,12 @@ readline_lib:
 
 
 clean:
-	make fclean -C ./library/libft/	
-	make clean -C ./library/readline/
 	rm -rf $(OBJ)
+#	make fclean -C ./library/libft/	
+#	make clean -C ./library/readline/
 	
 fclean: clean
-	make fclean -C ./library/libft/
 	rm -rf $(NAME)
+#	make fclean -C ./library/libft/
 
 re: fclean all

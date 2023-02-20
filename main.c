@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 00:48:54 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/20 01:00:32 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/02/20 03:56:03 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void print_start(void)
     ft_putstr_fd("\033[0m\n", 1);
 }
 
-char *put_prompt(t_data *f)
+char *put_prompt(void)
 {
     char *prompt;
     char *tmp;
@@ -47,6 +47,11 @@ char *put_prompt(t_data *f)
 void free_all(t_data *f)
 {
     ft_free(f->list_of_cmd->cmd);
+    if (f->list_of_cmd->infile != 0)
+        close(f->list_of_cmd->infile);
+    if (f->list_of_cmd->outfile != 1)
+        close(f->list_of_cmd->outfile);
+        
 }
 
 void setup_shell(int ac, char **av, char **env, t_data *d)
@@ -68,35 +73,31 @@ int	main(int ac, char **av, char **env)
 {
     char *rl; 
     t_data d;
-    t_cmd_list g;
     t_pipe f;
     t_list *lexer;
-    
+
     setup_shell(ac, av, env, &d);
-    d.list_of_cmd = &g;
 	while (1)
 	{
-		rl = put_prompt(&d);
+		rl = put_prompt();
 		if (!rl)
 			return (write(1, "exit\n", 5), 0);
 		if (*rl)
         {    
 		    add_history(rl);
             lexer = lexecal_analyzer(rl);
-		    test(lexer);
-		    if (all_is_good(lexer))
+		    // test(lexer);    
+		    if (lexer == NULL || all_is_good(lexer))
 		    {
-		    	free(lexer);
+                if (lexer)
+		    	    free(lexer);
+                free(rl);
 		    	continue;
 		    }
 		    d.list_of_cmd = command_table(lexer);
-            // d.list_of_cmd->cmd = ft_split(rl, ' ');
-            // d.list_of_cmd->infile = 0;
-            // d.list_of_cmd->outfile = 1;
-            // d.list_of_cmd->next = NULL;
-            f.path = split_path(d.my_env);
             if (!d.list_of_cmd)
                 exit(1);
+            f.path = split_path(d.my_env);
             if (!builtins(&d))
                cmd_exec(&d, &f);
             free_all(&d);

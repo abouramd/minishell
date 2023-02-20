@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:05:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/20 01:50:40 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/20 03:52:21 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_cmd_list	*command_table(t_list *lexer)
 	here_documents(lexer);
 	save = NULL;
 	cmd_table = NULL;
-	save = initilize_save(save);
+	save = initilize_save();
 	first = (t_vals *) lexer->content;
 	while (first->token != V_EOF)
 	{
@@ -65,7 +65,7 @@ t_cmd_list	*command_table(t_list *lexer)
 		else if (first->token == V_PIPE)
 		{
 			link_back(&cmd_table, save);
-			save = initilize_save(save);
+			save = initilize_save();
 		}
 		lexer = lexer->next;
 		first = (t_vals *) lexer->content;

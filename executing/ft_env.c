@@ -3,7 +3,6 @@
 char**    realloc_env(char **old_env, char *str)
 {
     char *tmp;
-    char *s;
     char h[2]={127, 0};
     
     size_t i = 0;

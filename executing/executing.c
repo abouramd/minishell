@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executing.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 06:51:59 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/20 00:51:32 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/02/20 03:26:44 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char **alloc_env(char **s)
         return NULL;
     while (s[size])
         size++;
-    ft_env = ft_calloc(size + 1, sizeof(char *));
+    ft_env = malloc((size + 1) * sizeof(char *));
     if (!ft_env)
         return NULL;
     size = 0;

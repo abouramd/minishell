@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 01:20:12 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/20 01:50:26 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/20 03:54:30 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@ t_vals	*initialize_token(char *str, int type)
 	return (token);
 }
 
-t_cmd_list	*initilize_save(t_cmd_list *save)
+t_cmd_list	*initilize_save(void)
 {
-	save = malloc(sizeof(t_vals));
+	t_cmd_list *save;
+	
+	save = malloc(sizeof(t_cmd_list));
 	save->infile = 0;
 	save->outfile = 1;
 	save->next = NULL;

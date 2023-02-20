@@ -27,7 +27,7 @@ t_vals	*others(t_lex *lexer)
 			go_next(lexer);
 			return (initialize_token("<<", V_HDK));
 		}
-		return (initialize_token("<", V_OUT_RDIR));
+		return (initialize_token("<", V_IN_RDIR));
 	}
 	if (lexer->l == '>')
 	{
@@ -37,7 +37,7 @@ t_vals	*others(t_lex *lexer)
 			go_next(lexer);
 			return (initialize_token(">>", V_APP));
 		}
-		return (initialize_token(">", V_IN_RDIR));
+		return (initialize_token(">", V_OUT_RDIR));
 	}
 	else
 		return (initialize_token("EOF", V_EOF));

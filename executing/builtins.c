@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 03:38:21 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/19 11:39:16 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/02/20 03:55:26 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,8 +235,7 @@ void built_echo(t_data *f)
 
 int builtins(t_data *f)
 {
-    if (!f->list_of_cmd->cmd[0])
-        return 1;
+    // printf("%s\n", f->list_of_cmd->cmd[0]);
     if (!ft_strncmp(f->list_of_cmd->cmd[0], "pwd", 4))
         return (built_pwd(f), 1);
     else if (!ft_strncmp(f->list_of_cmd->cmd[0], "cd", 3))
