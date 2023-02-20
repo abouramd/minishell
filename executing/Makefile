@@ -6,7 +6,7 @@
 #    By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 05:30:41 by abouramd          #+#    #+#              #
-#    Updated: 2023/02/20 02:13:36 by abouramd         ###   ########.fr        #
+#    Updated: 2023/02/19 09:27:17 by abouramd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,13 @@ NAME := minishell
 
 CFLAGS := #-Wall -Wextra -Werror
 
-INC := -I ./include  -I ./library/libft -I ./library/readline/
+INC := -I ../include  -I ./library/libft -I ./library/readline/
 
 LIB := -L ./library/libft/ -L ./library/readline -lreadline -lft -lcurses
 
-SRC_EXEC := main.c ./executing/builtins.c ./executing/creat_path.c ./executing/executing.c ./executing/join.c ./executing/put_c.c ./executing/ft_env.c
+SRC_EXEC := builtins.c creat_path.c executing.c join.c put_c.c ft_env.c
 
-SRC_PARS := ./parsing/all_is_good.c ./parsing/command_table.c ./parsing/here_documents.c ./parsing/initialize.c ./parsing/join_characters.c ./parsing/open_files.c ./parsing/parse_str.c ./parsing/parsing.c
+SRC_PARS := 
 
 OBJ := $(SRC_EXEC:.c=.o) $(SRC_PARS:.c=.o)
 

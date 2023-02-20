@@ -12,12 +12,6 @@
 
 #include "include.h"
 
-void	signal_handler(int signal)
-{
-	if (signal == SIGINT)
-		exit(0);
-}
-
 t_vals	*others(t_lex *lexer)
 {
 	if (lexer->l == '|')
@@ -124,34 +118,34 @@ void test(t_list *lexer)
     }
 }
 
-int	main(int ac, char **av, char **env)
-{
-	char	*rl;
-	t_list	*lexer;
-	t_cmd_list	*cmd_table;
+// int	main(int ac, char **av, char **env)
+// {
+// 	char	*rl;
+// 	t_list	*lexer;
+// 	t_cmd_list	*cmd_table;
 
-	(void)av;
-	(void)ac;
-	(void)env;
-	print_start();
-	signal(SIGINT, signal_handler);
-	signal(SIGQUIT, signal_handler);
-	while (1)
-	{
-		rl = readline("\033[1;32mminishell-1.0$ \033[0m");
-		if (!rl)
-		{
-			write(1, "exit\n", 5);
-			exit(0);
-		}
-		add_history(rl);
-		lexer = lexecal_analyzer(rl);
-		test(lexer);
-		if (all_is_good(lexer))
-		{
-			free(lexer);
-			continue;
-		}
-		cmd_table = command_table(lexer);
-	}
-}
+// 	(void)av;
+// 	(void)ac;
+// 	(void)env;
+// 	print_start();
+// 	signal(SIGINT, signal_handler);
+// 	signal(SIGQUIT, signal_handler);
+// 	while (1)
+// 	{
+// 		rl = readline("\033[1;32mminishell-1.0$ \033[0m");
+// 		if (!rl)
+// 		{
+// 			write(1, "exit\n", 5);
+// 			exit(0);
+// 		}
+// 		add_history(rl);
+// 		lexer = lexecal_analyzer(rl);
+// 		test(lexer);
+// 		if (all_is_good(lexer))
+// 		{
+// 			free(lexer);
+// 			continue;
+// 		}
+// 		cmd_table = command_table(lexer);
+// 	}
+// }
