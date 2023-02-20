@@ -6,15 +6,35 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:05:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/19 23:22:32 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/20 01:50:40 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-t_list	*command_table(t_list *lexer)
+void	link_back(t_cmd_list **lst, t_cmd_list *new)
 {
-	t_list		*cmd_table;
+	t_cmd_list	*p;
+
+	if (lst)
+	{
+		if (!(*lst))
+		{
+			*lst = new;
+		}
+		else
+		{
+			p = *lst;
+			while (p->next)
+				p = p->next;
+			p->next = new;
+		}
+	}
+}
+
+t_cmd_list	*command_table(t_list *lexer)
+{
+	t_cmd_list		*cmd_table;
 	t_vals		*first;
 	t_cmd_list	*save;
 
@@ -44,13 +64,13 @@ t_list	*command_table(t_list *lexer)
 		}
 		else if (first->token == V_PIPE)
 		{
-			ft_lstadd_back(&cmd_table, ft_lstnew(save));
+			link_back(&cmd_table, save);
 			save = initilize_save(save);
 		}
 		lexer = lexer->next;
 		first = (t_vals *) lexer->content;
 	}
-	ft_lstadd_back(&cmd_table, ft_lstnew(save));
+	link_back(&cmd_table, save);
 	//t_list *tmp = cmd_table;
 	// while (tmp != NULL)
 	// {

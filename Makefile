@@ -6,7 +6,7 @@
 #    By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/04 19:29:40 by abouramd          #+#    #+#              #
-#    Updated: 2023/02/19 02:33:31 by zasabri          ###   ########.fr        #
+#    Updated: 2023/02/20 01:15:22 by zasabri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME := minishell
 
 CC := cc
 
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := #-Wall -Wextra -Werror
 
 INC := -I ./include  -I ./libft
 

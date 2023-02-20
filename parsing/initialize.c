@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 01:20:12 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/19 09:09:20 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/20 01:50:26 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ t_cmd_list	*initilize_save(t_cmd_list *save)
 	save = malloc(sizeof(t_vals));
 	save->infile = 0;
 	save->outfile = 1;
+	save->next = NULL;
 	return (save);
 }

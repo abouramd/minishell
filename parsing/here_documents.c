@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 02:15:07 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/20 00:49:10 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/20 01:43:21 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ void	here_documents(t_list *lexer)
 	char		*path;
 	char		*arr;
 	int			fd;
+	t_list		*ptr;
 
+	ptr = NULL;
 	first = (t_vals *) lexer->content;
 	while (first->token != V_EOF)
 	{
@@ -50,6 +52,7 @@ void	here_documents(t_list *lexer)
 			first = (t_vals *) lexer->content;
 			if (first->token == V_STR)
 			{
+
 				path = ft_strjoin("/tmp/", first->val);
 				arr = remove_spaces(first->val);
 				fd = open(path, O_CREAT | O_RDWR, 0777);
@@ -69,8 +72,8 @@ void	here_documents(t_list *lexer)
 					free(str);
 				}
 				close(fd);
+				free(arr);
 			}
-			free(arr);
 		}
 		lexer = lexer->next;
 		first = (t_vals *) lexer->content;

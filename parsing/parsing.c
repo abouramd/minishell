@@ -128,7 +128,7 @@ int	main(int ac, char **av, char **env)
 {
 	char	*rl;
 	t_list	*lexer;
-	t_list	*cmd_table;
+	t_cmd_list	*cmd_table;
 
 	(void)av;
 	(void)ac;

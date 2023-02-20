@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:34:05 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/19 02:33:59 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/20 01:09:04 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int			all_is_good(t_list *lexer);
 char		*check_str(char *str);
 char		*add_str(char *str, char c);
 t_cmd_list	*initilize_save(t_cmd_list *save);
-t_list		*command_table(t_list *lexer);
+t_cmd_list		*command_table(t_list *lexer);
 int			isValid(char * s);
 void		for_out_redirection(t_vals *first, t_cmd_list *save, t_list **lexer);
 void		for_input_redirection(t_vals *first, t_cmd_list *save, t_list **lexer);
