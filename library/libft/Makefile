@@ -6,7 +6,7 @@
 #    By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/06 13:08:41 by abouramd          #+#    #+#              #
-#    Updated: 2023/02/14 07:21:23 by abouramd         ###   ########.fr        #
+#    Updated: 2023/02/21 03:23:27 by abouramd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,22 +30,24 @@ $(NAME): $(OBJ)
 
 bonus: $(OBJ) $(OBONUS)
 
-$(OBJ):$(SRC)
-	@$(CC) $(CFLAGS) -c $(SRC)
-	@ar -crs $(NAME) $(OBJ)
+.c.o:
+	@$(CC) $(CFLAGS) -c $<
+	@echo "\033[1;34m - creat $@ from $<.\033[0m"
+	@ar -crs $(NAME) $@
+	@echo "\033[1;34m - add $@ to $(NAME).\033[0m"
 	
 
 $(OBONUS):$(SBONUS)
 	@$(CC) $(CFLAGS) -c $(SBONUS)
 	@ar -crs $(NAME) $(OBONUS)
-	@echo "\033[1;32m ✅ LIBFT LIBRARY IS DONE 👍\033[0m"
+	@echo "\033[1;32m ✅ libft is done.\033[0m"
 
 clean:
 	@rm -f $(OBONUS) $(OBJ)
-	@echo "\033[1;31m ❎ RMOVE THE OBJECT FILES OF LIBFT\033[0m"
+	@echo "\033[1;31m ❎ remove the object files of libft.\033[0m"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "\033[1;31m ❎ RMOVE THE LIBFT LIBRARY\033[0m"
+	@echo "\033[1;31m ❎ remove libft.a\033[0m"
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 03:38:12 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/20 00:51:38 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/02/22 05:54:32 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,31 +41,28 @@ typedef struct s_pipe
 	char	**cmd;
 }			t_pipe;
 
-
-
 typedef struct termios t_term;
-
-// typedef struct s_cmd_list
-// {
-// 	char	**cmd;
-// 	int		infile;
-// 	int		outfile;
-// }	t_cmd_list;
 
 typedef struct s_data
 {
 	t_cmd_list *list_of_cmd;
 	char 	**my_env;
-	char	**path;
-	char	*pathname;
 	int 	exit_status;
-	struct sigaction old;
-}	t_data;
+	struct sigaction old_sigint;
+	struct sigaction old_sigquit;
+	t_term old_tty;
+	t_term new_tty;
+	char	*pathname;
+	char	**path;
+}				t_data;
 
 /* path fonction */
 char	*creat_path(t_data *d, t_pipe *f);
 char		**split_path(char **env);
 
+char**    realloc_env(char **old_env, char *str);
+void print_sort(char **s);
+char **alloc_env(char **s);
 
 /* print error */
 void		ft_puterr(char *s, char *set, int n);
@@ -91,6 +88,17 @@ void	signal_handler(int signal);
 char **alloc_env(char **s);
 void rl_replace_line (const char *, int);
 
+// builtins
+void built_pwd(t_data *f);
+void built_echo(t_data *f);
+void built_cd(t_data *f);
+void built_export(t_data *f);
+void built_unset(t_data *f);
+void built_env(t_data *f);
+void built_exit(t_data *f);
+
+
+void	pipeline(t_data *d, t_pipe *f);
 
 
 #endif
