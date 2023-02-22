@@ -6,7 +6,7 @@
 #    By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 05:30:41 by abouramd          #+#    #+#              #
-#    Updated: 2023/02/22 11:40:52 by abouramd         ###   ########.fr        #
+#    Updated: 2023/02/22 12:11:39 by abouramd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,17 @@ NAME := minishell
 
 CFLAGS := -Wall -Wextra -Werror -fsanitize=address
 
-INC := -I ./include  -I ./library/libft -I ./library/readline/
+LIB_DIR := libft/ readline/
 
-LIB := -L ./library/libft/ -L ./library/readline -lreadline -lft -lcurses
+INC := -I ./include $(addprefix -I ./library/,$(LIB_DIR))
 
-BUILTINS:= ./executing/builtins/cd.c ./executing/builtins/echo.c ./executing/builtins/env.c ./executing/builtins/exit.c ./executing/builtins/export.c ./executing/builtins/pwd.c ./executing/builtins/unset.c
+LIB := $(addprefix -L ./library/,$(LIB_DIR)) -lreadline -lft -lcurses
 
-SRC_EXEC := $(BUILTINS) main.c ./executing/pipeline.c ./executing/builtins.c ./executing/creat_path.c ./executing/executing.c ./executing/join.c ./executing/put_c.c ./executing/ft_env.c ./executing/sort_string.c ./executing/get_path.c
+BUILTINS := cd.c echo.c env.c exit.c export.c pwd.c unset.c
+
+EXEC_DIR := $(addprefix builtins/, $(BUILTINS)) pipeline.c builtins.c creat_path.c executing.c join.c put_c.c ft_env.c sort_string.c get_path.c
+
+SRC_EXEC :=  main.c $(addprefix ./executing/, $(EXEC_DIR))
 
 SRC_PARS := ./parsing/all_is_good.c ./parsing/command_table.c ./parsing/here_documents.c ./parsing/initialize.c ./parsing/join_characters.c ./parsing/open_files.c ./parsing/parse_str.c ./parsing/parsing.c
 
