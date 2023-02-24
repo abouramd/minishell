@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 00:48:54 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/22 11:53:08 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:55:00 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,11 @@ void free_cmd(t_cmd_list *list)
         close(list->infile);
     if (list->outfile != 1)
         close(list->outfile);
+    if (list->namehrd)
+    {
+        unlink(list->namehrd);
+        free(list->namehrd);
+    }
     free(list);
 }
 
@@ -114,7 +119,6 @@ int	main(int ac, char **av, char **env)
 {
     char *rl; 
     t_data d;
-    t_pipe f;
     t_list *lexer;
 
     setup_shell(ac, av, env, &d);
@@ -127,7 +131,7 @@ int	main(int ac, char **av, char **env)
         {    
 		    add_history(rl);
             lexer = lexecal_analyzer(rl);
-		    // test(lexer);    
+		    //test(lexer);    
 		    if (lexer == NULL || all_is_good(lexer))
 		    {
                 if (lexer)
@@ -135,13 +139,11 @@ int	main(int ac, char **av, char **env)
                 free(rl);
 		    	continue;
 		    }
-		    d.list_of_cmd = command_table(lexer);
+		    d.list_of_cmd = command_table(lexer, &d.exit_status);
             free_lexer(lexer);
-            if (d.list_of_cmd)
-            {
-                pipeline(&d, &f);
-                free_all(&d);    
-            }
+            if (!d.exit_status && d.list_of_cmd)
+                pipeline(&d);
+            free_all(&d);    
         }
         free(rl);
 	}

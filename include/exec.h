@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 03:38:12 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/22 05:54:32 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/02/24 06:15:19 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include "include.h"
 #include "readline.h"
 #include <termios.h>
+
 
 
 
@@ -57,8 +58,7 @@ typedef struct s_data
 }				t_data;
 
 /* path fonction */
-char	*creat_path(t_data *d, t_pipe *f);
-char		**split_path(char **env);
+char	*creat_path(t_data *d);
 
 char**    realloc_env(char **old_env, char *str);
 void print_sort(char **s);
@@ -70,12 +70,11 @@ void		ft_puterr(char *s, char *set, int n);
 /* utile fonction */
 char		*myjoin(char *s1, char *s2);
 size_t		my_str_len(const char *s);
-void		ft_free(char **s);
 int			my_strstr(char *s, char *set);
 int			ft_strcmp(char *s1, char *s2);
 
 
-char	**split_path(char **env);
+char	**split_path(t_data *d);
 void	cmd_exec(t_data *d, t_pipe *f);
 
 void ft_env_rm(char *elem, char ***my_env);
@@ -98,7 +97,7 @@ void built_env(t_data *f);
 void built_exit(t_data *f);
 
 
-void	pipeline(t_data *d, t_pipe *f);
+void	pipeline(t_data *d);
 
 
 #endif

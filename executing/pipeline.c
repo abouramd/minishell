@@ -1,20 +1,16 @@
 #include "exec.h"
 
-void	run_cmd(t_data *d,t_pipe *f)
+void dup_fd(t_data *d)
 {
-    sigaction(SIGINT, &d->old_sigint, NULL);
-    sigaction(SIGQUIT, &d->old_sigquit, NULL);
-    tcsetattr(0, TCSANOW, &d->old_tty);
     char *cmd;
+
+    cmd = "minishell";
     if (d->list_of_cmd->cmd)
         cmd = d->list_of_cmd->cmd[0];
-    else
-        cmd = "minishell";
-    
     if (d->list_of_cmd->infile != 0)
     {
         if (d->list_of_cmd->infile < 0)
-            ft_puterr(cmd, ": open fail in infile", 1);
+            ft_puterr(cmd, "open fail in infile", 1);
         else
         {
             dup2(d->list_of_cmd->infile, 0);
@@ -24,19 +20,28 @@ void	run_cmd(t_data *d,t_pipe *f)
     if (d->list_of_cmd->outfile != 1)
     {
         if (d->list_of_cmd->outfile < 0)
-            ft_puterr(cmd, ": open fail in outfile", 1);
+            ft_puterr(cmd, "open fail in outfile", 1);
         else
         {
             dup2(d->list_of_cmd->outfile, 1);
             close(d->list_of_cmd->outfile);
         }
     }
+}
+
+void	run_cmd(t_data *d)
+{
+    sigaction(SIGINT, &d->old_sigint, NULL);
+    sigaction(SIGQUIT, &d->old_sigquit, NULL);
+    tcsetattr(0, TCSANOW, &d->old_tty);
+    dup_fd(d);
     if (d->list_of_cmd->cmd)
     {
-	    d->pathname = creat_path(d, f);
+	    d->pathname = creat_path(d);
 	    if (execve(d->pathname, d->list_of_cmd->cmd, d->my_env) == -1)
 		    ft_puterr(d->list_of_cmd->cmd[0], strerror(errno), 1);
     }
+    exit(0);
 }
 void give_fd(t_cmd_list *f, int infile, int outfile)
 {
@@ -53,7 +58,7 @@ void give_fd(t_cmd_list *f, int infile, int outfile)
     // printf("f->infile => %d\n", f->infile);
 }
 
-int creat_child(t_data *d, t_pipe *f, int pfd)
+int creat_child(t_data *d, int pfd)
 {
 	int		id;
 	
@@ -80,7 +85,7 @@ int creat_child(t_data *d, t_pipe *f, int pfd)
             tmp = tmp->next;
         }
         if (!builtins(d))
-            run_cmd(d, f);
+            run_cmd(d);
         else
             exit(d->exit_status);
     }
@@ -99,7 +104,7 @@ int creat_child(t_data *d, t_pipe *f, int pfd)
 	return id;
 }
 
-void	pipeline(t_data *d, t_pipe *f)
+void	pipeline(t_data *d)
 {
     t_cmd_list *tmp;
     int fd[2];
@@ -118,7 +123,7 @@ void	pipeline(t_data *d, t_pipe *f)
                 pipe(fd);
             outfile = fd[1];
             give_fd(d->list_of_cmd, infile, outfile);
-            id = creat_child(d, f, fd[0]);
+            id = creat_child(d, fd[0]);
             d->list_of_cmd = d->list_of_cmd->next;
             infile = fd[0];
         }

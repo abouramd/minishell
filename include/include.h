@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:34:05 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/20 03:52:52 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/24 11:53:23 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int			all_is_good(t_list *lexer);
 char		*check_str(char *str);
 char		*add_str(char *str, char c);
 t_cmd_list	*initilize_save(void);
-t_cmd_list		*command_table(t_list *lexer);
+t_cmd_list	*command_table(t_list *lexer, int *exit_status);
 int			isValid(char * s);
 void		for_out_redirection(t_vals *first, t_cmd_list *save, t_list **lexer);
 void		for_input_redirection(t_vals *first, t_cmd_list *save, t_list **lexer);
@@ -42,5 +42,7 @@ char		*remove_spaces(char *lexer);
 void test(t_list *lexer);
 // exec function
 void	print_start(void);
+void	for_herdoc(t_vals *first, t_cmd_list *save, t_list **lexer, int *exit_status);
+char	*get_next_line(int fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 14:09:11 by abouramd          #+#    #+#             */
-/*   Updated: 2022/11/19 00:26:02 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/02/23 06:46:56 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,9 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+// my func
+char	**ft_ultimate_join(char **s1, char *s2);
+void	ft_free(char **s);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 07:59:21 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/19 10:48:50 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/24 02:21:59 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ char	*check_str(char *str)
 			i++;
 		}
 	}
+	//printf("%s\n", new_str);
 	return (new_str);
 }

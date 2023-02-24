@@ -47,6 +47,7 @@ t_vals	*select_token(t_lex *lexer)
 {
 	t_vals *token;
 	char *str;
+	int i;
 
 	str = NULL;
 	while (lexer->l && lexer->l == ' ')
@@ -54,12 +55,21 @@ t_vals	*select_token(t_lex *lexer)
 		lexer->nxt++;
 		lexer->l = lexer->fill[lexer->nxt];
 	}
+	i = 0;
+	char c;
 	while (lexer->l)
 	{
-		if (lexer->l == '|' || lexer->l == '<' || lexer->l == '>')
-			break;
-		str = add_str(str, lexer->l);
-		go_next(lexer);
+		if ((lexer->l == '\"' || lexer->l == '\'') && i == 0)
+		{
+			i = 1;
+			c = lexer->l;
+		}
+		else if (i == 1 && lexer->l == c)
+			i = 0;
+			if ((lexer->l == '|' || lexer->l == '<' || lexer->l == '>' || lexer->l == ' ') && i == 0)
+				break;
+			str = add_str(str, lexer->l);
+			go_next(lexer);
 	}
 	if (str)
 		token = initialize_token(str, V_STR);

@@ -6,7 +6,7 @@
 #    By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 05:30:41 by abouramd          #+#    #+#              #
-#    Updated: 2023/02/22 12:11:39 by abouramd         ###   ########.fr        #
+#    Updated: 2023/02/23 07:41:40 by abouramd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIB := $(addprefix -L ./library/,$(LIB_DIR)) -lreadline -lft -lcurses
 
 BUILTINS := cd.c echo.c env.c exit.c export.c pwd.c unset.c
 
-EXEC_DIR := $(addprefix builtins/, $(BUILTINS)) pipeline.c builtins.c creat_path.c executing.c join.c put_c.c ft_env.c sort_string.c get_path.c
+EXEC_DIR := $(addprefix builtins/, $(BUILTINS)) pipeline.c builtins.c creat_path.c executing.c join.c put_c.c ft_env.c sort_string.c get_path.c get_next_line.c
 
 SRC_EXEC :=  main.c $(addprefix ./executing/, $(EXEC_DIR))
 

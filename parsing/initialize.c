@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 01:20:12 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/22 08:46:48 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/02/24 01:24:54 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_cmd_list	*initilize_save(void)
 	save->cmd = NULL;
 	save->infile = 0;
 	save->outfile = 1;
+	save->namehrd = NULL;
 	save->next = NULL;
 	return (save);
 }

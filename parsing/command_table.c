@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_table.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:05:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/20 03:52:21 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/24 11:44:36 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ void	link_back(t_cmd_list **lst, t_cmd_list *new)
 	}
 }
 
-t_cmd_list	*command_table(t_list *lexer)
+t_cmd_list	*command_table(t_list *lexer, int *exit_status)
 {
 	t_cmd_list		*cmd_table;
 	t_vals		*first;
 	t_cmd_list	*save;
 
-	here_documents(lexer);
+	//here_documents(lexer);
 	save = NULL;
 	cmd_table = NULL;
 	save = initilize_save();
@@ -46,21 +46,26 @@ t_cmd_list	*command_table(t_list *lexer)
 	while (first->token != V_EOF)
 	{
 		if (first->token == V_STR)
-			save->cmd = ft_split(first->val, ' ');
+			save->cmd = ft_ultimate_join(save->cmd, first->val);
 		else if (first->token == V_IN_RDIR)
 		{
 			for_input_redirection(first, save, &lexer);
-			printf("%d\n", save->infile);
+			//printf("%d\n", save->infile);
 		}
 		else if (first->token == V_OUT_RDIR)
 		{
 			for_out_redirection(first, save, &lexer);
-			printf("%d\n", save->outfile);
+			//printf("%d\n", save->outfile);
 		}
 		else if (first->token == V_APP)
 		{
 			for_append(first, save, &lexer);
-			printf("%d\n", save->outfile);
+			//printf("%d\n", save->outfile);
+		}
+		else if (first->token == V_HDK)
+		{
+			for_herdoc(first, save, &lexer, exit_status);
+			//printf("%d\n", save->infile);
 		}
 		else if (first->token == V_PIPE)
 		{

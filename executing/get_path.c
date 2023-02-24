@@ -10,22 +10,22 @@ size_t count_size_of_path(char *s)
 	{
 		if (s[i] == ':')
 		{
-			size += 2;
+			size ++;
 			size++;
 			i++;
 		}
 		while(s[i])
 		{
 			if (s[i] == ':' && s[i - 1] == ':')
-				size += 2;
+				size ++;
 			size++;
 			i++;
 		}
 		if (s[i - 1] == ':')
-			size += 2;
+			size ++;
 	}
 	else
-		size += 2;
+		size ++;
     return size;
 }
 
@@ -41,7 +41,7 @@ char *path_get(char *s)
 		if (s[n] == ':')
 		{
 			p[i++] = '.';
-			p[i++] = '/';
+			// p[i++] = '/';
 			p[i++] = s[n++];
 		}
 		while(s[n])
@@ -49,26 +49,26 @@ char *path_get(char *s)
 			if (s[n] == ':' && s[n - 1] == ':')
 			{
 				p[i++] = '.';
-				p[i++] = '/';
+				// p[i++] = '/';
 			}
 			p[i++] = s[n++];
 		}
 		if (s[n - 1] == ':')
 		{
 			p[i++] = '.';
-			p[i++] = '/';
+			// p[i++] = '/';
 		}
 	}
 	else
 	{
 		p[i++] = '.';
-		p[i++] = '/';
+		// p[i++] = '/';
 	}
 	p[i] = '\0';
     return p;
 }
 
-char	**split_path(char **env)
+char	**split_path(t_data *d)
 {
 	int		i;
 	char	**s;
@@ -76,17 +76,19 @@ char	**split_path(char **env)
 
 	i = 0;
 	s = NULL;
-	while (env && env[i])
+	while (d->my_env && d->my_env[i])
 	{
-		if (my_strstr(env[i], "PATH=") == 1)
+		if (my_strstr(d->my_env[i], "PATH=") == 1)
 		{
-			tmp = path_get(&env[i][5]);
-            // printf("%s\n", &env[i][5]);
+			tmp = path_get(&d->my_env[i][5]);
+            // printf("%s\n", &d->my_env[i][5]);
             // printf("%s\n", tmp);
 			s = ft_split(tmp, ':');
 			break ;
 		}
 		i++;
 	}
+	if (!s)
+		s = ft_ultimate_join(NULL, ".");
 	return (s);
 }

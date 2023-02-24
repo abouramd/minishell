@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_list.h                                     :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 13:46:50 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/24 01:23:53 by abouramd         ###   ########.fr       */
+/*   Created: 2023/02/23 06:39:50 by abouramd          #+#    #+#             */
+/*   Updated: 2023/02/23 06:45:28 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMMAND_LIST
-#define COMMAND_LIST
+#include "libft.h"
 
-typedef struct s_cmd_list
+void	ft_free(char **s)
 {
-	char	**cmd;
-	int		infile;
-	int		outfile;
-	char 	*namehrd;
-	struct s_cmd_list *next;
-}	t_cmd_list;
-#endif
+	int	i;
+
+	i = 0;
+    if (s)
+    {
+	    while (s[i])
+		    free(s[i++]);
+	    free(s);
+    }
+}
