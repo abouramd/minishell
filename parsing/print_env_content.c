@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 13:01:46 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/25 17:35:32 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/25 17:45:22 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ char	*print_env_content(char	*line, char **env)
 			save = find_value(str[i] + 1, env);
 		if (save)
 			printf("%s\n", save);
+		else
+			printf("\n");
 		i++;
 	}
 	return (save);
