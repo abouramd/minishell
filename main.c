@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 00:48:54 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/25 17:37:18 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/25 18:13:12 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,11 @@ int	main(int ac, char **av, char **env)
 			{
 				if (!(simple_checker(lexer))
 					&& (ft_strnstr(save->cmd[i], "$", ft_strlen(save->cmd[i]))))
-					print_env_content(save->cmd[i], env);
+					if (print_env_content(save->cmd[i], env))
+					{
+						i++;
+						continue ;
+					}
 				i++;
 			}
 			// if (simple_checker(lexer) == 0)
