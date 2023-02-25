@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 13:01:46 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/25 17:24:56 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/25 17:35:32 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*print_env_content(char	*line, char **env)
 
 	// tmp = cmd_table;
 	// value = NULL;
-	env = NULL;
+	//env = NULL;
 	// int i = 0;
 	// while (tmp->cmd[i] != NULL)
 	// {
@@ -111,12 +111,12 @@ char	*print_env_content(char	*line, char **env)
 	str = ft_split(good_line, ' ');
 	while (str[i])
 	{
-		printf("[%s]\n", str[i++]);
-		// if (ft_strnstr(str[i], "$", 1) && ft_isalpha(str[i][1]))
-		// 	save = find_value(str[i] + 1, env);
-		// if (save)
-		// 	printf("%s\n", save);
-		// i++;
+		//printf("[%s]\n", str[i++]);
+		if (ft_strnstr(str[i], "$", 1) && ft_isalpha(str[i][1]))
+			save = find_value(str[i] + 1, env);
+		if (save)
+			printf("%s\n", save);
+		i++;
 	}
 	return (save);
 }
