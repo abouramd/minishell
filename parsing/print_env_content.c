@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 13:01:46 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/25 17:07:29 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/25 17:24:56 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*take_care_of_dollar_sign(char	*line)
 	j = 0;
 	while (line[i])
 	{
-		if ((size_t)i == ft_strlen(str) - 1 && line[i] == '$' && ft_isalpha(line[i + 1]))
+		if (line[i + 1] && line[i] == '$' && ft_isalpha(line[i + 1]))
 			j++;
 		i++;
 	}
@@ -99,11 +99,24 @@ char	*print_env_content(char	*line, char **env)
 	// 	printf("\n");
 	// return (value);
 	char	**str;
+	char	*good_line;
+	char	*save = NULL;
 	int		i;
-	int		j;
+	//int		j;
 
 	i = 0;
 	// printf("[%s]\n", take_care_of_dollar_sign(line));
 	// return (NULL);
-	
+	good_line = take_care_of_dollar_sign(line);
+	str = ft_split(good_line, ' ');
+	while (str[i])
+	{
+		printf("[%s]\n", str[i++]);
+		// if (ft_strnstr(str[i], "$", 1) && ft_isalpha(str[i][1]))
+		// 	save = find_value(str[i] + 1, env);
+		// if (save)
+		// 	printf("%s\n", save);
+		// i++;
+	}
+	return (save);
 }
