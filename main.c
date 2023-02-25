@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 00:48:54 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/24 11:55:00 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/02/25 13:36:09 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,8 @@ int	main(int ac, char **av, char **env)
         {    
 		    add_history(rl);
             lexer = lexecal_analyzer(rl);
-		    //test(lexer);    
+		    //test(lexer);
+            //break;   
 		    if (lexer == NULL || all_is_good(lexer))
 		    {
                 if (lexer)
@@ -140,6 +141,12 @@ int	main(int ac, char **av, char **env)
 		    	continue;
 		    }
 		    d.list_of_cmd = command_table(lexer, &d.exit_status);
+            if (print_env_content(d.list_of_cmd, env))
+            {
+                printf("%s\n", print_env_content(d.list_of_cmd, env));
+                free_lexer(lexer);
+                continue;
+            }
             free_lexer(lexer);
             if (!d.exit_status && d.list_of_cmd)
                 pipeline(&d);

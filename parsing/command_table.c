@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_table.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:05:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/24 11:44:36 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:15:17 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	link_back(t_cmd_list **lst, t_cmd_list *new)
 
 t_cmd_list	*command_table(t_list *lexer, int *exit_status)
 {
-	t_cmd_list		*cmd_table;
+	t_cmd_list	*cmd_table;
 	t_vals		*first;
 	t_cmd_list	*save;
 

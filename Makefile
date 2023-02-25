@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+         #
+#    By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 05:30:41 by abouramd          #+#    #+#              #
-#    Updated: 2023/02/23 07:41:40 by abouramd         ###   ########.fr        #
+#    Updated: 2023/02/24 16:02:21 by zasabri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,16 +26,16 @@ EXEC_DIR := $(addprefix builtins/, $(BUILTINS)) pipeline.c builtins.c creat_path
 
 SRC_EXEC :=  main.c $(addprefix ./executing/, $(EXEC_DIR))
 
-SRC_PARS := ./parsing/all_is_good.c ./parsing/command_table.c ./parsing/here_documents.c ./parsing/initialize.c ./parsing/join_characters.c ./parsing/open_files.c ./parsing/parse_str.c ./parsing/parsing.c
+SRC_PARS := ./parsing/print_env_content.c ./parsing/all_is_good.c ./parsing/command_table.c ./parsing/here_documents.c ./parsing/initialize.c ./parsing/join_characters.c ./parsing/open_files.c ./parsing/parse_str.c ./parsing/parsing.c
 
 OBJ := $(SRC_EXEC:.c=.o) $(SRC_PARS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-#	@echo "\033[1;33m configure readline library ...\033[0m"
-#	@echo "\033[1;34m" && cd ./library/readline && ./configure && echo "\033[1;33m ✅ compile readline library ...\033[0m" && make
-#	@echo "\033[1;32m ✅ readline library is done.\033[0m"
+	@echo "\033[1;33m configure readline library ...\033[0m"
+	@echo "\033[1;34m" && cd ./library/readline && ./configure && echo "\033[1;33m ✅ compile readline library ...\033[0m" && make
+	@echo "\033[1;32m ✅ readline library is done.\033[0m"
 	@make bonus -C ./library/libft/
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)  $(INC) $(LIB)
 	@echo "\033[1;32m ✅ minishell is done.\033[0m"

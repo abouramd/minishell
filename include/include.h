@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:34:05 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/24 11:53:23 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/02/24 19:00:07 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "set_val.h"
 # include "lexer.h"
 # include "command_list.h"
+# include "exec.h"
 
 void		initialize_lexer(t_lex *lexer, char *str);
 void		go_next(t_lex *lexer);
@@ -44,5 +45,6 @@ void test(t_list *lexer);
 void	print_start(void);
 void	for_herdoc(t_vals *first, t_cmd_list *save, t_list **lexer, int *exit_status);
 char	*get_next_line(int fd);
+char	*print_env_content(t_cmd_list *cmd_table, char **env);
 
 #endif
