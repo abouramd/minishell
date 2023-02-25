@@ -6,13 +6,13 @@
 #    By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 05:30:41 by abouramd          #+#    #+#              #
-#    Updated: 2023/02/24 16:02:21 by zasabri          ###   ########.fr        #
+#    Updated: 2023/02/25 17:06:25 by zasabri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := minishell
 
-CFLAGS := -Wall -Wextra -Werror -fsanitize=address
+CFLAGS := -Wall -Wextra -Werror #-fsanitize=address
 
 LIB_DIR := libft/ readline/
 

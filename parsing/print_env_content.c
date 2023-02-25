@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 13:01:46 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/25 14:31:24 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/25 17:07:29 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@ char	*find_value(char *var, char **env)
 {
 	int	i;
 	int	j;
+	int	k;
 
 	i = 0;
 	while (env[i])
 	{
 		//printf("[%s]\n", env[i]);
-		if (!(ft_strncmp(env[i], var, ft_strlen(var))))
+		k = 0;
+		while (env[i][k] && env[i][k] != '=')
+			k++;
+		if (!(ft_strncmp(env[i], var, k)) && ft_strlen(var) == (size_t)k)
 		{
 			//printf("==>%s\n", env[i]);
 			j = ft_strlen(env[i]) - 1;
@@ -33,28 +37,73 @@ char	*find_value(char *var, char **env)
 	}
 	return (NULL);
 }
-
-char	*print_env_content(t_cmd_list *cmd_table, char **env)
+char	*take_care_of_dollar_sign(char	*line)
 {
-	t_cmd_list	*tmp;
-	char		*value;
+	char	*str;
+	int		i;
+	int		j;
 
-	tmp = cmd_table;
-	value = NULL;
-	int i = 0;
-	while (tmp->cmd[i] != NULL)
+	i = 0;
+	j = 0;
+	while (line[i])
 	{
-		if (ft_strnstr(tmp->cmd[i], "$", 1))
-		{
-			//printf("--->%s\n", tmp->cmd[i] + 1);
-			if (tmp->cmd[i])
-			{
-				value = find_value(tmp->cmd[i] + 1, env);
-				break;
-			}
-		}
+		if ((size_t)i == ft_strlen(str) - 1 && line[i] == '$' && ft_isalpha(line[i + 1]))
+			j++;
 		i++;
 	}
-	//printf("%s\n", value);
-	return (value);
+	str = malloc(i + j + 1);
+	i = 0;
+	j = 0;
+	while (line[i])
+	{
+		if (i != 0 && (line[i] == '$' && ft_isalpha(line[i - 1])))
+		{
+			str[j] = ' ';
+			j++;
+		}
+		str[j] = line[i];
+		i++;
+		j++;
+	}
+	str[j] = '\0';
+	return (str);
+}
+char	*print_env_content(char	*line, char **env)
+{
+	// t_cmd_list	*tmp;
+	// char		*value;
+
+	// tmp = cmd_table;
+	// value = NULL;
+	env = NULL;
+	// int i = 0;
+	// while (tmp->cmd[i] != NULL)
+	// {
+	// 	if (!(ft_strnstr(tmp->cmd[i], "$", 1)))
+	// 		return (NULL);
+	// 	else if (ft_strnstr(tmp->cmd[i], "$", 1))
+	// 	{
+	// 		if (tmp->cmd[i][1] == '$')
+	// 			printf("57162");
+	// 		if (tmp->cmd[i])
+	// 		{
+	// 			value = find_value(tmp->cmd[i] + 1, env);
+	// 			break;
+	// 		}
+	// 	}
+	// 	i++;
+	// }
+	// if (value)
+	// 	printf("%s\n", value);
+	// else
+	// 	printf("\n");
+	// return (value);
+	char	**str;
+	int		i;
+	int		j;
+
+	i = 0;
+	// printf("[%s]\n", take_care_of_dollar_sign(line));
+	// return (NULL);
+	
 }

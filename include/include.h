@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:34:05 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/25 14:31:32 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/25 16:23:41 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ void test(t_list *lexer);
 void	print_start(void);
 void	for_herdoc(t_vals *first, t_cmd_list *save, t_list **lexer, int *exit_status);
 char	*get_next_line(int fd);
-char	*print_env_content(t_cmd_list *cmd_table, char **env);
+char	*print_env_content(char *line, char **env);
 
 #endif
