@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 13:01:46 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/25 18:12:56 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/25 18:18:55 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,10 @@ char	*print_env_content(char	*line, char **env)
 	char	*good_line;
 	char	*save = NULL;
 	int		i;
-	//int		j;
+	int		j;
 
 	i = 0;
+	j = 0;
 	// printf("[%s]\n", take_care_of_dollar_sign(line));
 	// return (NULL);
 	good_line = take_care_of_dollar_sign(line);
@@ -112,10 +113,14 @@ char	*print_env_content(char	*line, char **env)
 	while (str[i])
 	{
 		//printf("[%s]\n", str[i++]);
+		j = ft_strlen(str[i]) - 1;
 		if (ft_strnstr(str[i], "$", 1) && ft_isalpha(str[i][1]))
 			save = find_value(str[i] + 1, env);
 		if (save)
+		{
 			printf("%s", save);
+			if ()
+		}
 		i++;
 	}
 	printf("\n");
