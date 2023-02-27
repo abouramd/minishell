@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 00:48:54 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/25 18:13:12 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/27 13:22:10 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,12 @@ int	simple_checker(t_list *lexer)
 	}
 	return (0);
 }
-
+char	*replace_the_value(char	*cmd, char *str)
+{
+	if (str)
+		cmd = str;
+	return (cmd);
+}
 int	main(int ac, char **av, char **env)
 {
 	char *rl; 
@@ -183,11 +188,8 @@ int	main(int ac, char **av, char **env)
 			{
 				if (!(simple_checker(lexer))
 					&& (ft_strnstr(save->cmd[i], "$", ft_strlen(save->cmd[i]))))
-					if (print_env_content(save->cmd[i], env))
-					{
-						i++;
-						continue ;
-					}
+					//if (print_env_content(save->cmd[i], env))
+						save->cmd[i] = replace_the_value(save->cmd[i], print_env_content(save->cmd[i], env));
 				i++;
 			}
 			// if (simple_checker(lexer) == 0)

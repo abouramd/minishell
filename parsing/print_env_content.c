@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 13:01:46 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/25 18:18:55 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/27 13:21:13 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,32 @@ char	*take_care_of_dollar_sign(char	*line)
 	str[j] = '\0';
 	return (str);
 }
+char	*handle_specials(char *str)
+{
+	int		i;
+	char	*s;
+	int		j;
+	
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '.' || str[i] == '/' || str[i] == '^'
+			|| str[i] == '@' || str[i] == '=' || str[i] == '-'
+			|| str[i] == '+' || str[i] == '~' || str[i] == '#')
+			break;
+		i++;
+	}
+	j = i;
+	s = malloc(j + 1);
+	i = 0;
+	while (i < j)
+	{
+		s[i] = str[i];
+		i++;
+	}
+	s[i] = '\0';
+	return (s);
+}
 char	*print_env_content(char	*line, char **env)
 {
 	// t_cmd_list	*tmp;
@@ -103,7 +129,10 @@ char	*print_env_content(char	*line, char **env)
 	char	*save = NULL;
 	int		i;
 	int		j;
+	char	*r;
 
+	r = malloc(1);
+	r[0] = '\0';
 	i = 0;
 	j = 0;
 	// printf("[%s]\n", take_care_of_dollar_sign(line));
@@ -117,12 +146,10 @@ char	*print_env_content(char	*line, char **env)
 		if (ft_strnstr(str[i], "$", 1) && ft_isalpha(str[i][1]))
 			save = find_value(str[i] + 1, env);
 		if (save)
-		{
-			printf("%s", save);
-			if ()
-		}
+			r = ft_strjoin(r, save);
+		else
+			r = ft_strjoin(r, "\n");
 		i++;
 	}
-	printf("\n");
-	return (save);
+	return (r);
 }
