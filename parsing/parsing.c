@@ -98,64 +98,32 @@ t_list	*lexecal_analyzer(char *str)
 	return (list);
 }
 
-void print_tokens(t_vals *lexer)
-{
-        printf("value_of_token: %s (",lexer->val);
-		if (lexer->token == 0)
-			printf("str_token");
-		else if (lexer->token == 1)
-			printf("pipe_token");
-		else if (lexer->token == 2)
-			printf("append_token");
-		else if (lexer->token == 3)
-			printf("out_rederiction_token");
-		else if (lexer->token == 4)
-			printf("in_rederiction_token");
-		else if (lexer->token == 5)
-			printf("heredoce_token");
-		else
-			printf("end_of_file");
-		printf(")\n");
-}
-
-void test(t_list *lexer)
-{
-    t_list *first = lexer;
-    while(first)
-    {
-        print_tokens((t_vals *) first->content);
-        first = first->next;
-    }
-}
-
-// int	main(int ac, char **av, char **env)
+// void print_tokens(t_vals *lexer)
 // {
-// 	char	*rl;
-// 	t_list	*lexer;
-// 	t_cmd_list	*cmd_table;
+//         printf("value_of_token: %s (",lexer->val);
+// 		if (lexer->token == 0)
+// 			printf("str_token");
+// 		else if (lexer->token == 1)
+// 			printf("pipe_token");
+// 		else if (lexer->token == 2)
+// 			printf("append_token");
+// 		else if (lexer->token == 3)
+// 			printf("out_rederiction_token");
+// 		else if (lexer->token == 4)
+// 			printf("in_rederiction_token");
+// 		else if (lexer->token == 5)
+// 			printf("heredoce_token");
+// 		else
+// 			printf("end_of_file");
+// 		printf(")\n");
+// }
 
-// 	(void)av;
-// 	(void)ac;
-// 	(void)env;
-// 	print_start();
-// 	signal(SIGINT, signal_handler);
-// 	signal(SIGQUIT, signal_handler);
-// 	while (1)
-// 	{
-// 		rl = readline("\033[1;32mminishell-1.0$ \033[0m");
-// 		if (!rl)
-// 		{
-// 			write(1, "exit\n", 5);
-// 			exit(0);
-// 		}
-// 		add_history(rl);
-// 		lexer = lexecal_analyzer(rl);
-// 		test(lexer);
-// 		if (all_is_good(lexer))
-// 		{
-// 			free(lexer);
-// 			continue;
-// 		}
-// 		cmd_table = command_table(lexer);
-// 	}
+// void test(t_list *lexer)
+// {
+//     t_list *first = lexer;
+//     while(first)
+//     {
+//         print_tokens((t_vals *) first->content);
+//         first = first->next;
+//     }
 // }

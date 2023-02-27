@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:38:07 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/24 11:58:22 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/02/27 16:08:10 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,9 @@ void	for_herdoc(t_vals *first, t_cmd_list *save, t_list **lexer, int *exit_statu
 			tty = ft_strtrim(tty, "/dev");
 			free(tmp);
 		}
-    	// char *name = "tty";
 		char *name = ft_strjoin(ft_itoa(id), first->val);
 		name = ft_strjoin(name, tty);
-		// char *p = name;
-		// name = ft_strjoin(name, tmp);
-		// free(tmp);
-		// free(p);
 		char *lim = ft_strjoin(first->val, "\n");
-    	// char *name = "here_doc";
 		int pid;
 		if (!*exit_status)
 		{

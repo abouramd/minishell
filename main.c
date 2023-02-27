@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 00:48:54 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/27 15:57:12 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/27 16:06:58 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,23 +115,6 @@ void free_lexer(t_list *list)
 	}   
 }
 
-// int find_the_word(char **env, char *word)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 0;
-// 	while (env[i])
-// 	{
-// 		j = 0;
-// 		while (env[i][j] != '=')
-// 			j++;
-// 		if (!(ft_strncmp(env[i], word, j)))
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (0);
-// }
 int	get_token(t_vals *save)
 {
 	if (save->token == V_HDK)
@@ -172,8 +155,7 @@ int	main(int ac, char **av, char **env)
 		{    
 			add_history(rl);
 			lexer = lexecal_analyzer(rl);
-			//test(lexer);
-			//break;   
+			//test(lexer);  
 			if (lexer == NULL || all_is_good(lexer))
 			{
 				if (lexer)
@@ -186,24 +168,14 @@ int	main(int ac, char **av, char **env)
 			int i = 0;
 			if (save->cmd)
 			{
-			while (save->cmd[i])
-			{
-				if (!(simple_checker(lexer))
-					&& (ft_strnstr(save->cmd[i], "$", ft_strlen(save->cmd[i]))))
-					//if (print_env_content(save->cmd[i], env))
-						save->cmd[i] = replace_the_value(save->cmd[i], print_env_content(save->cmd[i], d.my_env));
-				i++;
+				while (save->cmd[i])
+				{
+					if (!(simple_checker(lexer))
+						&& (ft_strnstr(save->cmd[i], "$", ft_strlen(save->cmd[i]))))
+							save->cmd[i] = replace_the_value(save->cmd[i], print_env_content(save->cmd[i], d.my_env));
+					i++;
+				}
 			}
-			}
-			// if (simple_checker(lexer) == 0)
-			// {
-			// if (print_env_content(d.list_of_cmd, env))
-			// {
-			// 	//printf("%s\n", print_env_content(d.list_of_cmd, env));
-			// 	free_lexer(lexer);
-			// 	continue;
-			// }
-			// }
 			free_lexer(lexer);
 			if (!d.exit_status && d.list_of_cmd)
 				pipeline(&d);
