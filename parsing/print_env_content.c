@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 13:01:46 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/27 13:21:13 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/27 13:40:16 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ char	*print_env_content(char	*line, char **env)
 		if (save)
 			r = ft_strjoin(r, save);
 		else
-			r = ft_strjoin(r, "\n");
+			r = ft_strjoin(r, "\0");
 		i++;
 	}
 	return (r);

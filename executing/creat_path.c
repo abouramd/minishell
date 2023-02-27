@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   creat_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 16:23:01 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/24 10:55:37 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:39:55 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ char	*creat_path(t_data *d)
 
 	s = NULL;
 	d->path = split_path(d);
-	if (!d->list_of_cmd->cmd[0])
-		ft_puterr(d->list_of_cmd->cmd[0], "command not found", 0);
+	if (!**d->list_of_cmd->cmd)
+		ft_puterr(d->list_of_cmd->cmd[0], "command not found", 1);
 	if (my_strstr(d->list_of_cmd->cmd[0], "/"))
 		s = cmd_is_path(d);
 	else

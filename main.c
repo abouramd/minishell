@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 00:48:54 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/27 13:22:10 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/27 14:18:19 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,8 @@ int	main(int ac, char **av, char **env)
 			d.list_of_cmd = command_table(lexer, &d.exit_status);
 			save = d.list_of_cmd;
 			int i = 0;
+			if (save->cmd)
+			{
 			while (save->cmd[i])
 			{
 				if (!(simple_checker(lexer))
@@ -191,6 +193,7 @@ int	main(int ac, char **av, char **env)
 					//if (print_env_content(save->cmd[i], env))
 						save->cmd[i] = replace_the_value(save->cmd[i], print_env_content(save->cmd[i], env));
 				i++;
+			}
 			}
 			// if (simple_checker(lexer) == 0)
 			// {
