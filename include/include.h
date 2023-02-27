@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:34:05 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/25 16:23:41 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/27 15:57:27 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ void		for_append(t_vals *first, t_cmd_list *save, t_list **lexer);
 void		here_documents(t_list *tokens);
 t_list		*lexecal_analyzer(char *str);
 char		*remove_spaces(char *lexer);
-void test(t_list *lexer);
+void		test(t_list *lexer);
 // exec function
-void	print_start(void);
-void	for_herdoc(t_vals *first, t_cmd_list *save, t_list **lexer, int *exit_status);
-char	*get_next_line(int fd);
-char	*print_env_content(char *line, char **env);
+void		print_start(void);
+void		for_herdoc(t_vals *first, t_cmd_list *save, t_list **lexer, int *exit_status);
+char		*get_next_line(int fd);
+char		*print_env_content(char *line, char **env);
 
 #endif

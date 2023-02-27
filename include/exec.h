@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 03:38:12 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/24 18:53:50 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/27 15:55:51 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # include <unistd.h>
 # include <libft.h>
 # include "include.h"
-#include "readline.h"
-#include <termios.h>
+# include "readline.h"
+# include <termios.h>
 
 
 
