@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 00:48:54 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/27 16:06:58 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/27 23:54:53 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,23 +115,25 @@ void free_lexer(t_list *list)
 	}   
 }
 
-int	get_token(t_vals *save)
-{
-	if (save->token == V_HDK)
-		return (1);
-	return (0);
-}
-int	simple_checker(t_list *lexer)
-{
-	t_list *save = lexer;
-	while (save)
-	{
-		if (get_token((t_vals *)save->content) == 1)
-			return (1);
-		save = save->next;
-	}
-	return (0);
-}
+// int	get_token(t_vals *save)
+// {
+// 	if (save->token == V_HDK)
+// 		return (1);
+// 	return (0);
+// }
+
+// int	simple_checker(t_list *lexer)
+// {
+// 	t_list *save = lexer;
+// 	while (save)
+// 	{
+// 		if (get_token((t_vals *)save->content) == 1)
+// 			return (1);
+// 		save = save->next;
+// 	}
+// 	return (0);
+// }
+
 char	*replace_the_value(char	*cmd, char *str)
 {
 	if (str)
@@ -168,10 +170,10 @@ int	main(int ac, char **av, char **env)
 			int i = 0;
 			if (save->cmd)
 			{
+				//char **ptr = save->cmd[i];
 				while (save->cmd[i])
 				{
-					if (!(simple_checker(lexer))
-						&& (ft_strnstr(save->cmd[i], "$", ft_strlen(save->cmd[i]))))
+					if ((ft_strnstr(save->cmd[i], "$", ft_strlen(save->cmd[i]))))
 							save->cmd[i] = replace_the_value(save->cmd[i], print_env_content(save->cmd[i], d.my_env));
 					i++;
 				}

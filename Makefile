@@ -6,7 +6,7 @@
 #    By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 05:30:41 by abouramd          #+#    #+#              #
-#    Updated: 2023/02/25 17:06:25 by zasabri          ###   ########.fr        #
+#    Updated: 2023/02/28 20:07:29 by zasabri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,8 +52,8 @@ readline_lib:
 
 
 clean:
-#	@echo "\033[1;31m ❎ remove the object files of readline\033[0m"
-#	@make clean -C ./library/readline/
+	@echo "\033[1;31m ❎ remove the object files of readline\033[0m"
+	@make clean -C ./library/readline/
 	@make clean -C ./library/libft/	
 	@echo "\033[1;31m ❎ remove the object files of minishell.\033[0m"
 	@rm -rf $(OBJ)
