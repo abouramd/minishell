@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 17:17:58 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/23 07:40:18 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/01 14:18:01 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 10
-#endif //BUFFER_SIZE
+#endif
 
 int	str_chr(const char *s, char c)
 {
