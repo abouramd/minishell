@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 13:01:46 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/01 13:57:18 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/01 14:07:01 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ char	*print_env_content(char	*line, char **env)
 	int		i;
 	int		j;
 	char	*r;
-	//char	*sp;
 
 	r = malloc(1);
 	r[0] = '\0';
@@ -116,18 +115,16 @@ char	*print_env_content(char	*line, char **env)
 	free(good_line);
 	while (str[i])
 	{
-		//char *ptr;
+		char *ptr;
 		if (ft_strnstr(str[i], "$", 1) && ft_isalpha(str[i][1]))
-		{
 			save = find_value(befor_special(str[i] + 1), env);
-		}
-		//ptr = r;
+		ptr = r;
 		if (save)
 			r = ft_strjoin(r, save);
 		else
 			r = ft_strjoin(r, "\0");
 		r = ft_strjoin(r, after_special(str[i] + 1));
-		//free(ptr);
+		free(ptr);
 		i++;
 	}
 	i = 0;
