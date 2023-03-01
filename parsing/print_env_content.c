@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 13:01:46 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/27 23:55:32 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/01 13:57:18 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,32 +66,37 @@ char	*take_care_of_dollar_sign(char	*line)
 	str[j] = '\0';
 	return (str);
 }
-// char	*handle_specials(char *str)
-// {
-// 	int		i;
-// 	char	*s;
-// 	int		j;
-	
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		if (str[i] == '.' || str[i] == '/' || str[i] == '^'
-// 			|| str[i] == '@' || str[i] == '=' || str[i] == '-'
-// 			|| str[i] == '+' || str[i] == '~' || str[i] == '#')
-// 			break;
-// 		i++;
-// 	}
-// 	j = i;
-// 	s = malloc(j + 1);
-// 	i = 0;
-// 	while (i < j)
-// 	{
-// 		s[i] = str[i];
-// 		i++;
-// 	}
-// 	s[i] = '\0';
-// 	return (s);
-// }
+
+char	*befor_special(char *str)
+{
+	int		i;
+	char	*s;
+
+	i = 0;
+	while (str[i] && ft_isalnum(str[i]))
+		i++;
+	s = malloc(i + 1);
+	i = 0;
+	while (str[i] && ft_isalnum(str[i]))
+	{
+		s[i] = str[i];
+		i++;
+	}
+	s[i] = '\0';
+	return (s);
+}
+char	*after_special(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i] && ft_isalnum(str[i]))
+		i++;
+	if (str[i] == '\0')
+		return ("\0");
+	return (&str[i]);
+}
+
 char	*print_env_content(char	*line, char **env)
 {
 	char	**str;
@@ -100,6 +105,7 @@ char	*print_env_content(char	*line, char **env)
 	int		i;
 	int		j;
 	char	*r;
+	//char	*sp;
 
 	r = malloc(1);
 	r[0] = '\0';
@@ -110,16 +116,18 @@ char	*print_env_content(char	*line, char **env)
 	free(good_line);
 	while (str[i])
 	{
-		char *ptr;
-		j = ft_strlen(str[i]) - 1;
+		//char *ptr;
 		if (ft_strnstr(str[i], "$", 1) && ft_isalpha(str[i][1]))
-			save = find_value(str[i] + 1, env);
-		ptr = r;
+		{
+			save = find_value(befor_special(str[i] + 1), env);
+		}
+		//ptr = r;
 		if (save)
 			r = ft_strjoin(r, save);
 		else
 			r = ft_strjoin(r, "\0");
-		free(ptr);
+		r = ft_strjoin(r, after_special(str[i] + 1));
+		//free(ptr);
 		i++;
 	}
 	i = 0;
