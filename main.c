@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 00:48:54 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/28 20:15:08 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/02 13:48:33 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,18 +115,18 @@ void free_lexer(t_list *list)
 	}   
 }
 
-char	*replace_the_value(char	*cmd, char *str)
-{
-	if (str)
-		cmd = str;
-	return (cmd);
-}
+// char	*replace_the_value(char	*cmd, char *str)
+// {
+// 	if (str)
+// 		cmd = str;
+// 	return (cmd);
+// }
 int	main(int ac, char **av, char **env)
 {
-	char *rl; 
-	t_data d;
-	t_list *lexer;
-	t_cmd_list *save;
+	char		*rl; 
+	t_data		d;
+	t_list		*lexer;
+	//t_cmd_list *save;
 
 	setup_shell(ac, av, env, &d);
 	while (1)
@@ -139,7 +139,7 @@ int	main(int ac, char **av, char **env)
 			add_history(rl);
 			lexer = lexecal_analyzer(rl);
 			//test(lexer);  
-			if (lexer == NULL || all_is_good(lexer))
+			if (lexer == NULL || all_is_good(lexer, d.my_env))
 			{
 				if (lexer)
 					free_lexer(lexer);
@@ -147,17 +147,21 @@ int	main(int ac, char **av, char **env)
 				continue;
 			}
 			d.list_of_cmd = command_table(lexer, &d.exit_status);
-			save = d.list_of_cmd;
-			int i = 0;
-			if (save->cmd)
-			{
-				while (save->cmd[i])
-				{
-					if ((ft_strnstr(save->cmd[i], "$", ft_strlen(save->cmd[i]))))
-							save->cmd[i] = replace_the_value(save->cmd[i], print_env_content(save->cmd[i], d.my_env));
-					i++;
-				}
-			}
+			//save = d.list_of_cmd;
+			//int i = 0;
+			// if (save->cmd)
+			// {
+			// 	char *ptr;
+				
+			// 	while (save->cmd[i])
+			// 	{
+			// 		if ((ft_strnstr(save->cmd[i], "$", ft_strlen(save->cmd[i]))))
+			// 				save->cmd[i] = replace_the_value(save->cmd[i], print_env_content(save->cmd[i], d.my_env));
+			// 		i++;
+			// 	}
+			// 	ptr = save->cmd[i];
+			// 	free(ptr);
+			// }
 			free_lexer(lexer);
 			if (!d.exit_status && d.list_of_cmd)
 				pipeline(&d);

@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:34:05 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/27 15:57:27 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/02 13:45:05 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 void		initialize_lexer(t_lex *lexer, char *str);
 void		go_next(t_lex *lexer);
 t_vals		*initialize_token(char *str, int v);
-int			all_is_good(t_list *lexer);
+int			all_is_good(t_list *lexer, char **env);
 char		*check_str(char *str);
 char		*add_str(char *str, char c);
 t_cmd_list	*initilize_save(void);

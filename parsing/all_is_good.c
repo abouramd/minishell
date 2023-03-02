@@ -6,13 +6,38 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 09:19:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/20 03:44:17 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/02 13:51:23 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-int	all_is_good(t_list *lexer)
+// char	*for_expand(char *str)
+// {
+// 	int i = 0;
+// 	if (save->cmd)
+// 	{
+// 		char *ptr;
+		
+// 		while (save->cmd[i])
+// 		{
+// 			if ((ft_strnstr(save->cmd[i], "$", ft_strlen(save->cmd[i]))))
+// 					save->cmd[i] = replace_the_value(save->cmd[i], print_env_content(save->cmd[i], d.my_env));
+// 			i++;
+// 		}
+// 		ptr = save->cmd[i];
+// 		free(ptr);
+// 	}
+// }
+
+char	*replace_the_value(char	*cmd, char *str)
+{
+	if (str)
+		cmd = str;
+	return (cmd);
+}
+
+int	all_is_good(t_list *lexer, char **env)
 {
 	t_vals	*first;
 	t_vals	*second;
@@ -39,7 +64,9 @@ int	all_is_good(t_list *lexer)
 				return (printf("syntax error unexpected token `(null)'\n"));
 			if (str != save)
 				free(save);
-			first->val = str; 
+			if (ft_strnstr(str, "$", ft_strlen(str)))
+				str = replace_the_value(str, print_env_content(str, env));
+			first->val = str;
 		}
 		if (first->token != V_STR && second->token == V_PIPE)
 			return (printf("syntax error near unexpected token `%s'\n", second->val));

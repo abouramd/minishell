@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 22:29:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/04 23:16:44 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/01 16:34:38 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ typedef struct s_lex
 	char	l;
 	char	*fill;
 	int		nxt;
+	int		v;
 }	t_lex;
 
 #endif
