@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 09:19:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/02 13:51:23 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/02 14:31:36 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,11 @@ int	all_is_good(t_list *lexer, char **env)
 {
 	t_vals	*first;
 	t_vals	*second;
+	t_lex	check;
 	char	*str;
 	char	*save;
 
+	check.v = 0;
 	str = NULL;
 	first = (t_vals *) lexer->content;
 	if (first->token == V_EOF)
@@ -59,12 +61,13 @@ int	all_is_good(t_list *lexer, char **env)
 		if (first->token == V_STR)
 		{
 			save = first->val;
-			str = check_str(first->val);
+			str = check_str(first->val, &check);
 			if (!str)
 				return (printf("syntax error unexpected token `(null)'\n"));
 			if (str != save)
 				free(save);
-			if (ft_strnstr(str, "$", ft_strlen(str)))
+			//printf("[%s]\n", str);
+			if (ft_strnstr(str, "$", ft_strlen(str)) && check.v == 0)
 				str = replace_the_value(str, print_env_content(str, env));
 			first->val = str;
 		}

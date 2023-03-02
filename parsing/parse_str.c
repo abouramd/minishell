@@ -6,13 +6,13 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 07:59:21 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/01 16:40:39 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/02 14:28:39 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-char	*check_str(char *str)
+char	*check_str(char *str, t_lex *check)
 {
 	char	*new_str;
     int     i;
@@ -22,7 +22,8 @@ char	*check_str(char *str)
 	while (str[i])
 	{
 		if (str[i] == '\'')
-		{	
+		{
+			check->v = 1;
 			i++;
 			new_str = add_str(new_str, '\0');
 			while (str[i] && str[i] != '\'')
@@ -40,6 +41,8 @@ char	*check_str(char *str)
 			new_str = add_str(new_str, '\0');
 			while (str[i] && str[i] != '\"')
 			{
+				if (str[i] == ' ')
+					check->v = 2;
 				new_str = add_str(new_str, str[i]);
 				i++;
 			}
