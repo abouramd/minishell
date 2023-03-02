@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 07:59:21 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/02 14:28:39 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/02 14:36:40 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ char	*check_str(char *str, t_lex *check)
 			new_str = add_str(new_str, '\0');
 			while (str[i] && str[i] != '\"')
 			{
-				if (str[i] == ' ')
-					check->v = 2;
 				new_str = add_str(new_str, str[i]);
 				i++;
 			}
