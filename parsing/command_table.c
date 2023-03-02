@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:05:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/02 13:21:58 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/02 16:07:44 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,26 @@ void	link_back(t_cmd_list **lst, t_cmd_list *new)
 	}
 }
 
+int	ambiguous_check(t_vals *first, t_list *lexer)
+{
+	int	i = 0;
+	
+	//printf("First: %s\n", first->val);
+	lexer = lexer->next;
+	first = (t_vals *)lexer->content;
+	printf("[%s]\n", first->val);
+	if (first->token == V_STR)
+	{
+		while (first->val[i])
+		{
+			if (first->val[i] == ' ')
+				return (1);
+			i++;
+		}
+	}
+	return (0);
+}
+
 t_cmd_list	*command_table(t_list *lexer, int *exit_status)
 {
 	t_cmd_list	*cmd_table;
@@ -47,11 +67,22 @@ t_cmd_list	*command_table(t_list *lexer, int *exit_status)
 		if (first->token == V_STR)
 			save->cmd = ft_ultimate_join(save->cmd, first->val);
 		else if (first->token == V_IN_RDIR)
-			for_input_redirection(first, save, &lexer);
+		{
+			if (!ambiguous_check(first, lexer))
+				for_input_redirection(first, save, &lexer);
+			else
+				printf("minishell: ambiguous redirect\n");
+		}
 		else if (first->token == V_OUT_RDIR)
-			for_out_redirection(first, save, &lexer);
+		{
+			//if (!ambiguous_check(first, lexer))
+				for_out_redirection(first, save, &lexer);
+		}
 		else if (first->token == V_APP)
-			for_append(first, save, &lexer);
+		{
+			//if (!ambiguous_check(first, lexer))
+				for_append(first, save, &lexer);
+		}
 		else if (first->token == V_HDK)
 			for_herdoc(first, save, &lexer, exit_status);
 		else if (first->token == V_PIPE)
