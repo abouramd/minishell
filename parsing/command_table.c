@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:05:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/02 16:07:44 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/02 18:19:31 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ambiguous_check(t_vals *first, t_list *lexer)
 	//printf("First: %s\n", first->val);
 	lexer = lexer->next;
 	first = (t_vals *)lexer->content;
-	printf("[%s]\n", first->val);
+	//printf("[%s]\n", first->val);
 	if (first->token == V_STR)
 	{
 		while (first->val[i])
