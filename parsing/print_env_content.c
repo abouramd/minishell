@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 13:01:46 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/03 14:29:49 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/03 18:00:49 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	*find_value(char *var, char **env)
 	}
 	return (NULL);
 }
+
 char	*take_care_of_dollar_sign(char	*line)
 {
 	char	*str;
@@ -85,6 +86,7 @@ char	*befor_special(char *str)
 	s[i] = '\0';
 	return (s);
 }
+
 char	*after_special(char *str)
 {
 	int		i;
@@ -97,6 +99,34 @@ char	*after_special(char *str)
 	return (&str[i]);
 }
 
+int	if_specials_first(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] != '$')
+		i++;
+	return (i);
+}
+
+char	*if_specials2(char *str)
+{
+	int		i;
+	char	*s;
+
+	i = 0;
+	while (str[i] && str[i] != '$')
+		i++;
+	s = malloc(i + 1);
+	i = 0;
+	while (str[i] && str[i] != '$')
+	{
+		s[i] = str[i];
+		i++;
+	}
+	s[i] = '\0';
+	return (s);
+}
 char	*print_env_content(char	*line, char **env)
 {
 	char	**str;
@@ -116,14 +146,17 @@ char	*print_env_content(char	*line, char **env)
 	while (str[i])
 	{
 		char *ptr;
-		if (ft_strnstr(str[i], "$", 1) && ft_isalpha(str[i][1]))
-			save = find_value(befor_special(str[i] + 1), env);
+		if (ft_strnstr(str[i], "$", ft_strlen(str[i])))
+			save = find_value(befor_special(str[i] + if_specials_first(str[i]) + 1), env);
 		ptr = r;
 		if (save)
 			r = ft_strjoin(r, save);
 		else
 			r = ft_strjoin(r, "\0");
-		r = ft_strjoin(r, after_special(str[i] + 1));
+		if (if_specials2(str[i]))
+			r = ft_strjoin(if_specials2(str[i]), r);
+		if (ft_strnstr(str[i], "$", 1))
+			r = ft_strjoin(r, after_special(str[i] + 1));
 		if (i != 0 && !ft_strnstr(str[i - 1], "$", 1))
 			r = ft_strjoin(str[i - 1], r);
 		free(ptr);

@@ -6,19 +6,12 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:05:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/03 14:58:57 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/03 16:55:57 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-// char	*handle_rederiction_errors(char *str)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (str[i])
-// }
 void	link_back(t_cmd_list **lst, t_cmd_list *new)
 {
 	t_cmd_list	*p;
@@ -43,10 +36,8 @@ int	ambiguous_check(t_vals *first, t_list *lexer)
 {
 	int	i = 0;
 	
-	//printf("First: %s\n", first->val);
 	lexer = lexer->next;
 	first = (t_vals *)lexer->content;
-	//printf("[%s]\n", first->val);
 	if (first->token == V_STR)
 	{
 		while (first->val[i])
