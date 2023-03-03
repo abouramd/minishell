@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 23:11:15 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/24 04:46:28 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/02/25 10:04:32 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,5 @@ void	ft_puterr(char *s, char *set, int n)
 	// write(2, "\33[0m", 5);
 	write(2, "\n", 1);
 	if (n)
-		exit(1);
+		exit(n);
 }
-

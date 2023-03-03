@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 01:20:12 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/24 01:24:54 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/03 09:37:24 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,17 @@ t_vals	*initialize_token(char *str, int type)
 
 t_cmd_list	*initilize_save(void)
 {
-	t_cmd_list *save;
-	
+	t_cmd_list	*save;
+
 	save = malloc(sizeof(t_cmd_list));
 	save->cmd = NULL;
 	save->infile = 0;
 	save->outfile = 1;
 	save->namehrd = NULL;
+	save->infile_name = NULL;
+	save->infile_errno = 22;
+	save->outfile_name = NULL;
+	save->outfile_errno = 22;
 	save->next = NULL;
 	return (save);
 }

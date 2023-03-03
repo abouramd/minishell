@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+         #
+#    By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 05:30:41 by abouramd          #+#    #+#              #
-#    Updated: 2023/02/28 20:14:06 by zasabri          ###   ########.fr        #
+#    Updated: 2023/03/03 11:52:23 by abouramd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := minishell
 
-CFLAGS := -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS := -Wall -Wextra -Werror -fsanitize=address -g
 
 LIB_DIR := libft/ readline/
 
@@ -22,20 +22,20 @@ LIB := $(addprefix -L ./library/,$(LIB_DIR)) -lreadline -lft -lcurses
 
 BUILTINS := cd.c echo.c env.c exit.c export.c pwd.c unset.c
 
-EXEC_DIR := $(addprefix builtins/, $(BUILTINS)) pipeline.c builtins.c creat_path.c executing.c join.c put_c.c ft_env.c sort_string.c get_path.c get_next_line.c
+EXEC_DIR := $(addprefix builtins/, $(BUILTINS)) builtins.c creat_path.c exec_cmd.c executing.c fd_manage.c ft_env.c get_next_line.c get_path.c here_doc.c put_c.c sort_string.c signal_handler.c 
 
 SRC_EXEC :=  main.c $(addprefix ./executing/, $(EXEC_DIR))
 
-SRC_PARS := ./parsing/print_env_content.c ./parsing/all_is_good.c ./parsing/command_table.c ./parsing/here_documents.c ./parsing/initialize.c ./parsing/join_characters.c ./parsing/open_files.c ./parsing/parse_str.c ./parsing/parsing.c
+SRC_PARS :=  ./parsing/print_env_content.c ./parsing/all_is_good.c ./parsing/command_table.c ./parsing/here_documents.c ./parsing/initialize.c ./parsing/join_characters.c ./parsing/open_files.c ./parsing/parse_str.c ./parsing/parsing.c
 
 OBJ := $(SRC_EXEC:.c=.o) $(SRC_PARS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "\033[1;33m configure readline library ...\033[0m"
-	@echo "\033[1;34m" && cd ./library/readline && ./configure && echo "\033[1;33m ✅ compile readline library ...\033[0m" && make
-	@echo "\033[1;32m ✅ readline library is done.\033[0m"
+#  @echo "\033[1;33m configure readline library ...\033[0m"
+#  @echo "\033[1;34m" && cd ./library/readline && ./configure && echo "\033[1;33m ✅ compile readline library ...\033[1;34m" && make
+#  @echo "\033[1;32m ✅ readline library is done.\033[0m"
 	@make bonus -C ./library/libft/
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)  $(INC) $(LIB)
 	@echo "\033[1;32m ✅ minishell is done.\033[0m"
@@ -52,8 +52,8 @@ readline_lib:
 
 
 clean:
-	@echo "\033[1;31m ❎ remove the object files of readline\033[0m"
-	@make clean -C ./library/readline/
+#	@echo "\033[1;31m ❎ remove the object files of readline\033[0m"
+#	@make clean -C ./library/readline/
 	@make clean -C ./library/libft/	
 	@echo "\033[1;31m ❎ remove the object files of minishell.\033[0m"
 	@rm -rf $(OBJ)

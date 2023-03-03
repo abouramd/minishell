@@ -1,19 +1,112 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/28 08:17:50 by abouramd          #+#    #+#             */
+/*   Updated: 2023/03/03 10:24:54 by abouramd         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "exec.h"
 
-
-void built_export(t_data *f)
+static int	app_or_def(char *arg, int *type)
 {
-    size_t i = 1;
+	if (arg[0] == '+' && arg[1] == '=')
+	{
+		*type = APPAND_ENV;
+		return (2);
+	}
+	if (arg[0] == '=')
+	{
+		*type = DEFIN_ENV;
+		return (1);
+	}
+	return (0);
+}
 
-    if (f->list_of_cmd->cmd[1] == NULL)
-    {
-        char **en = alloc_env(f->my_env);
-        print_sort(en);
-        ft_free(en);
-    }
-    else
-    {
-        while (f->list_of_cmd->cmd[i])
-            ft_env_add(f->list_of_cmd->cmd[i++], &f->my_env);
-    }
+static char	*check_identifier(char *arg, int *type, char **value)
+{
+	size_t	i;
+	char	*identifier;
+	int		tmp;
+
+	identifier = NULL;
+	i = 0;
+	while (arg[i])
+	{
+		tmp = app_or_def(&arg[i], type);
+		i += tmp;
+		if (tmp != 0)
+			break ;
+		if (!ft_isalnum(arg[i]) && arg[i] != '_')
+		{
+			if (identifier)
+				free(identifier);
+			return (NULL);
+		}
+		identifier = add_str(identifier, arg[i]);
+		i++;
+	}
+	if (*type == APPAND_ENV || *type == DEFIN_ENV)
+		*value = ft_strdup(&arg[i]);
+	return (identifier);
+}
+
+int	ft_export(t_data *f, char *arg)
+{
+	char	*identifier;
+	char	*value;
+	int		choose;
+
+	identifier = NULL;
+	choose = 0;
+	value = NULL;
+	if (!ft_isalpha(arg[0]) && arg[0] != '_')
+		return (ft_puterr(arg, "not a valid identifier", 0), 1);
+	identifier = check_identifier(arg, &choose, &value);
+	if (!identifier)
+		return (ft_puterr(arg, "not a valid identifier", 0), 1);
+	// printf("identifier => %s\n", identifier);
+	// printf("identifier => %s\n", value);
+	if (choose == APPAND_ENV)
+	{
+		value = ft_free_joined(ft_find_env(identifier, f->my_env), value, 0, 1);
+		ft_env_add(identifier, value, &f->my_env);
+	}
+	else if (choose == DEFIN_ENV)
+		ft_env_add(identifier, value, &f->my_env);
+	else if (!ft_find_env(identifier, f->my_env))
+		f->my_env = realloc_env(f->my_env, identifier);
+	free(identifier);
+	if (value)
+		free(value);
+	return (0);
+}
+
+void	built_export(t_data *f)
+{
+	size_t	i;
+	int		es;
+	char	**en;
+
+	i = 1;
+	if (f->list_of_cmd->cmd[1] == NULL)
+	{
+		en = alloc_env(f->my_env);
+		print_sort(en, f->list_of_cmd->outfile);
+		ft_free(en);
+	}
+	else
+	{
+		while (f->list_of_cmd->cmd[i])
+		{
+			es = ft_export(f, f->list_of_cmd->cmd[i]);
+			if (es)
+				f->exit_status = es;
+			i++;
+		}
+	}
 }

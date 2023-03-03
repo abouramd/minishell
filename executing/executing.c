@@ -3,49 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   executing.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 06:51:59 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/01 14:17:37 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/25 10:07:19 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include.h"
 #include "exec.h"
 
+// void	signal_handler(int signal)
+// {
+// 	if (signal == SIGINT)
+// 	{
+//         write(1, "\n", 1);
+// 		 rl_on_new_line();
+// 		 rl_replace_line("", 0);
+// 		 rl_redisplay();
+//     }
+// }
 
-
-void	signal_handler(int signal)
+char	**alloc_env(char **s)
 {
-	if (signal == SIGINT)
+	char	**ft_env;
+	size_t	size;
+
+	size = 0;
+	if (s == NULL)
+		return (NULL);
+	while (s[size])
+		size++;
+	ft_env = malloc((size + 1) * sizeof(char *));
+	if (!ft_env)
+		return (NULL);
+	size = 0;
+	while (s[size])
 	{
-        write(1, "\n", 1);
-	    rl_on_new_line();
-	    rl_replace_line("", 0);
-	    rl_redisplay();
-    }
-}
-
-char **alloc_env(char **s)
-{
-    char **ft_env;
-    size_t  size = 0;
-    
-    if (s == NULL)
-        return NULL;
-    while (s[size])
-        size++;
-    ft_env = malloc((size + 1) * sizeof(char *));
-    if (!ft_env)
-        return NULL;
-    size = 0;
-    while (s[size])
-    {
-        ft_env[size] = ft_strdup(s[size]);
-        size++;
-    }
-    ft_env[size] = NULL;
-    return ft_env;
+		ft_env[size] = ft_strdup(s[size]);
+		size++;
+	}
+	ft_env[size] = NULL;
+	return (ft_env);
 }
 
 // char *put_prompt(t_data *f)
@@ -63,9 +61,8 @@ char **alloc_env(char **s)
 //     free(prompt);
 //     free(tmp);
 //     signal(SIGINT, SIG_IGN);
-//     return s;
+//     return (s);
 // }
-
 
 // int	main(int ac, char **av, char **env)
 // {
@@ -74,7 +71,7 @@ char **alloc_env(char **s)
 //     t_pipe f;
 //     struct termios tty;
 //     tcgetattr(0, &tty);
-    
+
 //     tty.c_lflag &= ~ECHOCTL;
 //     tcsetattr(0, TCSANOW, &tty);
 // 	(void)av;
@@ -93,8 +90,8 @@ char **alloc_env(char **s)
 // 			exit(0);
 // 		}
 // 		if (*rl)
-//         {    
-// 		    add_history(rl);
+//         {
+// 			 add_history(rl);
 //             d.list_of_cmd->cmd = ft_split(rl, ' ');
 //             f.path = split_path(env);
 //             if (!cmd)
@@ -114,7 +111,7 @@ char **alloc_env(char **s)
 // void setup_shell(int ac, char **av, char **env, t_data *d)
 // {
 //     t_term tty;
-    
+
 // 	(void)ac;
 // 	(void)av;
 //     tcgetattr(0, &tty);
@@ -132,7 +129,7 @@ char **alloc_env(char **s)
 //     t_data d;
 //     t_cmd_list g;
 //     t_pipe f;
-    
+
 //     setup_shell(ac, av, env, &d);
 //     d.list_of_cmd = &g;
 // 	while (1)
@@ -141,8 +138,8 @@ char **alloc_env(char **s)
 // 		if (!rl)
 // 			return (write(1, "exit\n", 5), 0);
 // 		if (*rl)
-//         {    
-// 		    add_history(rl);
+//         {
+// 			 add_history(rl);
 //             d.list_of_cmd->cmd = ft_split(rl, ' ');
 //             d.list_of_cmd->infile = 0;
 //             d.list_of_cmd->outfile = 1;

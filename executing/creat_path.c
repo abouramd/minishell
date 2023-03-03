@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   creat_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 16:23:01 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/27 13:39:55 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/01 17:45:04 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,75 +17,77 @@ char	*cmd_is_path(t_data *d)
 	char	*s;
 
 	s = NULL;
-	if (access(d->list_of_cmd->cmd[0], F_OK) == 0)
-	{
-		if (access(d->list_of_cmd->cmd[0], X_OK) == 0)
-			s = ft_strdup(d->list_of_cmd->cmd[0]);
-	}
+	if (access(d->list_of_cmd->cmd[0], F_OK | X_OK) == 0)
+		s = ft_strdup(d->list_of_cmd->cmd[0]);
 	else if (access(d->list_of_cmd->cmd[0], F_OK) == 0)
-	{
-		ft_puterr(d->list_of_cmd->cmd[0], "Permission denied", 0);
-		exit(126);
-	}
+		ft_puterr(d->list_of_cmd->cmd[0], "Permission denied", 126);
 	else if (!s)
-		ft_puterr(d->list_of_cmd->cmd[0], strerror(2), 0);
+		ft_puterr(d->list_of_cmd->cmd[0], strerror(2), 127);
 	return (s);
 }
 
-char	*link_cmd_path(t_data *d)
+void	join_path_with_cmd(t_data *d)
+{
+	int	i;
+
+	i = 0;
+	while (d->path && d->path[i])
+	{
+		d->path[i] = ft_free_joined(d->path[i], "/", 1, 0);
+		if (!d->path[i])
+			ft_puterr(d->list_of_cmd->cmd[0], "malloc !!", 1);
+		d->path[i] = ft_free_joined(d->path[i], d->list_of_cmd->cmd[0], 1, 0);
+		if (!d->path[i])
+			ft_puterr(d->list_of_cmd->cmd[0], "malloc !!", 1);
+		i++;
+	}
+}
+
+char	*link_cmd_path(t_data *d, char *set)
 {
 	int		i;
 	char	*s;
 
-	i = 0;
 	s = NULL;
+	join_path_with_cmd(d);
+	i = 0;
 	while (d->path && d->path[i])
 	{
-		d->path[i] = myjoin(d->path[i], "/");
-		d->path[i] = myjoin(d->path[i], d->list_of_cmd->cmd[0]);
-		if (!d->path[i])
-			exit(1);
-		if (access(d->path[i], F_OK) == 0)
+		if (access(d->path[i], F_OK | X_OK) == 0)
 		{
-			if (access(d->path[i], X_OK) == 0)
-			{
-				s = ft_strdup(d->path[i]);
-				break ;
-			}
+			s = ft_strdup(d->path[i]);
+			if (!s)
+				ft_puterr("strdup", "malloc!!", 1);
+			break ;
 		}
 		i++;
 	}
+	i = 0;
+	while (!s && d->path && d->path[i])
+		if (access(d->path[i++], F_OK) == 0)
+			ft_puterr(d->list_of_cmd->cmd[0], "Permission denied", 126);
 	if (!s)
-	{
-		i = 0;
-		while (d->path && d->path[i])
-		{
-			if (access(d->list_of_cmd->cmd[0], F_OK) == 0)
-			{
-				ft_puterr(d->list_of_cmd->cmd[0], "Permission denied", 0);
-				exit(126);
-			}
-			i++;
-		}
-	}
-	if (!s)
-		ft_puterr(d->list_of_cmd->cmd[0], "command not found", 0);
+		ft_puterr(d->list_of_cmd->cmd[0], set, 127);
 	return (s);
 }
- 
+
 char	*creat_path(t_data *d)
 {
 	char	*s;
+	char	*set;
+	int choose;
 
 	s = NULL;
-	d->path = split_path(d);
+	choose = 0;
+	d->path = split_path(d, &choose);
+	set = "command not found";
+	if (choose == 1)
+		set = strerror(2);
 	if (!**d->list_of_cmd->cmd)
-		ft_puterr(d->list_of_cmd->cmd[0], "command not found", 1);
-	if (my_strstr(d->list_of_cmd->cmd[0], "/"))
+		ft_puterr(d->list_of_cmd->cmd[0], "command not found", 127);
+	else if (ft_strstr(d->list_of_cmd->cmd[0], "/"))
 		s = cmd_is_path(d);
 	else
-		s = link_cmd_path(d);
-	if (s == NULL)
-		exit(127);
+		s = link_cmd_path(d, set);
 	return (s);
 }

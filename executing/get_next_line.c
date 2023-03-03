@@ -3,22 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 17:17:58 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/01 14:18:01 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/02/25 10:04:13 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 #include "exec.h"
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 10
-#endif
+#endif //BUFFER_SIZE
 
 int	str_chr(const char *s, char c)
 {
@@ -214,3 +210,4 @@ char	*get_next_line(int fd)
 //     system("leaks a.out");
 //     return (0);
 // }
+
