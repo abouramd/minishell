@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+         #
+#    By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 05:30:41 by abouramd          #+#    #+#              #
-#    Updated: 2023/03/03 11:52:23 by abouramd         ###   ########.fr        #
+#    Updated: 2023/03/03 13:39:19 by zasabri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,9 @@ OBJ := $(SRC_EXEC:.c=.o) $(SRC_PARS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-#  @echo "\033[1;33m configure readline library ...\033[0m"
-#  @echo "\033[1;34m" && cd ./library/readline && ./configure && echo "\033[1;33m ✅ compile readline library ...\033[1;34m" && make
-#  @echo "\033[1;32m ✅ readline library is done.\033[0m"
+#	@echo "\033[1;33m configure readline library ...\033[0m"
+#	@echo "\033[1;34m" && cd ./library/readline && ./configure && echo "\033[1;33m ✅ compile readline library ...\033[1;34m" && make
+#	@echo "\033[1;32m ✅ readline library is done.\033[0m"
 	@make bonus -C ./library/libft/
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)  $(INC) $(LIB)
 	@echo "\033[1;32m ✅ minishell is done.\033[0m"
