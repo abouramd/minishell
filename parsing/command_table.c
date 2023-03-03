@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   command_table.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:05:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/03 11:47:57 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/03 14:58:57 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
+// char	*handle_rederiction_errors(char *str)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (str[i])
+// }
 void	link_back(t_cmd_list **lst, t_cmd_list *new)
 {
 	t_cmd_list	*p;

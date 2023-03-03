@@ -6,29 +6,11 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 09:19:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/03 14:34:45 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/03 15:23:08 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
-
-// char	*for_expand(char *str)
-// {
-// 	int i = 0;
-// 	if (save->cmd)
-// 	{
-// 		char *ptr;
-		
-// 		while (save->cmd[i])
-// 		{
-// 			if ((ft_strnstr(save->cmd[i], "$", ft_strlen(save->cmd[i]))))
-// 					save->cmd[i] = replace_the_value(save->cmd[i], print_env_content(save->cmd[i], d.my_env));
-// 			i++;
-// 		}
-// 		ptr = save->cmd[i];
-// 		free(ptr);
-// 	}
-// }
 
 char	*replace_the_value(char	*cmd, char *str)
 {
@@ -53,22 +35,34 @@ int	all_is_good(t_list *lexer, char **env)
 	if (first->token == V_PIPE)
 		return (printf("syntax error unexpected token `|'\n"));
 	second = (t_vals *) lexer->next->content;
-	int	size = ft_lstsize(lexer);
+	//int	size = ft_lstsize(lexer);
 	//printf("%d->\n", size);
 	while (first->token != V_EOF)
 	{
 		if ((first->token == V_APP || first->token == V_OUT_RDIR
 			|| first->token == V_IN_RDIR || first->token == V_HDK) && second->token != V_STR)
 			return (printf("syntax error near unexpected token `%s'\n", second->val));
-		// printf("%d", size);
-		if (first->token == V_HDK && size > 4)
+		//printf("%d\n", ft_lstsize(lexer));
+		if (first->token == V_HDK && ft_lstsize(lexer) % 2 && ft_lstsize(lexer) != 3 && second->token == V_STR)
 		{
 			lexer = lexer->next->next;
 			first = (t_vals *) lexer->next->content;
 			second = (t_vals *) lexer->next->next->content;
 		}
-		if (first->token == V_HDK && size <= 4)
+		if (first->token == V_HDK && (ft_lstsize(lexer) % 2 == 0 || ft_lstsize(lexer) == 3) && second->token == V_STR)
+		{
+			lexer = lexer->next;
+			first = (t_vals *)lexer->content;
+			second = (t_vals *)lexer->next->content;
+			save = first->val;
+			str = check_str(first->val, &check);
+			if (!str)
+				return (printf("syntax error unexpected token `(null)'\n"));
+			if (str != save)
+				free(save);
+			first->val = str;
 			break;
+		}
 		if (first->token == V_STR)
 		{
 			save = first->val;
