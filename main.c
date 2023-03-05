@@ -1,25 +1,25 @@
 //
-	/* ************************************************************************** */
+/* ************************************************************************** */
 //
-	/*                                                                            */
+/*                                                                            */
 //
-	/*                                                        :::      ::::::::   */
+/*                                                        :::      ::::::::   */
 //
-	/*   main.c                                             :+:      :+:    :+:   */
-// /*                                                    +:+ +:+        
-	// +:+     */
-// /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+      
-	// +#+        */
-// /*                                                +#+#+#+#+#+  
-	// +#+           */
+/*   main.c                                             :+:      :+:    :+:   */
+// /*                                                    +:+ +:+
+// +:+     */
+// /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+
+// +#+        */
+// /*                                                +#+#+#+#+#+
+// +#+           */
 //
-	/*   Created: 2023/02/20 00:48:54 by abouramd          #+#    #+#             */
+/*   Created: 2023/02/20 00:48:54 by abouramd          #+#    #+#             */
 //
-	/*   Updated: 2023/03/02 13:48:33 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/02 13:48:33 by zasabri          ###   ########.fr       */
 //
-	/*                                                                            */
+/*                                                                            */
 //
-	/* ************************************************************************** */
+/* ************************************************************************** */
 
 // #include "include.h"
 // #include "exec.h"
@@ -29,17 +29,17 @@
 // 	ft_putstr_fd("\033[1;32m\n", 1);
 // 	ft_putstr_fd("  \n", 1);
 // 	ft_putstr_fd("  ███╗   ███╗ ██╗ ███╗   ██╗ ██╗ ███████╗ ██╗  ██╗ ███████╗ ██╗      ██╗     \n",
-			// 1);
+// 1);
 // 	ft_putstr_fd("  ████╗ ████║ ██║ ████╗  ██║ ██║ ██╔════╝ ██║  ██║ ██╔════╝ ██║      ██║     \n",
-			// 1);
+// 1);
 // 	ft_putstr_fd("  ██╔████╔██║ ██║ ██╔██╗ ██║ ██║ ███████╗ ███████║ █████╗   ██║      ██║     \n",
-			// 1);
+// 1);
 // 	ft_putstr_fd("  ██║╚██╔╝██║ ██║ ██║╚██╗██║ ██║ ╚════██║ ██╔══██║ ██╔══╝   ██║      ██║     \n",
-			// 1);
+// 1);
 // 	ft_putstr_fd("  ██║ ╚═╝ ██║ ██║ ██║ ╚████║ ██║ ███████║ ██║  ██║ ███████╗ ███████╗ ███████╗\n",
-			// 1);
+// 1);
 // 	ft_putstr_fd("  ╚═╝     ╚═╝ ╚═╝ ╚═╝  ╚═══╝ ╚═╝ ╚══════╝ ╚═╝  ╚═╝ ╚══════╝ ╚══════╝ ╚══════╝\n",
-			// 1);
+// 1);
 // 	ft_putstr_fd("\033[0m\n", 1);
 // }
 
@@ -173,9 +173,9 @@
 // 			// 	while (save->cmd[i])
 // 			// 	{
 // 			// 		if ((ft_strnstr(save->cmd[i], "$",
-									// ft_strlen(save->cmd[i]))))
+// ft_strlen(save->cmd[i]))))
 // 			// 				save->cmd[i] = replace_the_value(save->cmd[i],
-									// print_env_content(save->cmd[i], d.my_env));
+// print_env_content(save->cmd[i], d.my_env));
 // 			// 		i++;
 // 			// 	}
 // 			// 	ptr = save->cmd[i];
@@ -251,11 +251,6 @@ void	free_cmd(t_cmd_list *list)
 		free(list->infile_name);
 	if (list->outfile_name)
 		free(list->outfile_name);
-	if (list->namehrd)
-	{
-		unlink(list->namehrd);
-		free(list->namehrd);
-	}
 	free(list);
 }
 
@@ -307,37 +302,74 @@ void	setup_shell(int ac, char **av, char **env, t_data *d)
 void	free_lexer(t_list *list)
 {
 	t_vals	*tmp;
-	t_list	*p;
 
-	while (list)
+	if (list)
 	{
-		tmp = list->content;
+		if (list->next)
+			free_lexer(list->next);
+		tmp = (t_vals *)list->content;
 		if (tmp)
 		{
-			// if (tmp->val)
-			// 	free(tmp->val);
+			if (tmp->val != NULL)
+			 	free(tmp->val);
 			free(tmp);
 		}
-		p = list;
-		list = list->next;
-		free(p);
+		free(list);
+	}
+}
+
+void	cmd_info(t_cmd_list *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd)
+	{
+		i = 0;
+		while (cmd->cmd && cmd->cmd[i])
+			printf("cmd -> %s\n", cmd->cmd[i++]);
+		printf("infile -> %d\n", cmd->infile);
+		printf("outfile -> %d\n", cmd->outfile);
+		cmd = cmd->next;
+	}
+}
+
+void	free_hrd(t_here_doc *h)
+{
+	if (h)
+	{
+		if (h->next)
+			free_hrd(h->next);
+		if (h->infile != 0)
+			close(h->infile);
+		free(h);
 	}
 }
 
 int	pars(t_data *d, char *rl)
 {
-	t_list	*lexer;
+	t_list		*lexer;
+	t_here_doc	*hrd;
 
+	lexer = NULL;
+	hrd = NULL;
 	lexer = lexecal_analyzer(rl);
-	//test(lexer);
-	if (lexer == NULL)
+	if (lexer == NULL || syntax_error(lexer))
 	{
 		if (lexer)
+		{
+			d->exit_status = 258;
 			free_lexer(lexer);
+		}
 		free(rl);
 		return (1);
 	}
-	d->list_of_cmd = command_table(d, lexer);
+	hrd = open_here_doc(d, lexer);
+	d->list_of_cmd = NULL;
+	if (!d->kill_here)
+		d->list_of_cmd = command_table(d, hrd, lexer);
+	free_hrd(hrd);
+	//cmd_info(d->list_of_cmd);
 	free_lexer(lexer);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:05:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/05 10:07:01 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/05 12:22:31 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // 	i = 0;
 // 	while (str[i])
 // }
-void	link_back(t_cmd_list **lst, t_cmd_list *new)
+static void	link_back(t_cmd_list **lst, t_cmd_list *new)
 {
 	t_cmd_list	*p;
 
@@ -63,7 +63,7 @@ char	**add_new(t_data *f, char **cmd, char *new)
 	return (new_cmd);
 }
 
-t_cmd_list	*command_table(t_data *d, t_list *lexer)
+t_cmd_list	*command_table(t_data *d, t_here_doc *hrd, t_list *lexer)
 {
 	t_cmd_list	*cmd_table;
 	t_vals		*first;
@@ -84,7 +84,7 @@ t_cmd_list	*command_table(t_data *d, t_list *lexer)
 		else if (first->token == V_APP)
 			for_append(d, first, save, &lexer);
 		else if (first->token == V_HDK)
-			for_herdoc(d, first, save, &lexer);
+			add_herdoc(&hrd, save, &lexer);
 		else if (first->token == V_PIPE)
 		{
 			link_back(&cmd_table, save);

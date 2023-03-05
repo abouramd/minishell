@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 10:06:36 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/03 14:25:47 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/05 16:03:38 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 void	run_cmd(t_data *d)
 {
 	sigaction(SIGINT, &d->old_sigint, NULL);
-	// sigaction(SIGQUIT, &d->old_sigquit, NULL);
-	signal(SIGQUIT, signal_exec);
+	sigaction(SIGQUIT, &d->old_sigquit, NULL);
 	tcsetattr(0, TCSANOW, &d->old_tty);
 	dup_fd(d);
 	if (d->list_of_cmd->cmd)
@@ -84,7 +83,7 @@ void	pipeline(t_data *d)
 		d->list_of_cmd = tmp;
 		waitpid(id, &d->exit_status, 0);
 		if (WIFSIGNALED(d->exit_status))
-			d->exit_status = 128 + WEXITSTATUS(d->exit_status);
+			d->exit_status = 128 + WTERMSIG(d->exit_status);
 		else
 			d->exit_status = WEXITSTATUS(d->exit_status);
 		while (wait(NULL) != -1)

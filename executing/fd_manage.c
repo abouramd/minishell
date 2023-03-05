@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 10:08:22 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/28 15:22:50 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/05 13:26:56 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@ void	dup_fd(t_data *d)
 	if (d->list_of_cmd->infile != 0)
 	{
 		if (d->list_of_cmd->infile < 0)
-			ft_puterr(d->list_of_cmd->infile_name, strerror(d->list_of_cmd->infile_errno), 1);
+		{
+			if (d->list_of_cmd->infile_errno == 300)
+				ft_puterr(d->list_of_cmd->infile_name, "ambiguous redirect", 1);
+			else
+				ft_puterr(d->list_of_cmd->infile_name, strerror(d->list_of_cmd->infile_errno), 1);
+		}
 		else
 		{
 			dup2(d->list_of_cmd->infile, 0);
@@ -27,7 +32,12 @@ void	dup_fd(t_data *d)
 	if (d->list_of_cmd->outfile != 1)
 	{
 		if (d->list_of_cmd->outfile < 0)
-			ft_puterr(d->list_of_cmd->outfile_name, strerror(d->list_of_cmd->outfile_errno), 1);
+		{
+			if (d->list_of_cmd->outfile_errno == 300)
+				ft_puterr(d->list_of_cmd->outfile_name, "ambiguous redirect", 1);
+			else
+				ft_puterr(d->list_of_cmd->outfile_name, strerror(d->list_of_cmd->outfile_errno), 1);
+		}
 		else
 		{
 			dup2(d->list_of_cmd->outfile, 1);

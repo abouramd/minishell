@@ -6,13 +6,13 @@
 #    By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 05:30:41 by abouramd          #+#    #+#              #
-#    Updated: 2023/03/04 19:12:12 by abouramd         ###   ########.fr        #
+#    Updated: 2023/03/05 15:05:27 by abouramd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := minishell
 
-CFLAGS := -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS := -Wall -Wextra -Werror #-fsanitize=address -g3
 
 LIB_DIR := libft/ readline/
 
@@ -26,7 +26,7 @@ EXEC_DIR := $(addprefix builtins/, $(BUILTINS)) builtins.c creat_path.c exec_cmd
 
 SRC_EXEC :=  main.c $(addprefix ./executing/, $(EXEC_DIR))
 
-SRC_PARS :=  ./parsing/print_env_content.c ./parsing/all_is_good.c ./parsing/command_table.c ./parsing/here_documents.c ./parsing/initialize.c ./parsing/join_characters.c ./parsing/open_files.c ./parsing/parse_str.c ./parsing/parsing.c
+SRC_PARS := ./parsing/syntax_error.c ./parsing/print_env_content.c ./parsing/all_is_good.c ./parsing/command_table.c ./parsing/here_documents.c ./parsing/initialize.c ./parsing/join_characters.c ./parsing/open_files.c ./parsing/parse_str.c ./parsing/parsing.c
 
 OBJ := $(SRC_EXEC:.c=.o) $(SRC_PARS:.c=.o)
 

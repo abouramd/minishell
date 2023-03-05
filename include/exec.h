@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 03:38:12 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/03 14:26:23 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/05 16:29:31 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	signal_exec(int signum);
 void	pipeline(t_data *d);
 
 /* working with here_doc */
-void	for_herdoc(t_data *d, t_vals *first, t_cmd_list *save, t_list **lexer);
 char	*get_next_line(int fd);
 
 /* manage fd */
@@ -73,7 +72,7 @@ void	close_fd_in_parent(t_data *d);
 
 /* builtins */
 int		builtins(t_data *f);
-void	built_pwd();
+void	built_pwd(void);
 void	built_echo(t_data *f);
 void	built_cd(t_data *f);
 void	built_export(t_data *f);
@@ -82,6 +81,6 @@ void	built_env(t_data *f);
 void	built_exit(t_data *f);
 
 /* readline function */
-void	rl_replace_line(const char *, int);
+void	rl_replace_line(const char *s, int n);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 01:20:12 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/03 09:37:24 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/05 17:35:48 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ t_cmd_list	*initilize_save(void)
 	save->cmd = NULL;
 	save->infile = 0;
 	save->outfile = 1;
-	save->namehrd = NULL;
 	save->infile_name = NULL;
 	save->infile_errno = 22;
 	save->outfile_name = NULL;

@@ -17,7 +17,7 @@ t_vals	*others(t_lex *lexer)
 	if (lexer->l == '|')
 	{
 		go_next(lexer);
-		return (initialize_token("|", V_PIPE));
+		return (initialize_token(NULL, V_PIPE));
 	}
 	if (lexer->l == '<')
 	{
@@ -25,9 +25,9 @@ t_vals	*others(t_lex *lexer)
 		if (lexer->l == '<')
 		{
 			go_next(lexer);
-			return (initialize_token("<<", V_HDK));
+			return (initialize_token(NULL, V_HDK));
 		}
-		return (initialize_token("<", V_IN_RDIR));
+		return (initialize_token(NULL, V_IN_RDIR));
 	}
 	if (lexer->l == '>')
 	{
@@ -35,12 +35,12 @@ t_vals	*others(t_lex *lexer)
 		if (lexer->l == '>')
 		{
 			go_next(lexer);
-			return (initialize_token(">>", V_APP));
+			return (initialize_token(NULL, V_APP));
 		}
-		return (initialize_token(">", V_OUT_RDIR));
+		return (initialize_token(NULL, V_OUT_RDIR));
 	}
 	else
-		return (initialize_token("EOF", V_EOF));
+		return (initialize_token(NULL, V_EOF));
 }
 
 t_vals	*select_token(t_lex *lexer)
