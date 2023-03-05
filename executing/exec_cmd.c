@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 10:06:36 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/02 17:12:28 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/03 14:25:47 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	run_cmd(t_data *d)
 {
 	sigaction(SIGINT, &d->old_sigint, NULL);
-	sigaction(SIGQUIT, &d->old_sigquit, NULL);
+	// sigaction(SIGQUIT, &d->old_sigquit, NULL);
 	signal(SIGQUIT, signal_exec);
 	tcsetattr(0, TCSANOW, &d->old_tty);
 	dup_fd(d);

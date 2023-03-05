@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:34:05 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/03 09:49:13 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/04 19:05:06 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_data
 	char	*pathname;
 	char	**path;
 	char    *tty;
+	int ambiguous;
 }				t_data;
 
 void		initialize_lexer(t_lex *lexer, char *str);
@@ -51,9 +52,9 @@ char		*check_str(char *str, t_lex *check);
 char		*add_str(char *str, char c);
 t_cmd_list	*initilize_save(void);
 int			isValid(char * s);
-void		for_out_redirection(t_vals *first, t_cmd_list *save, t_list **lexer);
-void		for_input_redirection(t_vals *first, t_cmd_list *save, t_list **lexer);
-void		for_append(t_vals *first, t_cmd_list *save, t_list **lexer);
+void		for_out_redirection(t_data *f, t_vals *first, t_cmd_list *save, t_list **lexer);
+void		for_input_redirection(t_data *f, t_vals *first, t_cmd_list *save, t_list **lexer);
+void		for_append(t_data *f, t_vals *first, t_cmd_list *save, t_list **lexer);
 void		here_documents(t_list *tokens);
 t_list		*lexecal_analyzer(char *str);
 char		*remove_spaces(char *lexer);
@@ -64,5 +65,8 @@ char	*get_next_line(int fd);
 t_cmd_list	*command_table(t_data *f,t_list *lexer);
 void	for_herdoc(t_data *d, t_vals *first, t_cmd_list *save, t_list **lexer);
 char		*print_env_content(char *line, char **env);
+char	**ft_expand_str(t_data *f, char *s);
+char	*ft_expand_in_here_doc(t_data *f, char *s, int type);
+char	*ft_expand_in_red(t_data *f, char *s);
 
 #endif

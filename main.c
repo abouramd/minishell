@@ -1,14 +1,25 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/20 00:48:54 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/04 13:53:50 by zasabri          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+//
+	/* ************************************************************************** */
+//
+	/*                                                                            */
+//
+	/*                                                        :::      ::::::::   */
+//
+	/*   main.c                                             :+:      :+:    :+:   */
+// /*                                                    +:+ +:+        
+	// +:+     */
+// /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+      
+	// +#+        */
+// /*                                                +#+#+#+#+#+  
+	// +#+           */
+//
+	/*   Created: 2023/02/20 00:48:54 by abouramd          #+#    #+#             */
+//
+	/*   Updated: 2023/03/02 13:48:33 by zasabri          ###   ########.fr       */
+//
+	/*                                                                            */
+//
+	/* ************************************************************************** */
 
 // #include "include.h"
 // #include "exec.h"
@@ -17,12 +28,18 @@
 // {
 // 	ft_putstr_fd("\033[1;32m\n", 1);
 // 	ft_putstr_fd("  \n", 1);
-// 	ft_putstr_fd("  ███╗   ███╗ ██╗ ███╗   ██╗ ██╗ ███████╗ ██╗  ██╗ ███████╗ ██╗      ██╗     \n", 1);
-// 	ft_putstr_fd("  ████╗ ████║ ██║ ████╗  ██║ ██║ ██╔════╝ ██║  ██║ ██╔════╝ ██║      ██║     \n", 1);
-// 	ft_putstr_fd("  ██╔████╔██║ ██║ ██╔██╗ ██║ ██║ ███████╗ ███████║ █████╗   ██║      ██║     \n", 1);
-// 	ft_putstr_fd("  ██║╚██╔╝██║ ██║ ██║╚██╗██║ ██║ ╚════██║ ██╔══██║ ██╔══╝   ██║      ██║     \n", 1);
-// 	ft_putstr_fd("  ██║ ╚═╝ ██║ ██║ ██║ ╚████║ ██║ ███████║ ██║  ██║ ███████╗ ███████╗ ███████╗\n", 1);
-// 	ft_putstr_fd("  ╚═╝     ╚═╝ ╚═╝ ╚═╝  ╚═══╝ ╚═╝ ╚══════╝ ╚═╝  ╚═╝ ╚══════╝ ╚══════╝ ╚══════╝\n", 1);
+// 	ft_putstr_fd("  ███╗   ███╗ ██╗ ███╗   ██╗ ██╗ ███████╗ ██╗  ██╗ ███████╗ ██╗      ██╗     \n",
+			// 1);
+// 	ft_putstr_fd("  ████╗ ████║ ██║ ████╗  ██║ ██║ ██╔════╝ ██║  ██║ ██╔════╝ ██║      ██║     \n",
+			// 1);
+// 	ft_putstr_fd("  ██╔████╔██║ ██║ ██╔██╗ ██║ ██║ ███████╗ ███████║ █████╗   ██║      ██║     \n",
+			// 1);
+// 	ft_putstr_fd("  ██║╚██╔╝██║ ██║ ██║╚██╗██║ ██║ ╚════██║ ██╔══██║ ██╔══╝   ██║      ██║     \n",
+			// 1);
+// 	ft_putstr_fd("  ██║ ╚═╝ ██║ ██║ ██║ ╚████║ ██║ ███████║ ██║  ██║ ███████╗ ███████╗ ███████╗\n",
+			// 1);
+// 	ft_putstr_fd("  ╚═╝     ╚═╝ ╚═╝ ╚═╝  ╚═══╝ ╚═╝ ╚══════╝ ╚═╝  ╚═╝ ╚══════╝ ╚══════╝ ╚══════╝\n",
+			// 1);
 // 	ft_putstr_fd("\033[0m\n", 1);
 // }
 
@@ -47,7 +64,7 @@
 // 	free(tmp);
 // 	signal(SIGINT, SIG_IGN);
 // 	f->exit_status = 0;
-// 	return s;
+// 	return (s);
 // }
 // void free_cmd(t_cmd_list *list)
 // {
@@ -76,11 +93,11 @@
 // 		tmp = tmp -> next;
 // 		free_cmd(p);
 // 		p = tmp;
-// 	} 
+// 	}
 // }
 
 // void setup_shell(int ac, char **av, char **env, t_data *d)
-// {    
+// {
 // 	(void)ac;
 // 	(void)av;
 // 	tcgetattr(0, &d->new_tty);
@@ -100,7 +117,7 @@
 // {
 // 	t_vals *tmp;
 // 	t_list *p;
-	
+
 // 	while (list)
 // 	{
 // 		tmp = list->content;
@@ -110,9 +127,9 @@
 // 			free(tmp);
 // 		}
 // 		p = list;
-// 		list = list->next; 
+// 		list = list->next;
 // 		free(p);
-// 	}   
+// 	}
 // }
 
 // // char	*replace_the_value(char	*cmd, char *str)
@@ -123,7 +140,7 @@
 // // }
 // int	main(int ac, char **av, char **env)
 // {
-// 	char		*rl; 
+// 	char		*rl;
 // 	t_data		d;
 // 	t_list		*lexer;
 // 	//t_cmd_list *save;
@@ -135,16 +152,16 @@
 // 		if (!rl)
 // 			return (write(1, "exit\n", 5),tcsetattr(0, TCSANOW, &d.old_tty), 0);
 // 		if (*rl)
-// 		{    
+// 		{
 // 			add_history(rl);
 // 			lexer = lexecal_analyzer(rl);
-// 			//test(lexer);  
+// 			//test(lexer);
 // 			if (lexer == NULL || all_is_good(lexer, d.my_env))
 // 			{
 // 				if (lexer)
 // 					free_lexer(lexer);
 // 				free(rl);
-// 				continue;
+// 				continue ;
 // 			}
 // 			d.list_of_cmd = command_table(lexer, &d.exit_status);
 // 			//save = d.list_of_cmd;
@@ -152,11 +169,13 @@
 // 			// if (save->cmd)
 // 			// {
 // 			// 	char *ptr;
-				
+
 // 			// 	while (save->cmd[i])
 // 			// 	{
-// 			// 		if ((ft_strnstr(save->cmd[i], "$", ft_strlen(save->cmd[i]))))
-// 			// 				save->cmd[i] = replace_the_value(save->cmd[i], print_env_content(save->cmd[i], d.my_env));
+// 			// 		if ((ft_strnstr(save->cmd[i], "$",
+									// ft_strlen(save->cmd[i]))))
+// 			// 				save->cmd[i] = replace_the_value(save->cmd[i],
+									// print_env_content(save->cmd[i], d.my_env));
 // 			// 		i++;
 // 			// 	}
 // 			// 	ptr = save->cmd[i];
@@ -165,7 +184,7 @@
 // 			free_lexer(lexer);
 // 			if (!d.exit_status && d.list_of_cmd)
 // 				pipeline(&d);
-// 			free_all(&d);    
+// 			free_all(&d);
 // 		}
 // 		free(rl);
 // 	}
@@ -178,17 +197,23 @@ void	print_start(void)
 {
 	ft_putstr_fd("\033[1;32m\n", 1);
 	ft_putstr_fd("  ███╗   ███╗ ██╗ ███╗   ██╗ \
-██╗ ███████╗ ██╗  ██╗ ███████╗ ██╗      ██╗     \n", 1);
+██╗ ███████╗ ██╗  ██╗ ███████╗ ██╗      ██╗     \n",
+					1);
 	ft_putstr_fd("  ████╗ ████║ ██║ ████╗  ██║ \
-██║ ██╔════╝ ██║  ██║ ██╔════╝ ██║      ██║     \n", 1);
+██║ ██╔════╝ ██║  ██║ ██╔════╝ ██║      ██║     \n",
+					1);
 	ft_putstr_fd("  ██╔████╔██║ ██║ ██╔██╗ ██║ \
-██║ ███████╗ ███████║ █████╗   ██║      ██║     \n", 1);
+██║ ███████╗ ███████║ █████╗   ██║      ██║     \n",
+					1);
 	ft_putstr_fd("  ██║╚██╔╝██║ ██║ ██║╚██╗██║ \
-██║ ╚════██║ ██╔══██║ ██╔══╝   ██║      ██║     \n", 1);
+██║ ╚════██║ ██╔══██║ ██╔══╝   ██║      ██║     \n",
+					1);
 	ft_putstr_fd("  ██║ ╚═╝ ██║ ██║ ██║ ╚████║ \
-██║ ███████║ ██║  ██║ ███████╗ ███████╗ ███████╗\n", 1);
+██║ ███████║ ██║  ██║ ███████╗ ███████╗ ███████╗\n",
+					1);
 	ft_putstr_fd("  ╚═╝     ╚═╝ ╚═╝ ╚═╝  ╚═══╝ \
-╚═╝ ╚══════╝ ╚═╝  ╚═╝ ╚══════╝ ╚══════╝ ╚══════╝\n", 1);
+╚═╝ ╚══════╝ ╚═╝  ╚═╝ ╚══════╝ ╚══════╝ ╚══════╝\n",
+					1);
 	ft_putstr_fd("\033[0m\n", 1);
 }
 
@@ -204,8 +229,8 @@ char	*put_prompt(t_data *f)
 	tcsetattr(0, TCSANOW, &f->new_tty);
 	getcwd(pwd, PATH_MAX - 1);
 	color = "\033[1;32m";
-	// if (f->exit_status != 0)
-	// 	color = "\033[1;31m";
+	if (f->exit_status != 0)
+		color = "\033[1;31m";
 	ft_putstr_fd(color, 1);
 	prompt = ft_strjoin(pwd, " >> \033[0m");
 	s = readline(prompt);
@@ -305,7 +330,7 @@ int	pars(t_data *d, char *rl)
 
 	lexer = lexecal_analyzer(rl);
 	//test(lexer);
-	if (lexer == NULL || all_is_good(lexer, d->my_env))
+	if (lexer == NULL)
 	{
 		if (lexer)
 			free_lexer(lexer);
@@ -339,6 +364,8 @@ void	start_shell(t_data *d)
 				pipeline(d);
 			free_all(d);
 		}
+		else
+			d->exit_status = 0;
 		free(rl);
 	}
 }

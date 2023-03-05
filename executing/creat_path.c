@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 16:23:01 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/01 17:45:04 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/03 14:25:02 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*creat_path(t_data *d)
 {
 	char	*s;
 	char	*set;
-	int choose;
+	int		choose;
 
 	s = NULL;
 	choose = 0;

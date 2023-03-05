@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 08:17:50 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/03 10:24:54 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/03 14:22:18 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ int	ft_export(t_data *f, char *arg)
 	identifier = check_identifier(arg, &choose, &value);
 	if (!identifier)
 		return (ft_puterr(arg, "not a valid identifier", 0), 1);
-	// printf("identifier => %s\n", identifier);
-	// printf("identifier => %s\n", value);
 	if (choose == APPAND_ENV)
 	{
 		value = ft_free_joined(ft_find_env(identifier, f->my_env), value, 0, 1);

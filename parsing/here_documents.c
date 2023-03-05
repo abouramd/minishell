@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 02:15:07 by zasabri           #+#    #+#             */
-/*   Updated: 2023/02/22 16:06:37 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/05 10:09:24 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	here_documents(t_list *lexer)
 			first = (t_vals *) lexer->content;
 			if (first->token == V_STR)
 			{
-
 				path = ft_strjoin("/tmp/", first->val);
 				arr = remove_spaces(first->val);
 				fd = open(path, O_CREAT | O_RDWR, 0777);

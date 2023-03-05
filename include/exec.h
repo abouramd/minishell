@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 03:38:12 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/03 09:49:21 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/03 14:26:23 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	close_fd_in_parent(t_data *d);
 
 /* builtins */
 int		builtins(t_data *f);
-void	built_pwd(t_data *f);
+void	built_pwd();
 void	built_echo(t_data *f);
 void	built_cd(t_data *f);
 void	built_export(t_data *f);

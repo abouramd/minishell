@@ -6,20 +6,18 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:59:30 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/01 14:34:20 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/04 19:02:59 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-
 
 void	signal_handler(int signum)
 {
 	if (signum == SIGINT)
 	{
 		g_d.exit_status = 1;
-		// ft_putstr_fd("\033[1;31m", 1);
-		ft_putstr_fd("\033[1;32m", 1);
+		ft_putstr_fd("\033[1;31m", 1);
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);

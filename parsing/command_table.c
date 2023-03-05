@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   command_table.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:05:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/03 16:55:57 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/05 10:07:01 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
+// char	*handle_rederiction_errors(char *str)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (str[i])
+// }
 void	link_back(t_cmd_list **lst, t_cmd_list *new)
 {
 	t_cmd_list	*p;
@@ -32,31 +39,25 @@ void	link_back(t_cmd_list **lst, t_cmd_list *new)
 	}
 }
 
-int	ambiguous_check(t_vals *first, t_list *lexer)
+char	**add_new(t_data *f, char **cmd, char *new)
 {
-	int	i = 0;
-	
-	lexer = lexer->next;
-	first = (t_vals *)lexer->content;
-	if (first->token == V_STR)
+	char	**new_cmd;
+	size_t	i;
+	char	**tmp;
+
+	i = 0;
+	tmp = ft_expand_str(f, new);
+	new_cmd = cmd;
+	if (!tmp)
+		new_cmd = ft_ultimate_join(new_cmd, "");
+	while (tmp && tmp[i])
 	{
-		while (first->val[i])
-		{
-			if (first->val[i] == ' ')
-				return (1);
-			i++;
-		}
+		new_cmd = ft_ultimate_join(new_cmd, tmp[i]);
+		free(tmp[i++]);
 	}
-	return (0);
-}
-
-char ** add_new(char **cmd, char *new)
-{
-	char **new_cmd;
-
-	new_cmd = ft_ultimate_join(cmd, new);
+	free(tmp);
 	if (!new_cmd)
-	    return (cmd);
+		return (cmd);
 	if (cmd)
 		ft_free(cmd);
 	return (new_cmd);
@@ -71,38 +72,29 @@ t_cmd_list	*command_table(t_data *d, t_list *lexer)
 	save = NULL;
 	cmd_table = NULL;
 	save = initilize_save();
-	first = (t_vals *) lexer->content;
+	first = (t_vals *)lexer->content;
 	while (first->token != V_EOF)
 	{
 		if (first->token == V_STR)
-			save->cmd = add_new(save->cmd, first->val);
+			save->cmd = add_new(d, save->cmd, first->val);
 		else if (first->token == V_IN_RDIR)
-		{
-			if (!ambiguous_check(first, lexer))
-				for_input_redirection(first, save, &lexer);
-			else
-				printf("minishell: ambiguous redirect\n");
-		}
+			for_input_redirection(d, first, save, &lexer);
 		else if (first->token == V_OUT_RDIR)
-		{
-			//if (!ambiguous_check(first, lexer))
-				for_out_redirection(first, save, &lexer);
-		}
+			for_out_redirection(d, first, save, &lexer);
 		else if (first->token == V_APP)
-		{
-			//if (!ambiguous_check(first, lexer))
-				for_append(first, save, &lexer);
-		}
+			for_append(d, first, save, &lexer);
 		else if (first->token == V_HDK)
 			for_herdoc(d, first, save, &lexer);
 		else if (first->token == V_PIPE)
 		{
 			link_back(&cmd_table, save);
+			d->exit_status = 0;
 			save = initilize_save();
 		}
 		lexer = lexer->next;
-		first = (t_vals *) lexer->content;
+		first = (t_vals *)lexer->content;
 	}
+	d->exit_status = 0;
 	link_back(&cmd_table, save);
 	return (cmd_table);
 }
