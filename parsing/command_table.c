@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:05:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/05 12:22:31 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/06 12:28:56 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,19 @@ char	**add_new(t_data *f, char **cmd, char *new)
 	size_t	i;
 	char	**tmp;
 
+	new_cmd = cmd;
 	i = 0;
 	tmp = ft_expand_str(f, new);
-	new_cmd = cmd;
 	if (!tmp)
-		new_cmd = ft_ultimate_join(new_cmd, "");
+		return (new_cmd);
 	while (tmp && tmp[i])
 	{
-		new_cmd = ft_ultimate_join(new_cmd, tmp[i]);
+		cmd = new_cmd;
+		new_cmd = ft_ultimate_join(cmd, tmp[i]);
+		ft_free(cmd);
 		free(tmp[i++]);
 	}
 	free(tmp);
-	if (!new_cmd)
-		return (cmd);
-	if (cmd)
-		ft_free(cmd);
 	return (new_cmd);
 }
 

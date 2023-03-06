@@ -50,7 +50,7 @@ t_vals	*select_token(t_lex *lexer)
 	int i;
 
 	str = NULL;
-	while (lexer->l && lexer->l == ' ')
+	while (lexer->l && (lexer->l == ' ' || lexer->l == '\t'))
 	{
 		lexer->nxt++;
 		lexer->l = lexer->fill[lexer->nxt];

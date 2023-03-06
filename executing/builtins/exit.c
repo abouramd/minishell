@@ -6,11 +6,38 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 08:20:18 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/05 17:48:55 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/06 10:08:09 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+
+int	ft_max_long(char *str)
+{
+	int				sign;
+	unsigned long	res;
+	unsigned long	t;
+
+	sign = 1;
+	res = 0;
+	while (*str == ' ' || (*str <= 13 && *str >= 9))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	while (*str <= '9' && *str >= '0')
+	{
+		t = (res * 10) + (*str - '0');
+		if (res > t || t > __LONG_MAX__ + (sign < 0))
+			return (1);
+		res = t;
+		str++;
+	}
+	return (0);
+}
 
 int	check_arg(char *s)
 {
@@ -25,7 +52,7 @@ int	check_arg(char *s)
 			return (1);
 		i++;
 	}
-	return (0);
+	return (ft_max_long(s));
 }
 
 void	built_exit(t_data *f)
