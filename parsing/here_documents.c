@@ -3,116 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   here_documents.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 02:15:07 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/05 12:23:51 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/06 18:36:25 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
-
-// char	*remove_spaces(char *lexer)
-// {
-// 	char	*str;
-// 	int		i;
-
-// 	i = 0;
-// 	while (lexer[i] && lexer[i] != ' ')
-// 		i++;
-// 	str = malloc(i + 1);
-// 	if (!str)
-// 		return (0);
-// 	i = 0;
-// 	while (lexer[i] && lexer[i] != ' ')
-// 	{
-// 		str[i] = lexer[i];
-// 		i++;
-// 	}
-// 	str [i] = '\0';
-// 	return (str);
-// }
-
-// void	here_documents(t_list *lexer)
-// {
-// 	t_vals		*first;
-// 	char		*str;
-// 	char		*path;
-// 	char		*arr;
-// 	int			fd;
-// 	t_list		*ptr;
-
-// 	ptr = NULL;
-// 	first = (t_vals *) lexer->content;
-// 	while (first->token != V_EOF)
-// 	{
-// 		if (first->token == V_HDK)
-// 		{
-// 			lexer = lexer->next;
-// 			first = (t_vals *) lexer->content;
-// 			if (first->token == V_STR)
-// 			{
-// 				path = ft_strjoin("/tmp/", first->val);
-// 				arr = remove_spaces(first->val);
-// 				fd = open(path, O_CREAT | O_RDWR, 0777);
-// 				while (1)
-// 				{
-// 					str = readline("heredoc> ");
-// 					if (!str)
-// 						break ;
-// 					if (!ft_strncmp(str, arr, ft_strlen(str))
-// 						&& ft_strlen(str) == ft_strlen(arr))
-// 					{
-// 						free(str);
-// 						break ;
-// 					}
-// 					write(fd, str, ft_strlen(str));
-// 					write(fd, "\n", 1);
-// 					free(str);
-// 				}
-// 				close(fd);
-// 				free(arr);
-// 			}
-// 		}
-// 		lexer = lexer->next;
-// 		first = (t_vals *) lexer->content;
-// 	}
-// }
-// t_cmd_list	*open_here_doc(t_data *d, t_list *lexer)
-// {
-// 	t_cmd_list	*cmd_table;
-// 	t_vals		*first;
-// 	t_cmd_list	*save;
-
-// 	save = NULL;
-// 	cmd_table = NULL;
-// 	save = initilize_save();
-// 	first = (t_vals *)lexer->content;
-// 	while (first->token != V_EOF)
-// 	{
-// 		if (first->token == V_STR)
-// 			save->cmd = add_new(d, save->cmd, first->val);
-// 		else if (first->token == V_IN_RDIR)
-// 			for_input_redirection(d, first, save, &lexer);
-// 		else if (first->token == V_OUT_RDIR)
-// 			for_out_redirection(d, first, save, &lexer);
-// 		else if (first->token == V_APP)
-// 			for_append(d, first, save, &lexer);
-// 		else if (first->token == V_HDK)
-// 			for_herdoc(d, first, save, &lexer);
-// 		else if (first->token == V_PIPE)
-// 		{
-// 			link_back(&cmd_table, save);
-// 			d->exit_status = 0;
-// 			save = initilize_save();
-// 		}
-// 		lexer = lexer->next;
-// 		first = (t_vals *)lexer->content;
-// 	}
-// 	d->exit_status = 0;
-// 	link_back(&cmd_table, save);
-// 	return (cmd_table);
-// }
 
 static void	link_here_doc(t_here_doc **lst, t_here_doc *new)
 {

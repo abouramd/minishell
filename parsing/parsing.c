@@ -17,7 +17,7 @@ t_vals	*others(t_lex *lexer)
 	if (lexer->l == '|')
 	{
 		go_next(lexer);
-		return (initialize_token(NULL, V_PIPE));
+		return (initialize_token("|", V_PIPE));
 	}
 	if (lexer->l == '<')
 	{
@@ -25,9 +25,9 @@ t_vals	*others(t_lex *lexer)
 		if (lexer->l == '<')
 		{
 			go_next(lexer);
-			return (initialize_token(NULL, V_HDK));
+			return (initialize_token("<<", V_HDK));
 		}
-		return (initialize_token(NULL, V_IN_RDIR));
+		return (initialize_token("<", V_IN_RDIR));
 	}
 	if (lexer->l == '>')
 	{
@@ -35,41 +35,35 @@ t_vals	*others(t_lex *lexer)
 		if (lexer->l == '>')
 		{
 			go_next(lexer);
-			return (initialize_token(NULL, V_APP));
+			return (initialize_token(">>", V_APP));
 		}
-		return (initialize_token(NULL, V_OUT_RDIR));
+		return (initialize_token(">", V_OUT_RDIR));
 	}
 	else
-		return (initialize_token(NULL, V_EOF));
+		return (initialize_token("newline", V_EOF));
 }
 
 t_vals	*select_token(t_lex *lexer)
 {
-	t_vals *token;
-	char *str;
-	int i;
+	t_vals	*token;
+	char	*str;
+	char	c;
 
 	str = NULL;
 	while (lexer->l && (lexer->l == ' ' || lexer->l == '\t'))
-	{
-		lexer->nxt++;
-		lexer->l = lexer->fill[lexer->nxt];
-	}
-	i = 0;
-	char c;
+		go_next(lexer);
+	c = 0;
 	while (lexer->l)
 	{
-		if ((lexer->l == '\"' || lexer->l == '\'') && i == 0)
-		{
-			i = 1;
+		if ((lexer->l == '\"' || lexer->l == '\'') && c == 0)
 			c = lexer->l;
-		}
-		else if (i == 1 && lexer->l == c)
-			i = 0;
-			if ((lexer->l == '|' || lexer->l == '<' || lexer->l == '>' || lexer->l == ' ') && i == 0)
-				break;
-			str = add_str(str, lexer->l);
-			go_next(lexer);
+		else if (c != 0 && lexer->l == c)
+			c = 0;
+		if ((lexer->l == '|' || lexer->l == '<'
+				|| lexer->l == '>' || lexer->l == ' ') && c == 0)
+			break ;
+		str = add_str(str, lexer->l);
+		go_next(lexer);
 	}
 	if (str)
 		token = initialize_token(str, V_STR);
@@ -97,33 +91,3 @@ t_list	*lexecal_analyzer(char *str)
 	ft_lstadd_back(&list, ft_lstnew(token));
 	return (list);
 }
-
-// void print_tokens(t_vals *lexer)
-// {
-//         printf("value_of_token: %s (",lexer->val);
-// 		if (lexer->token == 0)
-// 			printf("str_token");
-// 		else if (lexer->token == 1)
-// 			printf("pipe_token");
-// 		else if (lexer->token == 2)
-// 			printf("append_token");
-// 		else if (lexer->token == 3)
-// 			printf("out_rederiction_token");
-// 		else if (lexer->token == 4)
-// 			printf("in_rederiction_token");
-// 		else if (lexer->token == 5)
-// 			printf("heredoce_token");
-// 		else
-// 			printf("end_of_file");
-// 		printf(")\n");
-// }
-
-// void test(t_list *lexer)
-// {
-//     t_list *first = lexer;
-//     while(first)
-//     {
-//         print_tokens((t_vals *) first->content);
-//         first = first->next;
-//     }
-// }
