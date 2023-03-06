@@ -6,29 +6,11 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:53:47 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/06 12:26:03 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:24:37 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/exec.h"
-
-// static char	*fill_varedddd(char *val, char *expanded_str)
-// {
-// 	size_t	j;
-
-// 	j = 0;
-// 	while (val && val[j] && val[j] != ' ' && val[j] != '\t')
-// 		expanded_str = add_str(expanded_str, val[j++]);
-// 	while (val && val[j])
-// 	{
-// 		while (val[j] && (val[j] == ' ' || val[j] == '\t'))
-// 			j++;
-// 		expanded_str = add_str(expanded_str, ' ');
-// 		while (val[j] && val[j] != ' ' && val[j] != '\t')
-// 			expanded_str = add_str(expanded_str, val[j++]);
-// 	}
-// 	return (expanded_str);
-// }
 
 static char	*fill_var(char *val, char *expanded_str)
 {
@@ -61,7 +43,6 @@ static char	*ft_replace_val(t_data *f, char *str, char *expanded_str, size_t *in
 	{
 		while (str && (ft_isalnum(str[i]) || str[i] == '_'))
 			id = add_str(id, str[i++]);
-		id = add_str(id, '\0');
 		expanded_str = fill_var(ft_find_env(id, f->my_env), expanded_str);
 		free(id);
 	}
@@ -156,26 +137,3 @@ char	**ft_expand_str(t_data *f, char *s)
 	tmp = ft_split_expand(expanded_str);
 	return (tmp);
 }
-
-// char	*ft_expand_in_red(t_data *f, char *s)
-// {
-// 	char	*expanded_str;
-// 	size_t	i;
-// 	int		t;
-
-// 	t = 0;
-// 	i = 0;
-// 	expanded_str = NULL;
-// 	while (s && s[i])
-// 	{
-// 		if (t == 0 && s[i] == '\'')
-// 			t = 1;
-// 		else if (t == 1 && s[i] == '\'')
-// 			t = 0;
-// 		if (t == 0 && s[i] == '$')
-// 			expanded_str = ft_replace_val(f, s, expanded_str, &i);
-// 		else
-// 			expanded_str = add_str(expanded_str, s[i++]);
-// 	}
-// 	return (expanded_str);
-// }

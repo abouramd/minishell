@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:38:07 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/05 13:28:14 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:21:04 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@ void	for_out_redirection(t_data *f, t_vals *first, t_cmd_list *save,
 	first = (t_vals *)(*lexer)->content;
 	if (first->token == V_STR)
 	{
-		if (save->outfile > 0)
+		if (save->outfile > 0 && save->infile >= 0)
 		{
 			if (save->outfile != 1)
 				close(save->outfile);
 			f->ambiguous = 0;
+			if (save->outfile_name)
+				free(save->outfile_name);
 			name = ft_expand_in_red(f, first->val);
 			if (!f->ambiguous)
 			{
@@ -56,11 +58,13 @@ void	for_input_redirection(t_data *f, t_vals *first, t_cmd_list *save,
 	first = (t_vals *)(*lexer)->content;
 	if (first->token == V_STR)
 	{
-		if (save->infile >= 0)
+		if (save->outfile > 0 && save->infile >= 0)
 		{
 			if (save->infile != 0 && save->infile > 0)
 				close(save->infile);
 			f->ambiguous = 0;
+			if (save->infile_name)
+				free(save->infile_name);
 			name = ft_expand_in_red(f, first->val);
 			if (!f->ambiguous)
 			{
@@ -90,11 +94,13 @@ void	for_append(t_data *f, t_vals *first, t_cmd_list *save, t_list **lexer)
 	first = (t_vals *)(*lexer)->content;
 	if (first->token == V_STR)
 	{
-		if (save->outfile > 0)
+		if (save->outfile > 0 && save->infile >= 0)
 		{
 			if (save->outfile != 1 && save->outfile > 0)
 				close(save->outfile);
 			f->ambiguous = 0;
+			if (save->outfile_name)
+				free(save->outfile_name);
 			name = ft_expand_in_red(f, first->val);
 			if (!f->ambiguous)
 			{
@@ -124,7 +130,7 @@ void	add_herdoc(t_here_doc **hrd, t_cmd_list *save, t_list **lexer)
 	first = (t_vals *)(*lexer)->content;
 	if (first->token == V_STR && (*hrd))
 	{
-		if (save->infile >= 0)
+		if (save->outfile > 0 && save->infile >= 0)
 		{
 			if (save->infile != 0)
 				close(save->infile);

@@ -1,4 +1,4 @@
 - [ ] 16 here doc max (exit with 2)
 - [ ] memory leaks T_lex struct
-- [ ] if an error in infile the out file should not creat or the oposet
+- [x] if an error in infile the out file should not creat or the oposet
 - [ ]

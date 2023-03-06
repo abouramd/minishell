@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:53:47 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/04 19:40:49 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:24:14 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*fill_var(t_data *f, char *val, char *expanded_str)
 	if (!val)
 		f->ambiguous = 1;
 	if (val)
-	{	
+	{
 		while (val && (val[j] == ' ' || val[j] == '\t'))
 			j++;
 		if (val && !val[j])
@@ -38,7 +38,8 @@ static char	*fill_var(t_data *f, char *val, char *expanded_str)
 	return (expanded_str);
 }
 
-static char	*ft_replace_val(t_data *f, char *str, char *expanded_str, size_t *index)
+static char	*ft_replace_val(t_data *f, char *str, char *expanded_str,
+		size_t *index)
 {
 	char	*val;
 	char	*id;
@@ -59,7 +60,6 @@ static char	*ft_replace_val(t_data *f, char *str, char *expanded_str, size_t *in
 	{
 		while (str && (ft_isalnum(str[i]) || str[i] == '_'))
 			id = add_str(id, str[i++]);
-		id = add_str(id, '\0');
 		expanded_str = fill_var(f, ft_find_env(id, f->my_env), expanded_str);
 		free(id);
 	}
@@ -157,7 +157,7 @@ char	*ft_expand_in_red(t_data *f, char *s)
 {
 	char	*expanded_str;
 	size_t	i;
-	char 		c;
+	char	c;
 
 	c = 0;
 	i = 0;
