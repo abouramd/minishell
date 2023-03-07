@@ -6,19 +6,12 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:05:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/06 19:29:12 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/07 10:32:16 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-// char	*handle_rederiction_errors(char *str)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (str[i])
-// }
 static void	link_back(t_cmd_list **lst, t_cmd_list *new)
 {
 	t_cmd_list	*p;

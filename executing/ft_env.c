@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 10:06:45 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/01 08:49:54 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/07 11:06:52 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ void	ft_env_add(char *identifier, char *value, char ***env)
 {
 	char	**my_env;
 	char	**s;
+	char	*tmp;
 	size_t	index;
 
 	my_env = *env;
@@ -145,7 +146,9 @@ void	ft_env_add(char *identifier, char *value, char ***env)
 		ft_free(s);
 		index++;
 	}
-	*env = realloc_env(my_env, change_value(identifier, value, NULL));
+	tmp = change_value(identifier, value, NULL);
+	*env = realloc_env(my_env, tmp);
+	free(tmp);
 }
 // void	ft_env_add(char *elem, char ***env)
 // {

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 10:18:46 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/05 13:31:22 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/06 19:18:43 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-static void	puterr_for_parser(char *error, char *arg, int n)
+static int	err(char *error, char *arg, int n)
 {
 	ft_putstr_fd("minishell: ", 2);
 	if (error)
@@ -24,6 +24,13 @@ static void	puterr_for_parser(char *error, char *arg, int n)
 	ft_putstr_fd("\'\n", 2);
 	if (n != 0)
 		exit(n);
+	return (1);
+}
+
+int	for_str_look_errors(char *c)
+{
+	err("syntax error near unexpected token `", c, 0);
+	return (1);
 }
 
 static int	check_str_look(char *str)
@@ -39,10 +46,7 @@ static int	check_str_look(char *str)
 			while (str[i] && str[i] != '\'')
 				i++;
 			if (!str[i])
-			{
-				puterr_for_parser("syntax error near unexpected token `", "\'", 0);
-				return (1);
-			}
+				return (for_str_look_errors("\'"));
 		}
 		else if (str[i] == '\"')
 		{
@@ -50,10 +54,7 @@ static int	check_str_look(char *str)
 			while (str[i] && str[i] != '\"')
 				i++;
 			if (!str[i])
-			{
-				puterr_for_parser("syntax error near unexpected token `", "\"", 0);
-				return (1);
-			}
+				return (for_str_look_errors("\""));
 		}
 		i++;
 	}
@@ -64,42 +65,38 @@ int	syntax_error(t_list *lexer)
 {
 	t_vals	*first;
 	t_vals	*second;
+	int		hdk_nb;
 
+	hdk_nb = 0;
 	first = (t_vals *)lexer->content;
 	if (first->token == V_EOF)
 		return (0);
 	if (first->token == V_PIPE)
-	{
-		puterr_for_parser("syntax error near unexpected token `", first->val, 0);
-		return (1);
-	}
+		return (err("syntax error near unexpected token `", first->val, 0));
 	second = (t_vals *) lexer->next->content;
 	while (first->token != V_EOF)
 	{
+		if (first->token == V_HDK)
+			hdk_nb++;
 		if ((first->token == V_APP || first->token == V_IN_RDIR
-			|| first->token == V_OUT_RDIR || first->token == V_HDK) && (second->token != V_STR))
-		{
-			//printf("hi: token->[%d], value->[%s] | second token->[%d]\n", first->token, first->val, second->token);
-			puterr_for_parser("syntax error near unexpected token `", second->val, 0);
-			return (1);
-		}
+				|| first->token == V_OUT_RDIR || first->token == V_HDK)
+			&& (second->token != V_STR))
+			return (err("syntax error near unexpected token`", second->val, 0));
 		if (first->token == V_STR)
 		{
-			//printf("hi: token->[%d], value->[%s] | second token->[%d]\n", first->token, first->val, second->token);
 			if (check_str_look(first->val))
 				return (1);
 		}
-		if (first->token == V_PIPE && (second->token == V_EOF || second->token == V_PIPE))
-		{
-			//printf("hi: token->[%d], value->[%s] | second token->[%d]\n", first->token, first->val, second->token);
-			puterr_for_parser("syntax error near unexpected token `", first->val, 0);
-			return (1);
-		}
+		if (first->token == V_PIPE
+			&& (second->token == V_EOF || second->token == V_PIPE))
+			return (err("syntax error near unexpected token `", first->val, 0));
 		if (second->token == V_EOF)
-			break;
+			break ;
 		lexer = lexer->next;
 		first = (t_vals *)lexer->content;
 		second = (t_vals *)lexer->next->content;
 	}
+	if (hdk_nb > 16)
+		err("maximum here-document count exceeded", "`<<", 1);
 	return (0);
 }

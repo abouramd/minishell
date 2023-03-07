@@ -310,7 +310,7 @@ void	free_lexer(t_list *list)
 		tmp = (t_vals *)list->content;
 		if (tmp)
 		{
-			if (tmp->val)
+			if (tmp->val && tmp->token == V_STR)
 			 	free(tmp->val);
 			free(tmp);
 		}

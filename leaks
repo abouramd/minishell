@@ -1,4 +1,10 @@
 pars
-Process 95754: 0 leaks for 0 total leaked bytes.
+Process 58066: 2 leaks for 32 total leaked bytes.
+    2 (32 bytes) << TOTAL >>
+      1 (16 bytes) ROOT LEAK: 0x7f84c6e00280 [16]  length: 7  "outfile"
+      1 (16 bytes) ROOT LEAK: 0x7f84c6f00040 [16]  length: 6  "infile"
 pars
-Process 95754: 0 leaks for 0 total leaked bytes.
+Process 58066: 2 leaks for 32 total leaked bytes.
+    2 (32 bytes) << TOTAL >>
+      1 (16 bytes) ROOT LEAK: 0x7f84c6e00280 [16]  length: 7  "outfile"
+      1 (16 bytes) ROOT LEAK: 0x7f84c6f00040 [16]  length: 6  "infile"
