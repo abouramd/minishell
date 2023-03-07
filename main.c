@@ -396,7 +396,7 @@ void	start_shell(t_data *d)
 			if (!d->kill_here && d->list_of_cmd)
 				pipeline(d);
 			free_all(d);
-			system("echo pars >> leaks && leaks minishell | grep bytes >> leaks");
+			system("echo exec >> leaks && leaks minishell | grep bytes >> leaks");
 		}
 		else
 			d->exit_status = 0;

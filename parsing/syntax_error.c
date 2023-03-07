@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 10:18:46 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/06 19:18:43 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/07 14:02:17 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,6 @@ int	syntax_error(t_list *lexer)
 		second = (t_vals *)lexer->next->content;
 	}
 	if (hdk_nb > 16)
-		err("maximum here-document count exceeded", "`<<", 1);
+		err("maximum here-document count exceeded ", "`<<", 2);
 	return (0);
 }
