@@ -310,7 +310,7 @@ void	free_lexer(t_list *list)
 		tmp = (t_vals *)list->content;
 		if (tmp)
 		{
-			if (tmp->val != NULL)
+			if (tmp->val)
 			 	free(tmp->val);
 			free(tmp);
 		}
@@ -370,6 +370,7 @@ int	pars(t_data *d, char *rl)
 		d->list_of_cmd = command_table(d, hrd, lexer);
 	free_hrd(hrd);
 	//cmd_info(d->list_of_cmd);
+	system("echo pars > leaks && leaks minishell | grep bytes >> leaks");
 	free_lexer(lexer);
 	return (0);
 }
@@ -395,6 +396,7 @@ void	start_shell(t_data *d)
 			if (!d->kill_here && d->list_of_cmd)
 				pipeline(d);
 			free_all(d);
+			system("echo pars >> leaks && leaks minishell | grep bytes >> leaks");
 		}
 		else
 			d->exit_status = 0;
