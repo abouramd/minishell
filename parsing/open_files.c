@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:38:07 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/06 13:21:04 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/07 11:44:57 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	for_out_redirection(t_data *f, t_vals *first, t_cmd_list *save,
 					save->outfile_errno = errno;
 					save->outfile_name = name;
 				}
+				else
+					free(name);
 			}
 			else
 			{
@@ -74,6 +76,8 @@ void	for_input_redirection(t_data *f, t_vals *first, t_cmd_list *save,
 					save->infile_errno = errno;
 					save->infile_name = name;
 				}
+				else
+					free(name);
 			}
 			else
 			{
@@ -110,6 +114,8 @@ void	for_append(t_data *f, t_vals *first, t_cmd_list *save, t_list **lexer)
 					save->outfile_errno = errno;
 					save->outfile_name = name;
 				}
+				else
+					free(name);
 			}
 			else
 			{
