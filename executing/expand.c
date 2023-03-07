@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:53:47 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/06 13:24:37 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/06 20:01:17 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ char	**ft_split_expand(char *expanded_str)
 	size_t	j;
 	char	c;
 	char	**tmp;
+	char	**save;
 
 	c = 0;
 	i = 0;
@@ -88,7 +89,9 @@ char	**ft_split_expand(char *expanded_str)
 		i++;
 	while (expanded_str && expanded_str[i])
 	{
-		tmp = ft_ultimate_join(tmp, "");
+		save = tmp;
+		tmp = ft_ultimate_join(save, "");
+		ft_free(save);
 		while (expanded_str && expanded_str[i])
 		{
 			if ((expanded_str[i] == '\t' || expanded_str[i] == ' ') && c == 0)
@@ -105,8 +108,7 @@ char	**ft_split_expand(char *expanded_str)
 			i++;
 		j++;
 	}
-	free(expanded_str);
-	return (tmp);
+	return (free(expanded_str), tmp);
 }
 
 char	**ft_expand_str(t_data *f, char *s)

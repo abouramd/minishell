@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 06:06:22 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/25 04:06:10 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/06 19:59:59 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,11 @@
 
 static char	**checker(char **s1, char *s2)
 {
-	if (!s2)
-		return (NULL);
+	s1 = (char **)malloc(sizeof(char *) * 2);
 	if (!s1)
-	{
-		s1 = (char **)malloc(sizeof(char *) * 1);
-		if (!s1)
-			return (NULL);
-		s1[0] = NULL;
-	}
+		return (NULL);
+	s1[0] = ft_strdup(s2);
+	s1[1] = NULL;
 	return (s1);
 }
 
@@ -32,9 +28,10 @@ char	**ft_ultimate_join(char **s1, char *s2)
 	char	**ret;
 
 	size = 0;
-	s1 = checker(s1, s2);
-	if (!s1)
+	if (!s2)
 		return (NULL);
+	if (!s1)
+		return (checker(s1, s2));
 	while (s1[size])
 		size++;
 	ret = (char **)malloc(sizeof(char *) * (size + 2));
