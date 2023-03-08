@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:53:47 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/06 20:01:17 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/08 08:38:42 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*ft_expand_in_here_doc(t_data *f, char *s, int type)
 	return (expanded_str);
 }
 
-char	**ft_split_expand(char *expanded_str)
+static char	**ft_split_expand(char *expanded_str)
 {
 	size_t	i;
 	size_t	j;

@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:38:07 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/07 11:44:57 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/08 09:22:48 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	for_out_redirection(t_data *f, t_vals *first, t_cmd_list *save,
 		t_list **lexer)
 {
-	char	*name;
+	char	**name;
 
 	*lexer = (*lexer)->next;
 	first = (t_vals *)(*lexer)->content;
@@ -28,21 +28,22 @@ void	for_out_redirection(t_data *f, t_vals *first, t_cmd_list *save,
 			f->ambiguous = 0;
 			if (save->outfile_name)
 				free(save->outfile_name);
-			name = ft_expand_in_red(f, first->val);
+			name = ft_expand_str(f, first->val);
+			if (!name || !name[0] || name[1])
+				f->ambiguous = 1;
 			if (!f->ambiguous)
 			{
-				save->outfile = open(name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+				save->outfile = open(name[0], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 				if (save->outfile < 0)
 				{
 					save->outfile_errno = errno;
-					save->outfile_name = name;
+					save->outfile_name = ft_strdup(name[0]);
 				}
-				else
-					free(name);
+				ft_free(name);
 			}
 			else
 			{
-				free(name);
+				ft_free(name);
 				save->outfile = -1;
 				save->outfile_errno = 300;
 				save->outfile_name = ft_strdup(first->val);
@@ -54,7 +55,7 @@ void	for_out_redirection(t_data *f, t_vals *first, t_cmd_list *save,
 void	for_input_redirection(t_data *f, t_vals *first, t_cmd_list *save,
 		t_list **lexer)
 {
-	char	*name;
+	char	**name;
 
 	*lexer = (*lexer)->next;
 	first = (t_vals *)(*lexer)->content;
@@ -67,21 +68,22 @@ void	for_input_redirection(t_data *f, t_vals *first, t_cmd_list *save,
 			f->ambiguous = 0;
 			if (save->infile_name)
 				free(save->infile_name);
-			name = ft_expand_in_red(f, first->val);
+			name = ft_expand_str(f, first->val);
+			if (!name || !name[0] || name[1])
+				f->ambiguous = 1;
 			if (!f->ambiguous)
 			{
-				save->infile = open(name, O_RDONLY, 0644);
+				save->infile = open(name[0], O_RDONLY, 0644);
 				if (save->infile < 0)
 				{
 					save->infile_errno = errno;
-					save->infile_name = name;
+					save->infile_name = ft_strdup(name[0]);
 				}
-				else
-					free(name);
+				ft_free(name);
 			}
 			else
 			{
-				free(name);
+				ft_free(name);
 				save->outfile = -1;
 				save->outfile_errno = 300;
 				save->outfile_name = ft_strdup(first->val);
@@ -92,7 +94,7 @@ void	for_input_redirection(t_data *f, t_vals *first, t_cmd_list *save,
 
 void	for_append(t_data *f, t_vals *first, t_cmd_list *save, t_list **lexer)
 {
-	char	*name;
+	char	**name;
 
 	*lexer = (*lexer)->next;
 	first = (t_vals *)(*lexer)->content;
@@ -105,21 +107,22 @@ void	for_append(t_data *f, t_vals *first, t_cmd_list *save, t_list **lexer)
 			f->ambiguous = 0;
 			if (save->outfile_name)
 				free(save->outfile_name);
-			name = ft_expand_in_red(f, first->val);
+			name = ft_expand_str(f, first->val);
+			if (!name || !name[0] || name[1])
+				f->ambiguous = 1;
 			if (!f->ambiguous)
 			{
-				save->outfile = open(name, O_CREAT | O_WRONLY | O_APPEND, 0644);
+				save->outfile = open(name[0], O_CREAT | O_WRONLY | O_APPEND, 0644);
 				if (save->outfile < 0)
 				{
 					save->outfile_errno = errno;
-					save->outfile_name = name;
+					save->outfile_name = ft_strdup(name[0]);
 				}
-				else
-					free(name);
+				ft_free(name);
 			}
 			else
 			{
-				free(name);
+				ft_free(name);
 				save->outfile = -1;
 				save->outfile_errno = 300;
 				save->outfile_name = ft_strdup(first->val);

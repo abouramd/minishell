@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:53:47 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/06 13:24:14 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/08 08:47:13 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,36 @@ static char	*ft_replace_val(t_data *f, char *str, char *expanded_str,
 	return (expanded_str);
 }
 
+static char	*ft_split_expand(char *expanded_str)
+{
+	size_t	i;
+	char	c;
+	char	*tmp;
+
+	c = 0;
+	i = 0;
+	tmp = NULL;
+	while (expanded_str && (expanded_str[i] == ' ' || expanded_str[i] == '\t'))
+		i++;
+	while (expanded_str && expanded_str[i])
+	{
+		while (expanded_str && expanded_str[i])
+		{
+			if ((expanded_str[i] == '\t' || expanded_str[i] == ' ') && c == 0)
+				break ;
+			if ((expanded_str[i] == '\"' || expanded_str[i] == '\'') && c == 0)
+				c = expanded_str[i];
+			else if (c && expanded_str[i] == c)
+				c = 0;
+			else
+				tmp = add_str(tmp, expanded_str[i]);
+			i++;
+		}
+		while (expanded_str[i] == ' ' || expanded_str[i] == '\t')
+			i++;
+	}
+	return (free(expanded_str), tmp);
+}
 // char	*ft_expand_in_here_doc(t_data *f, char *s, int type)
 // {
 // 	char	*expanded_str;
@@ -177,5 +207,6 @@ char	*ft_expand_in_red(t_data *f, char *s)
 			expanded_str = add_str(expanded_str, s[i]);
 		i++;
 	}
+	expanded_str = ft_split_expand(expanded_str);
 	return (expanded_str);
 }

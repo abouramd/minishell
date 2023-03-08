@@ -227,7 +227,8 @@ char	*put_prompt(t_data *f)
 	f->kill_here = 0;
 	signal(SIGINT, signal_handler);
 	tcsetattr(0, TCSANOW, &f->new_tty);
-	getcwd(pwd, PATH_MAX - 1);
+	if (getcwd(pwd, PATH_MAX - 1) == NULL)
+		ft_strlcpy(pwd, "minishell ~$", 13);
 	color = "\033[1;32m";
 	if (f->exit_status != 0)
 		color = "\033[1;31m";
