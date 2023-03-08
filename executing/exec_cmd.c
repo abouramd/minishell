@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 10:06:36 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/07 15:43:36 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/08 09:35:37 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ void	run_cmd(t_data *d)
 	sigaction(SIGINT, &d->old_sigint, NULL);
 	sigaction(SIGQUIT, &d->old_sigquit, NULL);
 	tcsetattr(0, TCSANOW, &d->old_tty);
-	dup_fd(d);
+	dup_fd(d->list_of_cmd->infile, d->list_of_cmd->infile_errno,
+		d->list_of_cmd->infile_name, 0);
+	dup_fd(d->list_of_cmd->outfile, d->list_of_cmd->outfile_errno,
+		d->list_of_cmd->outfile_name, 1);
 	if (d->list_of_cmd->cmd)
 	{
 		d->pathname = creat_path(d);
