@@ -1,0 +1,27 @@
+	t_here_doc	*here_doc;
+	t_here_doc	*tmp;
+	t_vals		*first;
+	int			save_exit;
+
+	at_first(&here_doc, &tmp, &first, lexer);
+	save_exit = d->exit_status;
+	while (first->token != V_EOF)
+	{
+		if (first->token == V_IN_RDIR || first->token == V_OUT_RDIR
+			|| first->token == V_APP)
+			first = (t_vals *)lexer->content;
+		else if (first->token == V_HDK)
+		{
+			tmp = first_val_here_doc();
+			for_herdoc(tmp, d, first, &lexer);
+			link_here_doc(&here_doc, tmp);
+			tmp = NULL;
+		}
+		else if (first->token == V_PIPE)
+			d->exit_status = 0;
+		lexer = lexer->next;
+		first = (t_vals *)lexer->content;
+	}
+	link_here_doc(&here_doc, tmp);
+	d->exit_status = save_exit;
+	return (here_doc);

@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 02:15:07 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/06 18:36:25 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/08 15:19:30 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ static t_here_doc	*first_val_here_doc(void)
 	return (here_doc);
 }
 
+static void	at_first(t_here_doc **here_doc, t_here_doc **tmp, t_vals **first, t_list *lexer)
+{
+	*here_doc = NULL;
+	*tmp = NULL;
+	*first = (t_vals *)lexer->content;
+}
+
 t_here_doc	*open_here_doc(t_data *d, t_list *lexer)
 {
 	t_here_doc	*here_doc;
@@ -49,9 +56,7 @@ t_here_doc	*open_here_doc(t_data *d, t_list *lexer)
 	t_vals		*first;
 	int			save_exit;
 
-	here_doc = NULL;
-	tmp = NULL;
-	first = (t_vals *)lexer->content;
+	at_first(&here_doc, &tmp, &first, lexer);
 	save_exit = d->exit_status;
 	while (first->token != V_EOF)
 	{
