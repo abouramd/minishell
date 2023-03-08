@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+         #
+#    By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 05:30:41 by abouramd          #+#    #+#              #
-#    Updated: 2023/03/06 18:27:27 by zasabri          ###   ########.fr        #
+#    Updated: 2023/03/08 10:47:48 by abouramd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME := minishell
 
 CFLAGS := -Wall -Wextra -Werror #-fsanitize=address -g3
 
-LIB_DIR := libft/ readline/
+LIB_DIR := libft/ readline/ get_next_line/
 
 INC := -I ./include $(addprefix -I ./library/,$(LIB_DIR))
 
@@ -22,9 +22,9 @@ LIB := $(addprefix -L ./library/,$(LIB_DIR)) -lreadline -lft -lcurses
 
 BUILTINS := cd.c echo.c env.c exit.c export.c pwd.c unset.c
 
-EXEC_DIR := $(addprefix builtins/, $(BUILTINS)) builtins.c creat_path.c exec_cmd.c executing.c fd_manage.c ft_env.c get_next_line.c get_path.c here_doc.c put_c.c sort_string.c signal_handler.c expand.c expand_red.c
+EXEC_DIR := $(addprefix builtins/, $(BUILTINS)) builtins.c creat_path.c exec_cmd.c executing.c fd_manage.c ft_env.c get_path.c here_doc.c put_c.c sort_string.c signal_handler.c expand.c expand_red.c
 
-SRC_EXEC :=  main.c $(addprefix ./executing/, $(EXEC_DIR))
+SRC_EXEC :=  main.c $(addprefix ./executing/, $(EXEC_DIR)) $(addprefix ./library/get_next_line/,get_next_line.c get_next_line_utils.c)
 
 SRC_PARS := ./parsing/syntax_error.c ./parsing/command_table.c ./parsing/here_documents.c ./parsing/initialize.c ./parsing/join_characters.c ./parsing/open_files.c ./parsing/parsing.c
 

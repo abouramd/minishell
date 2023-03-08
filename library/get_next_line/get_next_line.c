@@ -5,79 +5,39 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/06 17:17:58 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/25 10:04:13 by abouramd         ###   ########.fr       */
+/*   Created: 2023/02/05 21:17:11 by abouramd          #+#    #+#             */
+/*   Updated: 2023/03/08 10:31:40 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "get_next_line.h"
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 10
-#endif //BUFFER_SIZE
-
-int	str_chr(const char *s, char c)
+char	*keep_read(char *stock, int fd, char *buffer)
 {
-	size_t	i;
+	int	i;
 
-	i = 0;
-	while (s && s[i])
-		if (s[i++] == c)
-			return (0);
-	return (1);
-}
-
-char	*join_str(char *s1, char *s2)
-{
-	char	*r;
-	int		len1;
-	int		len2;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	if (!s2)
-		return (NULL);
-	if (!s1)
+	while (str_chr(buffer, '\n'))
 	{
-		s1 = malloc(1);
-		if (!s1)
-			return (NULL);
-		*s1 = '\0';
-	}
-	len1 = 0;
-	len2 = 0;
-	while (s1[len1] || s2[len2])
-	{
-		if (s1[len1])
-			len1++;
-		if (s2[len2])
-			len2++;
-	}
-	r = (char *)malloc(len1 + len2 + 1);
-	if (r)
-	{
-		j = len1;
-		len1 = 0;
-		len2 = 0;
-		while (s1[len1] || s2[len2])
+		i = read(fd, buffer, BUFFER_SIZE);
+		if (i == -1)
 		{
-			if (s1[len1])
-				r[i++] = s1[len1++];
-			if (s2[len2])
-				r[j++] = s2[len2++];
+			if (stock)
+				free(stock);
+			return (NULL);
 		}
-		r[j] = '\0';
+		if (i == 0)
+			break ;
+		buffer[i] = '\0';
+		stock = join_str(stock, buffer);
+		if (!stock)
+			break ;
 	}
-	free(s1);
-	return (r);
+	return (stock);
 }
 
 char	*read_file(char *stock, int fd)
 {
 	char	*buffer;
-	int		i;
 
 	if (str_chr(stock, '\n'))
 	{
@@ -89,23 +49,7 @@ char	*read_file(char *stock, int fd)
 			return (NULL);
 		}
 		buffer[0] = '\0';
-		while (str_chr(buffer, '\n'))
-		{
-			i = read(fd, buffer, BUFFER_SIZE);
-			if (i == -1)
-			{
-				if (stock)
-					free(stock);
-				free(buffer);
-				return (NULL);
-			}
-			if (i == 0)
-				break ;
-			buffer[i] = '\0';
-			stock = join_str(stock, buffer);
-			if (!stock)
-				break ;
-		}
+		stock = keep_read(stock, fd, buffer);
 		free(buffer);
 	}
 	return (stock);
@@ -114,8 +58,10 @@ char	*read_file(char *stock, int fd)
 char	*get_ret_line(char *s, size_t *n)
 {
 	size_t	i;
+	size_t	k;
 	char	*line;
 
+	k = 0;
 	i = 0;
 	if (s[i] == '\0')
 		return (NULL);
@@ -129,16 +75,10 @@ char	*get_ret_line(char *s, size_t *n)
 		return (NULL);
 	i = 0;
 	while (s[i] && s[i] != '\n')
-	{
-		line[i] = s[i];
-		i++;
-	}
+		line[k++] = s[i++];
 	if (s[i] == '\n')
-	{
-		line[i] = s[i];
-		i++;
-	}
-	line[i] = '\0';
+		line[k++] = s[i++];
+	line[k++] = '\0';
 	return (line);
 }
 
@@ -149,10 +89,7 @@ char	*get_stock(char *stock, size_t start)
 	size_t	i;
 
 	if (!stock[start - 1])
-	{
-		free(stock);
-		return (NULL);
-	}
+		return (free(stock), NULL);
 	n = start;
 	i = 0;
 	while (stock[n++])
@@ -210,4 +147,3 @@ char	*get_next_line(int fd)
 //     system("leaks a.out");
 //     return (0);
 // }
-
