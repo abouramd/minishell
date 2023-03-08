@@ -1,7 +1,6 @@
-	t_here_doc	*here_doc;
+t_here_doc	*here_doc;
 	t_here_doc	*tmp;
 	t_vals		*first;
-	int			save_exit;
 
 	at_first(&here_doc, &tmp, &first, lexer);
 	save_exit = d->exit_status;
