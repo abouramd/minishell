@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_table.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:05:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/07 10:32:16 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/08 15:13:59 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,27 +54,41 @@ char	**add_new(t_data *f, char **cmd, char *new)
 	return (new_cmd);
 }
 
+static void	at_first(t_cmd_list **cmd_table, t_vals **first, t_list *lexer)
+{
+	*cmd_table = NULL;
+	*first = (t_vals *)lexer->content;
+}
+
+static void	redirection(int token_type, t_data **d, t_vals **first,
+		t_cmd_list **save, t_list **lexer)
+{
+	if (token_type == V_IN_RDIR || token_type == V_OUT_RDIR
+		|| token_type == V_APP)
+	{
+		if (token_type == V_IN_RDIR)
+			for_input_redirection(*d, *first, *save, lexer);
+		else if (token_type == V_OUT_RDIR)
+			for_out_redirection(*d, *first, *save, lexer);
+		else if (token_type == V_APP)
+			for_append(*d, *first, *save, lexer);
+	}
+}
+
 t_cmd_list	*command_table(t_data *d, t_here_doc *hrd, t_list *lexer)
 {
 	t_cmd_list	*cmd_table;
 	t_vals		*first;
 	t_cmd_list	*save;
 
-	save = NULL;
-	cmd_table = NULL;
 	save = initilize_save();
-	first = (t_vals *)lexer->content;
+	at_first(&cmd_table, &first, lexer);
 	while (first->token != V_EOF)
 	{
 		if (first->token == V_STR)
 			save->cmd = add_new(d, save->cmd, first->val);
-		else if (first->token == V_IN_RDIR)
-			for_input_redirection(d, first, save, &lexer);
-		else if (first->token == V_OUT_RDIR)
-			for_out_redirection(d, first, save, &lexer);
-		else if (first->token == V_APP)
-			for_append(d, first, save, &lexer);
-		else if (first->token == V_HDK)
+		redirection(first->token, &d, &first, &save, &lexer);
+		if (first->token == V_HDK)
 			add_herdoc(&hrd, save, &lexer);
 		else if (first->token == V_PIPE)
 		{

@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:34:05 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/08 10:53:57 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/08 19:07:04 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void					for_input_redirection(t_data *f, t_vals *first,
 							t_cmd_list *save, t_list **lexer);
 void					for_append(t_data *f, t_vals *first, t_cmd_list *save,
 							t_list **lexer);
-void	add_herdoc(t_here_doc **hrd, t_cmd_list *save,
-		t_list **lexer);
+void					add_herdoc(t_here_doc **hrd, t_cmd_list *save,
+							t_list **lexer);
 void					here_documents(t_list *tokens);
 t_list					*lexecal_analyzer(char *str);
 char					*remove_spaces(char *lexer);
@@ -79,10 +79,11 @@ t_cmd_list				*command_table(t_data *d, t_here_doc *hrd,
 char					*print_env_content(char *line, char **env);
 char					**ft_expand_str(t_data *f, char *s);
 char					*ft_expand_in_here_doc(t_data *f, char *s, int type);
-// char					*ft_expand_in_red(t_data *f, char *s);
-
-t_here_doc	*open_here_doc(t_data *d, t_list *lexer);
-void	for_herdoc(t_here_doc *hrd, t_data *d, t_vals *first, t_list **lexer);
-int	syntax_error(t_list *lexer);
+char					*ft_replace_val(t_data *f, char *str,
+							char *expanded_str, size_t *index);
+t_here_doc				*open_here_doc(t_data *d, t_list *lexer);
+void					for_herdoc(t_here_doc *hrd, t_data *d, t_vals *first,
+							t_list **lexer);
+int						syntax_error(t_list *lexer);
 
 #endif
