@@ -6,13 +6,13 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 08:17:16 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/03 14:27:08 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/07 15:39:48 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-void	built_pwd()
+void	built_pwd(void)
 {
 	char	pwd[PATH_MAX];
 

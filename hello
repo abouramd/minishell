@@ -1,0 +1,13 @@
+total 840
+-rw-r--r--   1 abouramd  2019    2869 Mar  7 10:31 Makefile
+-rw-r--r--   1 abouramd  2019     411 Mar  7 10:31 README.md
+drwxr-xr-x  31 abouramd  2019    1054 Mar  7 15:05 executing
+-rw-r--r--   1 abouramd  2019       0 Mar  7 15:26 hello
+drwxr-xr-x   7 abouramd  2019     238 Mar  5 10:11 include
+-rw-r--r--   1 abouramd  2019      54 Mar  7 15:26 leaks
+drwxr-xr-x   4 abouramd  2019     136 Mar  5 10:11 library
+-rw-r--r--   1 abouramd  2019   10276 Mar  7 13:07 main.c
+-rw-r--r--   1 abouramd  2019    7180 Mar  7 14:55 main.o
+-rwxr-xr-x   1 abouramd  2019  391364 Mar  7 15:05 minishell
+-rw-r--r--   1 abouramd  2019     103 Mar  7 11:41 outfile
+drwxr-xr-x  16 abouramd  2019     544 Mar  7 14:55 parsing

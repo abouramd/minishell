@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 08:17:01 by abouramd          #+#    #+#             */
-/*   Updated: 2023/02/28 08:17:02 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/07 15:44:50 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,59 @@ static int	check_identifier(char *arg)
 		i++;
 	}
 	return (0);
+}
+
+char	**rm_var(char **old_env)
+{
+	char	*str;
+	char	**save;
+	char	h[2];
+	size_t	i;
+
+	h[0] = 127;
+	h[1] = 0;
+	i = 0;
+	while (old_env[i])
+		i++;
+	str = NULL;
+	while (i > 0)
+	{
+		str = ft_free_joined(old_env[i - 1], str, 1, 1);
+		str = ft_free_joined(h, str, 0, 1);
+		i--;
+	}
+	free(old_env);
+	save = ft_split(str, 127);
+	free(str);
+	return (save);
+}
+
+void	ft_env_rm(char *elem, char ***env)
+{
+	char	**my_env;
+	char	**s;
+	char	*tmp;
+	size_t	index;
+
+	my_env = *env;
+	index = 0;
+	while (my_env && my_env[index])
+	{
+		s = ft_split(my_env[index], '=');
+		if (!ft_strcmp(s[0], elem))
+		{
+			tmp = ft_strdup("");
+			if (!tmp)
+				exit(1);
+			free(my_env[index]);
+			my_env[index] = tmp;
+			*env = rm_var(my_env);
+			ft_free(s);
+			break ;
+		}
+		ft_free(s);
+		index++;
+	}
 }
 
 int	ft_unset(char *arg, t_data *f)

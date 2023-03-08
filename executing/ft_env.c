@@ -6,37 +6,11 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 10:06:45 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/07 11:06:52 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/07 15:44:42 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-
-char	**rm_var(char **old_env)
-{
-	char	*str;
-	char	**save;
-	char	h[2];
-	size_t	i;
-
-	h[0] = 127;
-	h[1] = 0;
-	i = 0;
-	while (old_env[i])
-		i++;
-	str = NULL;
-	while (i > 0)
-	{
-		str = ft_free_joined(old_env[i - 1], str, 0, 1);
-		str = ft_free_joined(h, str, 0, 1);
-		i--;
-	}
-	save = ft_split(str, 127);
-	if (!save)
-		return (old_env);
-	ft_free(old_env);
-	return (save);
-}
 
 char	**realloc_env(char **old_env, char *str)
 {
@@ -47,34 +21,6 @@ char	**realloc_env(char **old_env, char *str)
 		return (old_env);
 	ft_free(old_env);
 	return (new_env);
-}
-
-void	ft_env_rm(char *elem, char ***env)
-{
-	char	**my_env;
-	char	**s;
-	char	*tmp;
-	size_t	index;
-
-	my_env = *env;
-	index = 0;
-	while (my_env && my_env[index])
-	{
-		s = ft_split(my_env[index], '=');
-		if (!ft_strcmp(s[0], elem))
-		{
-			tmp = ft_strdup("");
-			if (!tmp)
-				exit(1);
-			free(my_env[index]);
-			my_env[index] = tmp;
-			*env = rm_var(my_env);
-			ft_free(s);
-			break ;
-		}
-		ft_free(s);
-		index++;
-	}
 }
 
 char	*ft_find_env(char *elem, char **my_env)
