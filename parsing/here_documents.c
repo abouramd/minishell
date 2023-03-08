@@ -6,7 +6,7 @@
 /*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 02:15:07 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/08 15:19:30 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/08 18:47:52 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static t_here_doc	*first_val_here_doc(void)
 	return (here_doc);
 }
 
-static void	at_first(t_here_doc **here_doc, t_here_doc **tmp, t_vals **first, t_list *lexer)
+static void	at_first(t_here_doc **here_doc, t_here_doc **tmp,
+		t_vals **first, t_list *lexer)
 {
 	*here_doc = NULL;
 	*tmp = NULL;
