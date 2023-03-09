@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 10:18:46 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/07 14:02:17 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/09 13:38:17 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,7 @@ int	syntax_error(t_list *lexer)
 			if (check_str_look(first->val))
 				return (1);
 		}
-		if (first->token == V_PIPE
-			&& (second->token == V_EOF || second->token == V_PIPE))
+		if (first->token == V_PIPE && (second->token == V_EOF || second->token == V_PIPE))
 			return (err("syntax error near unexpected token `", first->val, 0));
 		if (second->token == V_EOF)
 			break ;
