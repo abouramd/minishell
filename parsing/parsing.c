@@ -12,31 +12,28 @@
 
 #include "include.h"
 
+t_vals	*tokens(t_lex **lexer, char *str, int type)
+{
+	go_next(*lexer);
+	return (initialize_token(str, type));
+}
+
 t_vals	*others(t_lex *lexer)
 {
 	if (lexer->l == '|')
-	{
-		go_next(lexer);
-		return (initialize_token("|", V_PIPE));
-	}
+		return (tokens(&lexer, "|", V_PIPE));
 	if (lexer->l == '<')
 	{
 		go_next(lexer);
 		if (lexer->l == '<')
-		{
-			go_next(lexer);
-			return (initialize_token("<<", V_HDK));
-		}
+			return (tokens(&lexer, "<<", V_HDK));
 		return (initialize_token("<", V_IN_RDIR));
 	}
 	if (lexer->l == '>')
 	{
 		go_next(lexer);
 		if (lexer->l == '>')
-		{
-			go_next(lexer);
-			return (initialize_token(">>", V_APP));
-		}
+			return (tokens(&lexer, ">>", V_APP));
 		return (initialize_token(">", V_OUT_RDIR));
 	}
 	else
