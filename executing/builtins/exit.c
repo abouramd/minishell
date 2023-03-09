@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 08:20:18 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/06 10:08:09 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/09 12:17:14 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_max_long(char *str)
 	while (*str <= '9' && *str >= '0')
 	{
 		t = (res * 10) + (*str - '0');
-		if (res > t || t > __LONG_MAX__ + (sign < 0))
+		if (res > t || t > (unsigned long)__LONG_MAX__ + (sign < 0))
 			return (1);
 		res = t;
 		str++;
