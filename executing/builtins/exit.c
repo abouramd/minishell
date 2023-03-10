@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 08:20:18 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/09 12:17:14 by codespace        ###   ########.fr       */
+/*   Updated: 2023/03/10 08:58:16 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int	check_arg(char *s)
 
 void	built_exit(t_data *f)
 {
-	ft_putendl_fd("exit", 1);
+	if (!f->in_muti_pip)
+		ft_putendl_fd("exit", 2);
 	if (f->list_of_cmd->cmd[1] != NULL)
 	{
 		if (f->list_of_cmd->cmd[2] == NULL

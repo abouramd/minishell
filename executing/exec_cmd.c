@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 10:06:36 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/08 09:35:37 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/10 08:58:06 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	creat_child(t_data *d, int prev_fd)
 	else if (id == 0)
 	{
 		close_useless_fd(d->list_of_cmd->next, prev_fd);
+		d->in_muti_pip = 1;
 		if (!builtins(d))
 			run_cmd(d);
 		else

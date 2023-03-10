@@ -277,10 +277,6 @@ void	setup_shell(int ac, char **av, char **env, t_data *d)
 	char	pwd[PATH_MAX];
 
 	(void)ac;
-	d->tty = ttyname(0);
-	tmp = d->tty;
-	d->tty = ft_strtrim(d->tty, "/dev/ttys");
-	free(tmp);
 	tcgetattr(0, &d->new_tty);
 	tcgetattr(0, &d->old_tty);
 	d->new_tty.c_lflag &= ~ECHOCTL;
@@ -291,6 +287,7 @@ void	setup_shell(int ac, char **av, char **env, t_data *d)
 	signal(SIGINT, signal_handler);
 	print_start();
 	d->exit_status = 0;
+	d->in_muti_pip = 0;
 	d->my_env = alloc_env(env);
 	getcwd(pwd, PATH_MAX - 1);
 	tmp = ft_strtrim(av[0], "./");
@@ -369,6 +366,8 @@ int	pars(t_data *d, char *rl)
 	d->list_of_cmd = NULL;
 	if (!d->kill_here)
 		d->list_of_cmd = command_table(d, hrd, lexer);
+	else
+		d->exit_status = 1;
 	free_hrd(hrd);
 	//cmd_info(d->list_of_cmd);
 	//system("echo pars > leaks && leaks minishell | grep bytes >> leaks");

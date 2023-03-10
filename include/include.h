@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:34:05 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/08 19:07:04 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/10 08:57:53 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_data
 	t_term				new_tty;
 	char				*pathname;
 	char				**path;
-	char				*tty;
+	int					in_muti_pip;
 	int					ambiguous;
 }						t_data;
 

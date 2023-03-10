@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_documents.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 02:15:07 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/08 18:47:52 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/10 08:59:30 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,12 @@ t_here_doc	*open_here_doc(t_data *d, t_list *lexer)
 			tmp = first_val_here_doc();
 			for_herdoc(tmp, d, first, &lexer);
 			link_here_doc(&here_doc, tmp);
-			tmp = NULL;
 		}
 		else if (first->token == V_PIPE)
 			d->exit_status = 0;
 		lexer = lexer->next;
 		first = (t_vals *)lexer->content;
 	}
-	link_here_doc(&here_doc, tmp);
 	d->exit_status = save_exit;
 	return (here_doc);
 }
