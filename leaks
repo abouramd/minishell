@@ -1,8 +1,2 @@
 pars
-<<<<<<< HEAD
-exec
-=======
-Process 61583: 0 leaks for 0 total leaked bytes.
-exec
-Process 61583: 0 leaks for 0 total leaked bytes.
->>>>>>> 3f807d0810e46f8dac241208a3005f5247878609
+Process 64960: 0 leaks for 0 total leaked bytes.

@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:57:21 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/04 09:32:35 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/10 11:10:00 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ void	built_cd(t_data *f)
 {
 	char	pwd[PATH_MAX];
 
-	getcwd(pwd, PATH_MAX - 1);
+	if (getcwd(pwd, PATH_MAX - 1) == NULL)
+		ft_strlcpy(pwd, "", 1);
 	if (f->list_of_cmd->cmd[1] == NULL)
 		go_to_home(f, pwd, ft_find_env("HOME", f->my_env));
 	else if (!ft_strcmp(f->list_of_cmd->cmd[1], "~"))

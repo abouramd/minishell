@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 03:38:21 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/03 14:26:35 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/10 11:47:35 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	builtins(t_data *f)
 	if (f->list_of_cmd->cmd && *f->list_of_cmd->cmd)
 	{
 		if (!ft_strcmp(f->list_of_cmd->cmd[0], "pwd"))
-			return (built_pwd(), 1);
+			return (built_pwd(f), 1);
 		else if (!ft_strcmp(f->list_of_cmd->cmd[0], "cd"))
 			return (built_cd(f), 1);
 		else if (!ft_strcmp(f->list_of_cmd->cmd[0], "unset"))

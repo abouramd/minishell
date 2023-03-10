@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 15:41:54 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/07 15:41:58 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/10 11:38:42 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ char	**split_path(t_data *d, int *choose)
 		{
 			tmp = path_get(&d->my_env[i][5]);
 			s = ft_split(tmp, ':');
+			free(tmp);
 			break ;
 		}
 		i++;

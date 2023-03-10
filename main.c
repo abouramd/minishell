@@ -309,26 +309,10 @@ void	free_lexer(t_list *list)
 		if (tmp)
 		{
 			if (tmp->val && tmp->e_token == V_STR)
-			 	free(tmp->val);
+				free(tmp->val);
 			free(tmp);
 		}
 		free(list);
-	}
-}
-
-void	cmd_info(t_cmd_list *cmd)
-{
-	int	i;
-
-	i = 0;
-	while (cmd)
-	{
-		i = 0;
-		while (cmd->cmd && cmd->cmd[i])
-			printf("cmd -> %s\n", cmd->cmd[i++]);
-		printf("infile -> %d\n", cmd->infile);
-		printf("outfile -> %d\n", cmd->outfile);
-		cmd = cmd->next;
 	}
 }
 
@@ -369,8 +353,7 @@ int	pars(t_data *d, char *rl)
 	else
 		d->exit_status = 1;
 	free_hrd(hrd);
-	//cmd_info(d->list_of_cmd);
-	//system("echo pars > leaks && leaks minishell | grep bytes >> leaks");
+	system("echo pars > leaks && leaks minishell | grep bytes >> leaks");
 	free_lexer(lexer);
 	return (0);
 }
@@ -396,7 +379,7 @@ void	start_shell(t_data *d)
 			if (!d->kill_here && d->list_of_cmd)
 				pipeline(d);
 			free_all(d);
-			//system("echo exec >> leaks && leaks minishell | grep bytes >> leaks");
+			system("echo exec >> leaks && leaks minishell | grep bytes >> leaks");
 		}
 		else
 			d->exit_status = 0;

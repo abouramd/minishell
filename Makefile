@@ -6,7 +6,7 @@
 #    By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 05:30:41 by abouramd          #+#    #+#              #
-#    Updated: 2023/03/10 09:44:01 by abouramd         ###   ########.fr        #
+#    Updated: 2023/03/10 11:00:53 by abouramd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ READLINE_PATH:= ./library/readline
 
 INC := -I ./include $(addprefix -I ./library/,$(LIB_DIR)) -I $(READLINE_PATH)
 
-LIB := $(addprefix -L ./library/,$(LIB_DIR)) -lreadline -lft -lcurses
+LIB := $(addprefix -L ./library/,$(LIB_DIR)) -L $(READLINE_PATH) -lreadline -lft -lcurses
 
 BUILTINS := cd.c echo.c env.c exit.c export.c pwd.c unset.c
 
