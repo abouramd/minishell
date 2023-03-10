@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 08:24:05 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/05 16:26:42 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/10 09:38:01 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	for_herdoc(t_here_doc *hrd, t_data *d, t_vals *first, t_list **lexer)
 
 	*lexer = (*lexer)->next;
 	first = (t_vals *)(*lexer)->content;
-	if (first->token == V_STR && !d->kill_here)
+	if (first->e_token == V_STR && !d->kill_here)
 	{
 		pipe(fd);
 		pid = fork();

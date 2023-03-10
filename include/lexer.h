@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 22:29:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/01 16:34:38 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/10 09:41:46 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	LEXER_H
+#ifndef LEXER_H
 # define LEXER_H
 
 typedef struct s_lex
@@ -19,6 +19,6 @@ typedef struct s_lex
 	char	*fill;
 	int		nxt;
 	int		v;
-}	t_lex;
+}			t_lex;
 
 #endif

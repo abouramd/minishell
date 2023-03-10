@@ -6,7 +6,7 @@
 #    By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 05:30:41 by abouramd          #+#    #+#              #
-#    Updated: 2023/03/08 19:02:44 by abouramd         ###   ########.fr        #
+#    Updated: 2023/03/10 09:44:01 by abouramd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,11 @@ NAME := minishell
 
 CFLAGS := -Wall -Wextra -Werror #-fsanitize=address -g3
 
-LIB_DIR := libft/ readline/ get_next_line/
+LIB_DIR := libft/ get_next_line/
 
-INC := -I ./include $(addprefix -I ./library/,$(LIB_DIR))
+READLINE_PATH:= ./library/readline
+
+INC := -I ./include $(addprefix -I ./library/,$(LIB_DIR)) -I $(READLINE_PATH)
 
 LIB := $(addprefix -L ./library/,$(LIB_DIR)) -lreadline -lft -lcurses
 

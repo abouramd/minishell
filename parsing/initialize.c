@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 01:20:12 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/05 17:35:48 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/10 09:39:30 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_vals	*initialize_token(char *str, int type)
 	token = malloc(sizeof(t_vals));
 	if (!token)
 		return (NULL);
-	token->token = type;
+	token->e_token = type;
 	token->val = str;
 	return (token);
 }

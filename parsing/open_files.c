@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:38:07 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/10 09:20:23 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/10 09:39:46 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	for_out_redirection(t_data *f, t_vals *first, t_cmd_list *save,
 
 	*lexer = (*lexer)->next;
 	first = (t_vals *)(*lexer)->content;
-	if (first->token == V_STR && save->outfile > 0 && save->infile >= 0)
+	if (first->e_token == V_STR && save->outfile > 0 && save->infile >= 0)
 	{
 		name = m_file(f, save->outfile, save->outfile_name, first->val);
 		if (!f->ambiguous)
@@ -64,7 +64,7 @@ void	for_input_redirection(t_data *f, t_vals *first, t_cmd_list *save,
 
 	*lexer = (*lexer)->next;
 	first = (t_vals *)(*lexer)->content;
-	if (first->token == V_STR && save->outfile > 0 && save->infile >= 0)
+	if (first->e_token == V_STR && save->outfile > 0 && save->infile >= 0)
 	{
 		name = m_file(f, save->infile, save->infile_name, first->val);
 		if (!f->ambiguous)
@@ -93,7 +93,7 @@ void	for_append(t_data *f, t_vals *first, t_cmd_list *s, t_list **lexer)
 
 	*lexer = (*lexer)->next;
 	first = (t_vals *)(*lexer)->content;
-	if (first->token == V_STR && s->outfile > 0 && s->infile >= 0)
+	if (first->e_token == V_STR && s->outfile > 0 && s->infile >= 0)
 	{
 		name = m_file(f, s->outfile, s->outfile_name, first->val);
 		if (!f->ambiguous)
@@ -122,7 +122,7 @@ void	add_herdoc(t_here_doc **hrd, t_cmd_list *save, t_list **lexer)
 
 	*lexer = (*lexer)->next;
 	first = (t_vals *)(*lexer)->content;
-	if (first->token == V_STR && (*hrd))
+	if (first->e_token == V_STR && (*hrd))
 	{
 		if (save->outfile > 0 && save->infile >= 0)
 		{

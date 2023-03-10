@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 10:18:46 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/09 13:38:17 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/10 09:38:35 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,27 +69,27 @@ int	syntax_error(t_list *lexer)
 
 	hdk_nb = 0;
 	first = (t_vals *)lexer->content;
-	if (first->token == V_EOF)
+	if (first->e_token == V_EOF)
 		return (0);
-	if (first->token == V_PIPE)
+	if (first->e_token == V_PIPE)
 		return (err("syntax error near unexpected token `", first->val, 0));
 	second = (t_vals *) lexer->next->content;
-	while (first->token != V_EOF)
+	while (first->e_token != V_EOF)
 	{
-		if (first->token == V_HDK)
+		if (first->e_token == V_HDK)
 			hdk_nb++;
-		if ((first->token == V_APP || first->token == V_IN_RDIR
-				|| first->token == V_OUT_RDIR || first->token == V_HDK)
-			&& (second->token != V_STR))
+		if ((first->e_token == V_APP || first->e_token == V_IN_RDIR
+				|| first->e_token == V_OUT_RDIR || first->e_token == V_HDK)
+			&& (second->e_token != V_STR))
 			return (err("syntax error near unexpected token`", second->val, 0));
-		if (first->token == V_STR)
+		if (first->e_token == V_STR)
 		{
 			if (check_str_look(first->val))
 				return (1);
 		}
-		if (first->token == V_PIPE && (second->token == V_EOF || second->token == V_PIPE))
+		if (first->e_token == V_PIPE && (second->e_token == V_EOF || second->e_token == V_PIPE))
 			return (err("syntax error near unexpected token `", first->val, 0));
-		if (second->token == V_EOF)
+		if (second->e_token == V_EOF)
 			break ;
 		lexer = lexer->next;
 		first = (t_vals *)lexer->content;

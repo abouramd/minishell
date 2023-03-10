@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 02:15:07 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/10 08:59:30 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/10 09:39:23 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,18 @@ t_here_doc	*open_here_doc(t_data *d, t_list *lexer)
 
 	at_first(&here_doc, &tmp, &first, lexer);
 	save_exit = d->exit_status;
-	while (first->token != V_EOF)
+	while (first->e_token != V_EOF)
 	{
-		if (first->token == V_IN_RDIR || first->token == V_OUT_RDIR
-			|| first->token == V_APP)
+		if (first->e_token == V_IN_RDIR || first->e_token == V_OUT_RDIR
+			|| first->e_token == V_APP)
 			first = (t_vals *)lexer->content;
-		else if (first->token == V_HDK)
+		else if (first->e_token == V_HDK)
 		{
 			tmp = first_val_here_doc();
 			for_herdoc(tmp, d, first, &lexer);
 			link_here_doc(&here_doc, tmp);
 		}
-		else if (first->token == V_PIPE)
+		else if (first->e_token == V_PIPE)
 			d->exit_status = 0;
 		lexer = lexer->next;
 		first = (t_vals *)lexer->content;

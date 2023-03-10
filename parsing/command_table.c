@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_table.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:05:23 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/08 19:02:21 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/10 09:39:05 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ static void	at_first(t_cmd_list **cmd_table, t_vals **first, t_list *lexer)
 static void	redirection(t_data **d, t_vals **first,
 		t_cmd_list **save, t_list **lexer)
 {
-	if ((*first)->token == V_IN_RDIR || (*first)->token == V_OUT_RDIR
-		|| (*first)->token == V_APP)
+	if ((*first)->e_token == V_IN_RDIR || (*first)->e_token == V_OUT_RDIR
+		|| (*first)->e_token == V_APP)
 	{
-		if ((*first)->token == V_IN_RDIR)
+		if ((*first)->e_token == V_IN_RDIR)
 			for_input_redirection(*d, *first, *save, lexer);
-		else if ((*first)->token == V_OUT_RDIR)
+		else if ((*first)->e_token == V_OUT_RDIR)
 			for_out_redirection(*d, *first, *save, lexer);
-		else if ((*first)->token == V_APP)
+		else if ((*first)->e_token == V_APP)
 			for_append(*d, *first, *save, lexer);
 	}
 }
@@ -83,14 +83,14 @@ t_cmd_list	*command_table(t_data *d, t_here_doc *hrd, t_list *lexer)
 
 	save = initilize_save();
 	at_first(&cmd_table, &first, lexer);
-	while (first->token != V_EOF)
+	while (first->e_token != V_EOF)
 	{
-		if (first->token == V_STR)
+		if (first->e_token == V_STR)
 			save->cmd = add_new(d, save->cmd, first->val);
 		redirection(&d, &first, &save, &lexer);
-		if (first->token == V_HDK)
+		if (first->e_token == V_HDK)
 			add_herdoc(&hrd, save, &lexer);
-		else if (first->token == V_PIPE)
+		else if (first->e_token == V_PIPE)
 		{
 			link_back(&cmd_table, save);
 			d->exit_status = 0;
