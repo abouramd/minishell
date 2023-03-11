@@ -336,6 +336,7 @@ int	pars(t_data *d, char *rl)
 	lexer = NULL;
 	hrd = NULL;
 	lexer = lexecal_analyzer(rl);
+	check_herdoc_limits(lexer);
 	if (lexer == NULL || syntax_error(lexer))
 	{
 		if (lexer)

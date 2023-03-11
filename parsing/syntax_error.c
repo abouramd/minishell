@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 10:18:46 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/10 09:38:35 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/11 10:44:30 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "include.h"
 
 #include "include.h"
 
@@ -61,41 +63,40 @@ static int	check_str_look(char *str)
 	return (0);
 }
 
+int	print_errors(int first, int second)
+{
+	if ((first == V_APP || first == V_IN_RDIR
+			|| first == V_OUT_RDIR || first == V_HDK)
+		&& (second != V_STR))
+		return (1);
+	if (first == V_PIPE && (second == V_PIPE || second == V_EOF))
+		return (1);
+	return (0);
+}
+
 int	syntax_error(t_list *lexer)
 {
-	t_vals	*first;
-	t_vals	*second;
-	int		hdk_nb;
+	t_vals	*f;
+	t_vals	*s;
 
-	hdk_nb = 0;
-	first = (t_vals *)lexer->content;
-	if (first->e_token == V_EOF)
+	f = (t_vals *)lexer->content;
+	if (f->e_token == V_EOF)
 		return (0);
-	if (first->e_token == V_PIPE)
-		return (err("syntax error near unexpected token `", first->val, 0));
-	second = (t_vals *) lexer->next->content;
-	while (first->e_token != V_EOF)
+	if (f->e_token == V_PIPE)
+		return (err("syntax error near unexpected token `", f->val, 0));
+	s = (t_vals *) lexer->next->content;
+	while (f->e_token != V_EOF)
 	{
-		if (first->e_token == V_HDK)
-			hdk_nb++;
-		if ((first->e_token == V_APP || first->e_token == V_IN_RDIR
-				|| first->e_token == V_OUT_RDIR || first->e_token == V_HDK)
-			&& (second->e_token != V_STR))
-			return (err("syntax error near unexpected token`", second->val, 0));
-		if (first->e_token == V_STR)
-		{
-			if (check_str_look(first->val))
+		if (print_errors(f->e_token, s->e_token))
+			return (err("syntax error near unexpected token`", s->val, 0));
+		if (f->e_token == V_STR)
+			if (check_str_look(f->val))
 				return (1);
-		}
-		if (first->e_token == V_PIPE && (second->e_token == V_EOF || second->e_token == V_PIPE))
-			return (err("syntax error near unexpected token `", first->val, 0));
-		if (second->e_token == V_EOF)
+		if (s->e_token == V_EOF)
 			break ;
 		lexer = lexer->next;
-		first = (t_vals *)lexer->content;
-		second = (t_vals *)lexer->next->content;
+		f = (t_vals *)lexer->content;
+		s = (t_vals *)lexer->next->content;
 	}
-	if (hdk_nb > 16)
-		err("maximum here-document count exceeded ", "`<<", 2);
 	return (0);
 }

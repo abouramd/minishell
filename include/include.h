@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:34:05 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/10 08:57:53 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/11 10:45:58 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ char					*ft_replace_val(t_data *f, char *str,
 t_here_doc				*open_here_doc(t_data *d, t_list *lexer);
 void					for_herdoc(t_here_doc *hrd, t_data *d, t_vals *first,
 							t_list **lexer);
+void					check_herdoc_limits(t_list *lexer);
 int						syntax_error(t_list *lexer);
 
 #endif
