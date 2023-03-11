@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 10:06:45 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/07 15:44:42 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/11 18:06:45 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,72 +96,26 @@ void	ft_env_add(char *identifier, char *value, char ***env)
 	*env = realloc_env(my_env, tmp);
 	free(tmp);
 }
-// void	ft_env_add(char *elem, char ***env)
-// {
-// 	char	**my_env;
-// 	char	**s;
-// 	char	**t;
-// 	char	*tmp;
-// 	size_t	index;
 
-// 	my_env = *env;
-// 	index = 0;
-// 	t = ft_split(elem, '=');
-// 	while (my_env && my_env[index])
-// 	{
-// 		s = ft_split(my_env[index], '=');
-// 		if (!ft_strcmp(s[0], t[0]))
-// 		{
-// 			if (ft_strchr(elem, '='))
-// 			{
-// 				tmp = ft_strdup(elem);
-// 				if (!tmp)
-// 					exit(1);
-// 				free(my_env[index]);
-// 				my_env[index] = tmp;
-// 			}
-// 			ft_free(s);
-// 			ft_free(t);
-// 			return ;
-// 		}
-// 		ft_free(s);
-// 		index++;
-// 	}
-// 	*env = realloc_env(my_env, elem);
-// 	ft_free(t);
-// }
+char	**alloc_env(char **s)
+{
+	char	**ft_env;
+	size_t	size;
 
-// void appand_env(char *elem, char ***env)
-// {
-// 	char	**my_env;
-// 	char	**s;
-// 	char	**t;
-// 	char	*tmp;
-// 	size_t	index;
-
-// 	my_env = *env;
-// 	index = 0;
-// 	t = ft_split(elem, '=');
-// 	while (my_env && my_env[index])
-// 	{
-// 		s = ft_split(my_env[index], '=');
-// 		if (!ft_strcmp(s[0], t[0]))
-// 		{
-// 			if (ft_strchr(elem, '='))
-// 			{
-// 				tmp = ft_strdup(elem);
-// 				if (!tmp)
-// 					exit(1);
-// 				free(my_env[index]);
-// 				my_env[index] = tmp;
-// 			}
-// 			ft_free(s);
-// 			ft_free(t);
-// 			return ;
-// 		}
-// 		ft_free(s);
-// 		index++;
-// 	}
-// 	*env = realloc_env(my_env, elem);
-// 	ft_free(t);
-// }
+	size = 0;
+	if (s == NULL)
+		return (NULL);
+	while (s[size])
+		size++;
+	ft_env = malloc((size + 1) * sizeof(char *));
+	if (!ft_env)
+		return (NULL);
+	size = 0;
+	while (s[size])
+	{
+		ft_env[size] = ft_strdup(s[size]);
+		size++;
+	}
+	ft_env[size] = NULL;
+	return (ft_env);
+}

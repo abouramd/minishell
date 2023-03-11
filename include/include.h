@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:34:05 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/11 10:45:58 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/11 18:32:01 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void					here_documents(t_list *tokens);
 t_list					*lexecal_analyzer(char *str);
 char					*remove_spaces(char *lexer);
 void					test(t_list *lexer);
-// exec function
 void					print_start(void);
 char					*get_next_line(int fd);
 t_cmd_list				*command_table(t_data *d, t_here_doc *hrd,
@@ -84,7 +83,7 @@ char					*ft_replace_val(t_data *f, char *str,
 t_here_doc				*open_here_doc(t_data *d, t_list *lexer);
 void					for_herdoc(t_here_doc *hrd, t_data *d, t_vals *first,
 							t_list **lexer);
-void					check_herdoc_limits(t_list *lexer);
+int						check_herdoc_limits(t_list *lexer);
 int						syntax_error(t_list *lexer);
 
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+         #
+#    By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 05:30:41 by abouramd          #+#    #+#              #
-#    Updated: 2023/03/11 10:45:30 by zasabri          ###   ########.fr        #
+#    Updated: 2023/03/11 18:28:26 by abouramd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ LIB := $(addprefix -L ./library/,$(LIB_DIR)) -L $(READLINE_PATH) -lreadline -lft
 
 BUILTINS := cd.c echo.c env.c exit.c export.c pwd.c unset.c
 
-EXEC_DIR := $(addprefix builtins/, $(BUILTINS)) builtins.c creat_path.c exec_cmd.c executing.c fd_manage.c ft_env.c get_path.c here_doc.c put_c.c sort_string.c signal_handler.c expand.c expand_str.c
+EXEC_DIR := $(addprefix builtins/, $(BUILTINS)) builtins.c creat_path.c exec_cmd.c free_all.c setup_shell.c fd_manage.c ft_env.c get_path.c here_doc.c put_c.c sort_string.c signal_handler.c expand.c expand_str.c
 
 SRC_EXEC :=  main.c $(addprefix ./executing/, $(EXEC_DIR)) $(addprefix ./library/get_next_line/,get_next_line.c get_next_line_utils.c)
 

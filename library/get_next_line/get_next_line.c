@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 21:17:11 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/08 10:31:40 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/11 18:32:24 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,20 +130,3 @@ char	*get_next_line(int fd)
 	stock = get_stock(stock, i);
 	return (line);
 }
-
-// int main()
-// {
-//     int fd;
-//     char *line = "";
-
-//     fd = open("get_next_line.c", O_RDONLY);
-//     while (line)
-//     {
-//         line = get_next_line(fd);
-//         printf("%s", line);
-//         if (line)
-//             free(line);
-//     }
-//     system("leaks a.out");
-//     return (0);
-// }

@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 10:06:36 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/11 15:56:18 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/11 18:20:00 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	loop_for_pipe(t_data *d)
 	return (id);
 }
 
-void	pipeline(t_data *d)
+void	exec_cmd(t_data *d)
 {
 	int			id;
 	t_cmd_list	*tmp;
