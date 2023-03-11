@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 16:23:01 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/03 14:25:02 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/11 15:59:38 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 char	*cmd_is_path(t_data *d)
 {
 	char	*s;
+	DIR		*name_dir;
 
 	s = NULL;
+	name_dir = opendir(d->list_of_cmd->cmd[0]);
+	if (name_dir != NULL)
+		ft_puterr(d->list_of_cmd->cmd[0], "is a directory", 126);
 	if (access(d->list_of_cmd->cmd[0], F_OK | X_OK) == 0)
 		s = ft_strdup(d->list_of_cmd->cmd[0]);
 	else if (access(d->list_of_cmd->cmd[0], F_OK) == 0)

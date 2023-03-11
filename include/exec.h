@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 03:38:12 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/10 11:55:35 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/11 15:52:36 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "include.h"
 # include "readline.h"
+# include <dirent.h>
 # include <fcntl.h>
 # include <get_next_line.h>
 # include <libft.h>
