@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_str.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:53:47 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/08 19:06:22 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:08:21 by zasabri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static char	**add_args(char **save, char *expanded_str, size_t *x, size_t *y)
 
 	i = *x;
 	tmp = save;
+	c = 0;
 	save = ft_ultimate_join(tmp, "");
 	ft_free(tmp);
 	while (expanded_str && expanded_str[i])
