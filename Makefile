@@ -6,7 +6,7 @@
 #    By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 05:30:41 by abouramd          #+#    #+#              #
-#    Updated: 2023/03/11 18:28:26 by abouramd         ###   ########.fr        #
+#    Updated: 2023/03/12 10:44:36 by abouramd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS := -Wall -Wextra -Werror #-fsanitize=address -g3
 
 LIB_DIR := libft/ get_next_line/
 
-READLINE_PATH:= ./library/readline
+READLINE_PATH:= ~/readline
 
 INC := -I ./include $(addprefix -I ./library/,$(LIB_DIR)) -I $(READLINE_PATH)
 
@@ -28,34 +28,32 @@ EXEC_DIR := $(addprefix builtins/, $(BUILTINS)) builtins.c creat_path.c exec_cmd
 
 SRC_EXEC :=  main.c $(addprefix ./executing/, $(EXEC_DIR)) $(addprefix ./library/get_next_line/,get_next_line.c get_next_line_utils.c)
 
-SRC_PARS := ./parsing/check_hdk_limit.c ./parsing/syntax_error.c ./parsing/command_table.c ./parsing/here_documents.c ./parsing/initialize.c ./parsing/join_characters.c ./parsing/open_files.c ./parsing/parsing.c
+PARS_DIR := check_hdk_limit.c command_table.c here_documents.c initialize.c join_characters.c open_files.c parsing.c syntax_error.c
+
+SRC_PARS := $(addprefix ./parsing/, $(PARS_DIR))
 
 OBJ := $(SRC_EXEC:.c=.o) $(SRC_PARS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-#	@echo "\033[1;33m configure readline library ...\033[0m"
-#	@echo "\033[1;34m" && cd ./library/readline && ./configure && echo "\033[1;33m ✅ compile readline library ...\033[1;34m" && make
-#	@echo "\033[1;32m ✅ readline library is done.\033[0m"
 	@make bonus -C ./library/libft/
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)  $(INC) $(LIB)
 	@echo "\033[1;32m ✅ minishell is done.\033[0m"
-
-	
-readline_lib:
-	@echo "\033[1;33m configure readline library ...\033[0m"
-	@echo "\033[1;34m" && cd ./library/readline && ./configure && echo "\033[1;33m ✅ compile readline library ...\033[0m" && make
-	@echo "\033[1;32m ✅ readline library is done.\033[0m"
 
 .c.o:
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 	@echo "\033[1;34m - creat $@ from $<.\033[0m"
 
+readline_create:
+	@echo "\033[1;33m configure readline library ...\033[0m"
+	@echo "\033[1;34m" && cd $(READLINE_PATH) && ./configure && echo "\033[1;33m ✅ compile readline library ...\033[1;34m" && make
+	@echo "\033[1;32m ✅ readline library is done.\033[0m"
+	
+readline_clean:
+	make -C $(READLINE_PATH) clean
 
 clean:
-#	@echo "\033[1;31m ❎ remove the object files of readline\033[0m"
-#	@make clean -C ./library/readline/
 	@make clean -C ./library/libft/	
 	@echo "\033[1;31m ❎ remove the object files of minishell.\033[0m"
 	@rm -rf $(OBJ)

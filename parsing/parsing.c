@@ -88,3 +88,33 @@ t_list	*lexecal_analyzer(char *str)
 	ft_lstadd_back(&list, ft_lstnew(token));
 	return (list);
 }
+
+int	pars(t_data *d, char *rl)
+{
+	t_list		*lexer;
+	t_here_doc	*hrd;
+
+	lexer = NULL;
+	hrd = NULL;
+	lexer = lexecal_analyzer(rl);
+	if (lexer == NULL || syntax_error(lexer) || check_herdoc_limits(lexer))
+	{
+		if (lexer)
+		{
+			d->exit_status = 258;
+			free_lexer(lexer);
+		}
+		free(rl);
+		return (1);
+	}
+	hrd = open_here_doc(d, lexer);
+	d->list_of_cmd = NULL;
+	if (!d->kill_here)
+		d->list_of_cmd = command_table(d, hrd, lexer);
+	else
+		d->exit_status = 1;
+	free_hrd(hrd);
+	system("echo pars > leaks && leaks minishell | grep bytes >> leaks");/**/
+	free_lexer(lexer);
+	return (0);
+}

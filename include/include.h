@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:34:05 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/11 18:32:01 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/12 10:50:32 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,8 @@ typedef struct s_data
 void					initialize_lexer(t_lex *lexer, char *str);
 void					go_next(t_lex *lexer);
 t_vals					*initialize_token(char *str, int v);
-int						all_is_good(t_list *lexer, char **env);
-char					*check_str(char *str, t_lex *check);
 char					*add_str(char *str, char c);
 t_cmd_list				*initilize_save(void);
-int						isValid(char *s);
 void					for_out_redirection(t_data *f, t_vals *first,
 							t_cmd_list *save, t_list **lexer);
 void					for_input_redirection(t_data *f, t_vals *first,
@@ -66,16 +63,12 @@ void					for_append(t_data *f, t_vals *first, t_cmd_list *save,
 							t_list **lexer);
 void					add_herdoc(t_here_doc **hrd, t_cmd_list *save,
 							t_list **lexer);
-void					here_documents(t_list *tokens);
 t_list					*lexecal_analyzer(char *str);
-char					*remove_spaces(char *lexer);
-void					test(t_list *lexer);
 void					print_start(void);
 char					*get_next_line(int fd);
 t_cmd_list				*command_table(t_data *d, t_here_doc *hrd,
 							t_list *lexer);
 
-char					*print_env_content(char *line, char **env);
 char					**ft_expand_str(t_data *f, char *s);
 char					*ft_expand_in_here_doc(t_data *f, char *s, int type);
 char					*ft_replace_val(t_data *f, char *str,
@@ -85,5 +78,12 @@ void					for_herdoc(t_here_doc *hrd, t_data *d, t_vals *first,
 							t_list **lexer);
 int						check_herdoc_limits(t_list *lexer);
 int						syntax_error(t_list *lexer);
+int						pars(t_data *d, char *rl);
+
+/* free function */
+void					free_cmd(t_cmd_list *list);
+void					free_all(t_data *f);
+void					free_lexer(t_list *list);
+void					free_hrd(t_here_doc *h);
 
 #endif

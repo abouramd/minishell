@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 03:38:12 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/11 18:27:28 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/12 10:50:15 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	print_sort(char **s, int fd);
 /* signal handler */
 void	signal_handler(int signum);
 void	signal_here_doc(int signum);
-void	signal_exec(int signum);
 
 /* executing a cmd */
 void	exec_cmd(t_data *d);
@@ -80,11 +79,6 @@ void	built_exit(t_data *f);
 /* readline function */
 void	rl_replace_line(const char *s, int n);
 
-/* free function */
-void	free_cmd(t_cmd_list *list);
-void	free_all(t_data *f);
-void	free_lexer(t_list *list);
-void	free_hrd(t_here_doc *h);
 /* setup shell */
 void	setup_shell(int ac, char **av, char **env, t_data *d);
 

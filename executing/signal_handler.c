@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:59:30 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/04 19:02:59 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/12 10:24:45 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,4 @@ void	signal_here_doc(int signum)
 		ft_putchar_fd('\n', 2);
 		exit(1);
 	}
-}
-
-void	signal_exec(int signum)
-{
-	ft_putendl_fd("Quit: 3\n", 1);
-	exit(128 + signum);
 }

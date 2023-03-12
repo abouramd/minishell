@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 10:21:32 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/11 18:31:22 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/12 10:05:17 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	check_herdoc_limits(t_list *lexer)
 	}
 	if (checker > 16)
 	{
-		printf("minishell: maximum here-document count exceeded\n");
+		ft_putendl_fd("minishell: maximum here-document count exceeded", 2);
 		exit(2);
 	}
 	return (0);

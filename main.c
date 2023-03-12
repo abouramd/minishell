@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 18:22:54 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/11 18:34:17 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/12 10:49:36 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,41 +28,11 @@ char	*put_prompt(t_data *f)
 	if (f->exit_status != 0)
 		color = "\033[1;31m";
 	ft_putstr_fd(color, 1);
-	prompt = ft_strjoin(pwd, " >> \033[0m");
+	prompt = ft_strjoin(pwd, " ~$ \033[0m");
 	s = readline(prompt);
 	free(prompt);
 	signal(SIGINT, SIG_IGN);
 	return (s);
-}
-
-int	pars(t_data *d, char *rl)
-{
-	t_list		*lexer;
-	t_here_doc	*hrd;
-
-	lexer = NULL;
-	hrd = NULL;
-	lexer = lexecal_analyzer(rl);
-	if (lexer == NULL || check_herdoc_limits(lexer) || syntax_error(lexer))
-	{
-		if (lexer)
-		{
-			d->exit_status = 258;
-			free_lexer(lexer);
-		}
-		free(rl);
-		return (1);
-	}
-	hrd = open_here_doc(d, lexer);
-	d->list_of_cmd = NULL;
-	if (!d->kill_here)
-		d->list_of_cmd = command_table(d, hrd, lexer);
-	else
-		d->exit_status = 1;
-	free_hrd(hrd);
-	system("echo pars > leaks && leaks minishell | grep bytes >> leaks");/**/
-	free_lexer(lexer);
-	return (0);
 }
 
 void	start_shell(t_data *d)
