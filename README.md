@@ -404,6 +404,7 @@
 
     - It's worth noting that the behavior of "ctrl + D" may vary depending on the program or context in which it is used. In some cases, pressing "ctrl + D" may delete text or perform other actions, so it's always a good idea to check the documentation or help files for the program you are using to understand its specific behavior.
 
+![](./signals_explain.png)
 # ***explain redirections***
 - Redirections are a way of controlling input and output in a command   -line or shell environment. The most commonly used redirection operators are:
 
