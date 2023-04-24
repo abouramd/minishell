@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 16:23:01 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/11 15:59:38 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/04/24 03:27:48 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,15 @@ char	*creat_path(t_data *d)
 	set = "command not found";
 	if (choose == 1)
 		set = strerror(2);
-	if (!**d->list_of_cmd->cmd)
+	if (!ft_strcmp(d->list_of_cmd->cmd[0], ".")
+		&& d->list_of_cmd->cmd[1] == NULL)
+		ft_puterr(" .: filename argument required\n.",
+			" usage: . filename [arguments]", 2);
+	if (!ft_strcmp(d->list_of_cmd->cmd[0], "..") && choose == 1)
+		ft_puterr(d->list_of_cmd->cmd[0], "is a directory", 126);
+	if (!ft_strcmp(d->list_of_cmd->cmd[0], "..") && choose == 0)
+		ft_puterr(d->list_of_cmd->cmd[0], "command not found", 127);
+	else if (!**d->list_of_cmd->cmd)
 		ft_puterr(d->list_of_cmd->cmd[0], "command not found", 127);
 	else if (ft_strstr(d->list_of_cmd->cmd[0], "/"))
 		s = cmd_is_path(d);

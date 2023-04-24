@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 18:22:54 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/13 10:25:24 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/04/24 03:28:03 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	start_shell(t_data *d)
 
 int	main(int ac, char **av, char **env)
 {
+	signal(SIGQUIT, SIG_IGN);
 	setup_shell(ac, av, env, &g_d);
 	start_shell(&g_d);
 	return (0);

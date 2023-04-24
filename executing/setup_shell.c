@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 18:19:00 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/11 18:25:07 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/04/24 03:25:21 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	setup_shell(int ac, char **av, char **env, t_data *d)
 	tcsetattr(0, TCSANOW, &d->new_tty);
 	sigaction(SIGINT, NULL, &d->old_sigint);
 	sigaction(SIGQUIT, NULL, &d->old_sigquit);
-	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, signal_handler);
 	print_start();
 	d->exit_status = 0;
@@ -53,5 +52,9 @@ void	setup_shell(int ac, char **av, char **env, t_data *d)
 	tmp = ft_free_joined("/", tmp, 0, 1);
 	tmp = ft_free_joined(pwd, tmp, 0, 1);
 	ft_env_add("SHELL", tmp, &d->my_env);
+	ft_env_rm("PWD", &d->my_env);
+	d->my_env = realloc_env(d->my_env, "PWD");
+	ft_env_rm("OLDPWD", &d->my_env);
+	d->my_env = realloc_env(d->my_env, "OLDPWD");
 	free(tmp);
 }
