@@ -1,3 +1,28 @@
+## ***installation***
+1. download the GNU readline library [https://ftpmirror.gnu.org/readline/readline-8.2.tar.gz](https://ftpmirror.gnu.org/readline/readline-8.2.tar.gz)
+2. unzip the readline library using this command :
+    ```
+    tar -xvzf readline-8.2.tar.gz
+    ```
+3. clone this repo :
+    ```
+    git clone https://github.com/abouramd/minishell.git
+    ```
+4. go to the `Makefile` and replace `~/readline` with the path of the readline library in this variable :
+    ```
+    READLINE_PATH:= #put the path of readline here#
+    ```
+    if you don't now how to find the path of readline you can just go inside the folder of readline and use `pwd` command.
+5. after doing all that you will go to folder of minishell and you run this commad:
+    ```
+    make readline_create all
+    ```
+    the first rule will configure and compile readline library and the second will make compile minishell.
+6. now you can run minishell just like this :
+    ```
+    ./minishell
+    ```
+
 ## ***External function***
 1. **readline():**
     - Prototype: 
