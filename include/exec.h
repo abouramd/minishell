@@ -6,14 +6,13 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 03:38:12 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/12 10:50:15 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/13 11:02:52 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
 
-# include "get_next_line.h"
 # include "include.h"
 # include "readline.h"
 # include <dirent.h>
@@ -49,6 +48,7 @@ void	ft_env_rm(char *elem, char ***my_env);
 char	**alloc_env(char **s);
 char	**realloc_env(char **old_env, char *str);
 void	print_sort(char **s, int fd);
+int		ft_check_in_env(char *elem, char **my_env);
 
 /* signal handler */
 void	signal_handler(int signum);
@@ -56,9 +56,6 @@ void	signal_here_doc(int signum);
 
 /* executing a cmd */
 void	exec_cmd(t_data *d);
-
-/* working with here_doc */
-char	*get_next_line(int fd);
 
 /* manage fd */
 void	dup_fd(int fd, int file_errno, char *file_name, int new_fd);

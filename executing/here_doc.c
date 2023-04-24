@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 08:24:05 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/12 15:47:03 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/13 10:33:32 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_get_lim(char *s, int *type)
 			lim = add_str(lim, s[i]);
 		i++;
 	}
-	lim = add_str(lim, '\n');
+	lim = add_str(lim, '\0');
 	return (lim);
 }
 
@@ -50,8 +50,7 @@ void	here_doc(int *fd_pipe, t_data *d, t_vals *first)
 	close(fd_pipe[0]);
 	while (1)
 	{
-		ft_putstr_fd("\033[1;34mhere_doc\033[1;31m >> \033[0m", 1);
-		str = get_next_line(0);
+		str = readline("\033[1;34mhere_doc\033[1;31m >> \033[0m");
 		if (!str || !ft_strcmp(str, lim))
 		{
 			if (str)
@@ -59,7 +58,7 @@ void	here_doc(int *fd_pipe, t_data *d, t_vals *first)
 			break ;
 		}
 		str = ft_expand_in_here_doc(d, str, type);
-		write(fd, str, ft_strlen(str));
+		ft_putendl_fd(str, fd);
 		free(str);
 	}
 	free(lim);

@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 11:21:44 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/03 14:19:19 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/12 17:10:02 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	built_env(t_data *f)
 	i = 0;
 	if (f->list_of_cmd->cmd[1])
 	{
-		ft_putendl_fd("minishell: exit: too many arguments", 2);
+		ft_putendl_fd("minishell: env: too many arguments", 2);
 		f->exit_status = 1;
 		return ;
 	}

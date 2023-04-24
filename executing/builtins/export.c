@@ -6,11 +6,31 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 08:17:50 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/03 14:22:18 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/13 10:52:39 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+
+int	ft_check_in_env(char *elem, char **my_env)
+{
+	char	**s;
+	size_t	index;
+
+	index = 0;
+	while (my_env && my_env[index])
+	{
+		s = ft_split(my_env[index], '=');
+		if (!ft_strcmp(s[0], elem))
+		{
+			ft_free(s);
+			return (1);
+		}
+		ft_free(s);
+		index++;
+	}
+	return (0);
+}
 
 static int	app_or_def(char *arg, int *type)
 {
@@ -76,7 +96,7 @@ int	ft_export(t_data *f, char *arg)
 	}
 	else if (choose == DEFIN_ENV)
 		ft_env_add(identifier, value, &f->my_env);
-	else if (!ft_find_env(identifier, f->my_env))
+	else if (!ft_check_in_env(identifier, f->my_env))
 		f->my_env = realloc_env(f->my_env, identifier);
 	free(identifier);
 	if (value)

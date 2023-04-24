@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 02:15:07 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/10 09:39:23 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/13 11:19:30 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,9 @@ t_here_doc	*open_here_doc(t_data *d, t_list *lexer)
 	t_here_doc	*here_doc;
 	t_here_doc	*tmp;
 	t_vals		*first;
-	int			save_exit;
 
 	at_first(&here_doc, &tmp, &first, lexer);
-	save_exit = d->exit_status;
+	d->save_status = d->exit_status;
 	while (first->e_token != V_EOF)
 	{
 		if (first->e_token == V_IN_RDIR || first->e_token == V_OUT_RDIR
@@ -75,6 +74,6 @@ t_here_doc	*open_here_doc(t_data *d, t_list *lexer)
 		lexer = lexer->next;
 		first = (t_vals *)lexer->content;
 	}
-	d->exit_status = save_exit;
+	d->exit_status = d->save_status;
 	return (here_doc);
 }

@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:57:21 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/10 11:10:00 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/13 08:31:29 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,6 @@ void	built_cd(t_data *f)
 		else
 			go_to_dir(f, pwd);
 	}
+	if (getcwd(pwd, PATH_MAX - 1) != NULL)
+		ft_env_add("PWD", pwd, &f->my_env);
 }

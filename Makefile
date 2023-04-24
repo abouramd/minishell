@@ -6,7 +6,7 @@
 #    By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 05:30:41 by abouramd          #+#    #+#              #
-#    Updated: 2023/03/12 10:44:36 by abouramd         ###   ########.fr        #
+#    Updated: 2023/03/13 11:03:23 by abouramd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME := minishell
 
 CFLAGS := -Wall -Wextra -Werror #-fsanitize=address -g3
 
-LIB_DIR := libft/ get_next_line/
+LIB_DIR := libft/
 
 READLINE_PATH:= ~/readline
 
@@ -26,7 +26,7 @@ BUILTINS := cd.c echo.c env.c exit.c export.c pwd.c unset.c
 
 EXEC_DIR := $(addprefix builtins/, $(BUILTINS)) builtins.c creat_path.c exec_cmd.c free_all.c setup_shell.c fd_manage.c ft_env.c get_path.c here_doc.c put_c.c sort_string.c signal_handler.c expand.c expand_str.c
 
-SRC_EXEC :=  main.c $(addprefix ./executing/, $(EXEC_DIR)) $(addprefix ./library/get_next_line/,get_next_line.c get_next_line_utils.c)
+SRC_EXEC :=  main.c $(addprefix ./executing/, $(EXEC_DIR))
 
 PARS_DIR := check_hdk_limit.c command_table.c here_documents.c initialize.c join_characters.c open_files.c parsing.c syntax_error.c
 

@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 08:20:18 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/10 08:58:16 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/13 14:53:17 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,12 @@ void	built_exit(t_data *f)
 			exit(255);
 		}
 		else
-		{
 			ft_putendl_fd("minishell: exit: too many arguments", 2);
-			f->exit_status = 1;
-		}
+		f->exit_status = 1;
 	}
 	else
-		exit(0);
+	{
+		tcsetattr(0, TCSANOW, &f->old_tty);
+		exit(f->save_status);
+	}
 }

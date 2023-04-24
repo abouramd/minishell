@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:34:05 by zasabri           #+#    #+#             */
-/*   Updated: 2023/03/12 10:50:32 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/13 11:18:25 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_data
 	char				**path;
 	int					in_muti_pip;
 	int					ambiguous;
+	int					save_status;
 }						t_data;
 
 void					initialize_lexer(t_lex *lexer, char *str);
@@ -65,7 +66,6 @@ void					add_herdoc(t_here_doc **hrd, t_cmd_list *save,
 							t_list **lexer);
 t_list					*lexecal_analyzer(char *str);
 void					print_start(void);
-char					*get_next_line(int fd);
 t_cmd_list				*command_table(t_data *d, t_here_doc *hrd,
 							t_list *lexer);
 

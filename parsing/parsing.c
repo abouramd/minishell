@@ -114,7 +114,6 @@ int	pars(t_data *d, char *rl)
 	else
 		d->exit_status = 1;
 	free_hrd(hrd);
-	system("echo pars > leaks && leaks minishell | grep bytes >> leaks");/**/
 	free_lexer(lexer);
 	return (0);
 }

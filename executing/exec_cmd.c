@@ -6,7 +6,7 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 10:06:36 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/11 18:20:00 by abouramd         ###   ########.fr       */
+/*   Updated: 2023/03/13 11:19:46 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	loop_for_pipe(t_data *d)
 		id = creat_child(d, fd[0]);
 		d->list_of_cmd = d->list_of_cmd->next;
 		infile = fd[0];
+		d->save_status = 0;
 	}
 	return (id);
 }

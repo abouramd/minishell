@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_str.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zasabri <zasabri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:53:47 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/12 16:08:21 by zasabri          ###   ########.fr       */
+/*   Updated: 2023/03/13 12:22:00 by abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,14 @@ static char	**ft_split_expand(char *expanded_str)
 	return (free(expanded_str), save);
 }
 
+static void	ft_qoute_handel(char c, char *set)
+{
+	if ((c == '\"' || c == '\'') && *set == 0)
+		*set = c;
+	else if (*set && c == *set)
+		*set = 0;
+}
+
 char	**ft_expand_str(t_data *f, char *s)
 {
 	char	*expanded_str;
@@ -72,13 +80,13 @@ char	**ft_expand_str(t_data *f, char *s)
 	expanded_str = NULL;
 	while (s && s[i])
 	{
-		if ((s[i] == '\"' || s[i] == '\'') && c == 0)
-			c = s[i];
-		else if (c && s[i] == c)
-			c = 0;
+		ft_qoute_handel(s[i], &c);
 		if (c != '\'' && s[i] == '$')
 		{
-			expanded_str = ft_replace_val(f, s, expanded_str, &i);
+			if (c == 0 && (s[i + 1] == '\'' || s[i + 1] == '\"'))
+				i++;
+			else
+				expanded_str = ft_replace_val(f, s, expanded_str, &i);
 			continue ;
 		}
 		else
