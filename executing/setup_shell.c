@@ -52,9 +52,11 @@ void	setup_shell(int ac, char **av, char **env, t_data *d)
 	tmp = ft_free_joined("/", tmp, 0, 1);
 	tmp = ft_free_joined(pwd, tmp, 0, 1);
 	ft_env_add("SHELL", tmp, &d->my_env);
-	ft_env_rm("PWD", &d->my_env);
-	d->my_env = realloc_env(d->my_env, "PWD");
-	ft_env_rm("OLDPWD", &d->my_env);
-	d->my_env = realloc_env(d->my_env, "OLDPWD");
-	free(tmp);
+    free(tmp);
+    tmp = getcwd(NULL, 0);
+    ft_env_rm("PWD", &d->my_env);
+    ft_env_add("PWD", tmp, &d->my_env);
+    free(tmp);
+    ft_env_rm("OLDPWD", &d->my_env);
+    d->my_env = realloc_env(d->my_env, "OLDPWD");
 }
