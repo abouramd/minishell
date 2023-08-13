@@ -1,0 +1,4 @@
+minishell
+.nfs*
+*.o
+.idea/

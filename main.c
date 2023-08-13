@@ -6,11 +6,27 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 18:22:54 by abouramd          #+#    #+#             */
-/*   Updated: 2023/04/24 03:28:03 by abouramd         ###   ########.fr       */
+/*   Updated: 13/08/2023 05:07:23 PM abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+
+t_data	g_d;
+
+
+void	signal_handler(int signum)
+{
+	if (signum == SIGINT)
+	{
+		g_d.exit_status = 1;
+		ft_putstr_fd("\033[1;31m", 1);
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+}
 
 void	ft_get_pwd_for_prompt(t_data *f, char *pwd)
 {

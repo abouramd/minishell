@@ -16,7 +16,7 @@ CFLAGS := -Wall -Wextra -Werror #-fsanitize=address -g3
 
 LIB_DIR := libft/
 
-READLINE_PATH:= ~/readline
+READLINE_PATH:= ~/readline-8.2/
 
 INC := -I ./include $(addprefix -I ./library/,$(LIB_DIR)) -I $(READLINE_PATH)
 

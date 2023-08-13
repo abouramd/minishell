@@ -28,7 +28,7 @@
 */
 
 /* globale var */
-t_data	g_d;
+// t_data	g_d;
 
 /* my define */
 # define DEFIN_ENV 1

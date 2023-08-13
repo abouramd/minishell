@@ -6,24 +6,12 @@
 /*   By: abouramd <abouramd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:59:30 by abouramd          #+#    #+#             */
-/*   Updated: 2023/03/12 10:24:45 by abouramd         ###   ########.fr       */
+/*   Updated: 13/08/2023 04:18:06 PM abouramd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-void	signal_handler(int signum)
-{
-	if (signum == SIGINT)
-	{
-		g_d.exit_status = 1;
-		ft_putstr_fd("\033[1;31m", 1);
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-}
 
 void	signal_here_doc(int signum)
 {
