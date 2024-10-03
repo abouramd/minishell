@@ -1,4 +1,28 @@
-## ***installation***
+# Minishell
+
+## Description
+Minishell is a simple shell implementation project, aiming to recreate basic functionalities of bash. This project is part of the 42 school curriculum and focuses on process creation, file descriptors, and command interpretation.
+
+## Features
+
+- Display a prompt for new commands
+- Working command history
+- Execute commands (using PATH, relative, or absolute paths)
+- Handle single quotes (') and double quotes (")
+- Implement redirections: <, >, <<, >>
+- Implement pipes (|)
+- Handle environment variables and $?
+- Handle signals: ctrl-C, ctrl-D, ctrl-\
+- Implement built-in commands:
+  - echo (with -n option)
+  - cd (with relative or absolute path)
+  - pwd
+  - export
+  - unset
+  - env
+  - exit
+
+## ***Usage***
 1. download the GNU readline library [https://ftpmirror.gnu.org/readline/readline-8.2.tar.gz](https://ftpmirror.gnu.org/readline/readline-8.2.tar.gz)
 2. unzip the readline library using this command :
     ```
